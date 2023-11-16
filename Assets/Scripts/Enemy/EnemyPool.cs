@@ -3,59 +3,33 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyPool : MonoBehaviour
+    public sealed class EnemyPool : PoolSystem<GameObject>
     {
         [Header("Spawn")]
-        [SerializeField]
-        private EnemyPositions enemyPositions;
-
-        [SerializeField]
-        private GameObject character;
-
-        [SerializeField]
-        private Transform worldTransform;
-
-        [Header("Pool")]
-        [SerializeField]
-        private Transform container;
-
-        [SerializeField]
-        private GameObject prefab;
-
-        private readonly Queue<GameObject> enemyPool = new();
-        
-        private void Awake()
-        {
-            for (var i = 0; i < 7; i++)
-            {
-                var enemy = Instantiate(this.prefab, this.container);
-                this.enemyPool.Enqueue(enemy);
-            }
-        }
+        [SerializeField] private EnemyPositions enemyPositions;
+        [SerializeField] private HitPointsComponent character;
 
         public GameObject SpawnEnemy()
         {
-            if (!this.enemyPool.TryDequeue(out var enemy))
-            {
-                return null;
-            }
+            var enemy = GetInstance();
+            if (enemy is null) return null;
 
-            enemy.transform.SetParent(this.worldTransform);
+            enemy.transform.SetParent(worldTransform);
 
-            var spawnPosition = this.enemyPositions.RandomSpawnPosition();
+            var spawnPosition = enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
-            
-            var attackPosition = this.enemyPositions.RandomAttackPosition();
+
+            var attackPosition = enemyPositions.RandomAttackPosition();
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
 
-            enemy.GetComponent<EnemyAttackAgent>().SetTarget(this.character);
+            enemy.GetComponent<EnemyAttackAgent>().SetTarget(character);
             return enemy;
         }
 
         public void UnspawnEnemy(GameObject enemy)
         {
-            enemy.transform.SetParent(this.container);
-            this.enemyPool.Enqueue(enemy);
+            enemy.transform.SetParent(container);
+            Release(enemy);
         }
     }
 }

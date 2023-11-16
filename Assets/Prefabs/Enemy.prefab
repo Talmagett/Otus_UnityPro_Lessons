@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3195880656587174614}
+  bulletConfig: {fileID: 11400000, guid: f09d228218d96004d9d0cb4f598ef183, type: 2}
 --- !u!114 &8186052948131603766
 MonoBehaviour:
   m_ObjectHideFlags: 0

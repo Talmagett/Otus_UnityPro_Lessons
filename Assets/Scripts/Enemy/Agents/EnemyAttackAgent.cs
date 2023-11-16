@@ -4,7 +4,7 @@ namespace ShootEmUp
 {
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
-        public delegate void FireHandler(GameObject enemy, Vector2 position, Vector2 direction);
+        public delegate void FireHandler(BulletConfig bulletConfig, Vector2 position, Vector2 direction);
 
         public event FireHandler OnFire;
 
@@ -12,45 +12,39 @@ namespace ShootEmUp
         [SerializeField] private EnemyMoveAgent moveAgent;
         [SerializeField] private float countdown;
 
-        private GameObject target;
-        private float currentTime;
+        private HitPointsComponent _characterTarget;
+        private float _currentTime;
 
-        public void SetTarget(GameObject target)
+        public void SetTarget(HitPointsComponent target)
         {
-            this.target = target;
+            _characterTarget = target;
         }
 
         public void Reset()
         {
-            this.currentTime = this.countdown;
+            _currentTime = countdown;
         }
 
         private void FixedUpdate()
         {
-            if (!this.moveAgent.IsReached)
-            {
-                return;
-            }
-            
-            if (!this.target.GetComponent<HitPointsComponent>().IsHitPointsExists())
-            {
-                return;
-            }
+            if (!moveAgent.IsReached) return;
 
-            this.currentTime -= Time.fixedDeltaTime;
-            if (this.currentTime <= 0)
+            if (!_characterTarget.IsHitPointsExists()) return;
+
+            _currentTime -= Time.fixedDeltaTime;
+            if (_currentTime <= 0)
             {
-                this.Fire();
-                this.currentTime += this.countdown;
+                Fire();
+                _currentTime += countdown;
             }
         }
 
         private void Fire()
         {
-            var startPosition = this.weaponComponent.Position;
-            var vector = (Vector2) this.target.transform.position - startPosition;
+            var startPosition = weaponComponent.Position;
+            var vector = (Vector2)_characterTarget.transform.position - startPosition;
             var direction = vector.normalized;
-            this.OnFire?.Invoke(this.gameObject, startPosition, direction);
+            OnFire?.Invoke(weaponComponent.BulletConfig, startPosition, direction);
         }
     }
 }
