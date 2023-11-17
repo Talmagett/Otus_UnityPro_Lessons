@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -8,17 +7,27 @@ namespace ShootEmUp
         [SerializeField] private EnemyPool enemyPool;
         [SerializeField] private BulletSystem bulletSystem;
 
-        private IEnumerator Start()
+        private const float SpawnCooldown = 1;
+        private float _spawnTimer=0;
+
+        private void Update()
         {
-            while (true)
+            if (_spawnTimer > SpawnCooldown)
             {
-                yield return new WaitForSeconds(1);
-                var enemy = enemyPool.SpawnEnemy();
-                if (enemy is not null)
-                {
-                    enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
-                    enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
-                }
+                Spawn();
+                _spawnTimer = 0;
+            }
+
+            _spawnTimer += Time.deltaTime;
+        }
+
+        private void Spawn()
+        {
+            var enemy = enemyPool.SpawnEnemy();
+            if (enemy is not null)
+            {
+                enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
+                enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
             }
         }
 

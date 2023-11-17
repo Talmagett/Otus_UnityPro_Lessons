@@ -25,7 +25,9 @@ namespace ShootEmUp
 
         public T GetInstance()
         {
-            return _pool.Dequeue();
+            if(_pool.TryDequeue(out T t))
+                return t;
+            return null;
         }
 
         public void Release(T instance)
