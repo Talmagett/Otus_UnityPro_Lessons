@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -9,8 +8,6 @@ namespace ShootEmUp
         [SerializeField] private EnemyPool enemyPool;
         [SerializeField] private BulletSystem bulletSystem;
 
-        private readonly HashSet<GameObject> _activeEnemies = new();
-
         private IEnumerator Start()
         {
             while (true)
@@ -19,24 +16,18 @@ namespace ShootEmUp
                 var enemy = enemyPool.SpawnEnemy();
                 if (enemy is not null)
                 {
-                    if (_activeEnemies.Add(enemy))
-                    {
-                        enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
-                        enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
-                    }
+                    enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
+                    enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
                 }
             }
         }
 
         private void OnDestroyed(GameObject enemy)
         {
-            if (_activeEnemies.Remove(enemy))
-            {
-                enemy.GetComponent<HitPointsComponent>().HpEmpty -= OnDestroyed;
-                enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
+            enemy.GetComponent<HitPointsComponent>().HpEmpty -= OnDestroyed;
+            enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
 
-                enemyPool.UnspawnEnemy(enemy);
-            }
+            enemyPool.UnspawnEnemy(enemy);
         }
 
         private void OnFire(BulletConfig bulletConfig, Vector2 position, Vector2 direction)
@@ -48,7 +39,7 @@ namespace ShootEmUp
                 color = bulletConfig.color,
                 damage = bulletConfig.damage,
                 position = position,
-                velocity = direction * 2.0f
+                velocity = direction * bulletConfig.speed
             });
         }
     }
