@@ -1,17 +1,24 @@
+using GameManager;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager : MonoBehaviour, Listeners.IOnGameStarted, Listeners.IOnGameFinished,
+        Listeners.IOnGamePaused, Listeners.IOnGameResumed
     {
         [SerializeField] private EnemyPool enemyPool;
         [SerializeField] private BulletSystem bulletSystem;
 
         private const float SpawnCooldown = 1;
-        private float _spawnTimer=0;
+        private float _spawnTimer;
+
+        private bool _canSpawn;
 
         private void Update()
         {
+            if (!_canSpawn)
+                return;
+
             if (_spawnTimer > SpawnCooldown)
             {
                 Spawn();
@@ -50,6 +57,26 @@ namespace ShootEmUp
                 position = position,
                 velocity = direction * bulletConfig.speed
             });
+        }
+
+        public void OnGameStarted()
+        {
+            _canSpawn = true;
+        }
+
+        public void OnGameFinished()
+        {
+            _canSpawn = false;
+        }
+
+        public void OnGamePaused()
+        {
+            _canSpawn = false;
+        }
+
+        public void OnGameResumed()
+        {
+            _canSpawn = true;
         }
     }
 }

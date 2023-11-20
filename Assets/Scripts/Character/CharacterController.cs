@@ -1,10 +1,12 @@
+using GameManager;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterController : MonoBehaviour
+    public sealed class CharacterController : MonoBehaviour, Listeners.IOnGameStarted, Listeners.IOnGameFinished,
+        Listeners.IOnGamePaused, Listeners.IOnGameResumed
     {
-        [SerializeField] private GameManager gameManager;
+        [SerializeField] private GameManager.GameManager gameManager;
         [SerializeField] private BulletSystem bulletSystem;
         [SerializeField] private InputManager inputManager;
 
@@ -13,6 +15,7 @@ namespace ShootEmUp
         [SerializeField] private HitPointsComponent hitPointsComponent;
         [SerializeField] private WeaponComponent weaponComponent;
 
+        private bool _canControl;
         private void OnEnable()
         {
             hitPointsComponent.HpEmpty += OnCharacterDeath;
@@ -32,11 +35,17 @@ namespace ShootEmUp
 
         private void OnSpacePressed_Fire()
         {
+            if (!_canControl)
+                return;
+            
             Fire();
         }
 
         private void FixedUpdate()
         {
+            if (!_canControl)
+                return;
+            
             Move();
         }
 
@@ -57,6 +66,26 @@ namespace ShootEmUp
         {
             moveComponent.MoveByRigidbodyVelocity(
                 new Vector2(inputManager.HorizontalDirection, 0) * Time.fixedDeltaTime);
+        }
+
+        public void OnGameStarted()
+        {
+            _canControl = true;
+        }
+
+        public void OnGameFinished()
+        {
+            _canControl = false;
+        }
+
+        public void OnGamePaused()
+        {
+            _canControl = false;
+        }
+
+        public void OnGameResumed()
+        {
+            _canControl = true;
         }
     }
 }
