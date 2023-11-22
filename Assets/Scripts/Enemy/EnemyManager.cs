@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using GameManager;
 namespace ShootEmUp
 {
     public sealed class EnemyManager : MonoBehaviour, Listeners.IOnGameStarted, Listeners.IOnGameFinished,
