@@ -5,27 +5,27 @@ namespace ShootEmUp
 {
     public sealed class InputManager : MonoBehaviour
     {
-        public float HorizontalDirection { get; private set; }
-        public event Action OnSpacePressed;
+        public float MoveDirection { get; private set; }
+        public event Action OnFire;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                OnSpacePressed?.Invoke();
+                OnFire?.Invoke();
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                this.HorizontalDirection = -1;
+                MoveDirection = -1;
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                this.HorizontalDirection = 1;
+                MoveDirection = 1;
             }
             else
             {
-                this.HorizontalDirection = 0;
+                MoveDirection = 0;
             }
         }
     }

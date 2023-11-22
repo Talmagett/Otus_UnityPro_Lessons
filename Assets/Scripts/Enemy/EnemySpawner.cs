@@ -1,35 +1,39 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyPool : PoolSystem<GameObject>
+    public sealed class EnemySpawner : MonoBehaviour
     {
-        [Header("Spawn")]
         [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private HitPointsComponent character;
+        [SerializeField] private Pool<Enemy> pool; 
+        
+        [SerializeField] private Transform worldTransform;
 
-        public GameObject SpawnEnemy()
+        private void Awake()
         {
-            var enemy = GetInstance();
-            if (enemy is null) return null;
+            pool.InitSpawn();
+        }
 
-            enemy.transform.SetParent(worldTransform);
+        public Enemy SpawnEnemy()
+        {
+            Enemy enemy = pool.GetInstance(worldTransform);
 
             var spawnPosition = enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
             var attackPosition = enemyPositions.RandomAttackPosition();
+            
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
-
             enemy.GetComponent<EnemyAttackAgent>().SetTarget(character);
             return enemy;
         }
 
-        public void UnspawnEnemy(GameObject enemy)
+        public void UnspawnEnemy(Enemy enemy)
         {
-            enemy.transform.SetParent(container);
-            Release(enemy);
+            pool.Release(enemy);
         }
     }
 }

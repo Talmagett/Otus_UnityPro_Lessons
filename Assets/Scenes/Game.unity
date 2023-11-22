@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bd15923a144ffbab0333dc6e74e641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 363245578}
+  bulletSpawner: {fileID: 363245578}
   levelBounds: {fileID: 2572952653776768186}
 --- !u!114 &363245578
 MonoBehaviour:
@@ -276,9 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506813c3d07740a0987befeee578108f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCount: 50
-  container: {fileID: 1831741369}
-  prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+  pool:
+    initialCount: 50
+    container: {fileID: 1831741369}
+    prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
   worldTransform: {fileID: 1683128698}
 --- !u!1 &519420028
 GameObject:
@@ -375,6 +376,7 @@ GameObject:
   - component: {fileID: 562298204}
   - component: {fileID: 562298207}
   - component: {fileID: 562298205}
+  - component: {fileID: 562298208}
   m_Layer: 0
   m_Name: EnemySystem
   m_TagString: Untagged
@@ -410,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dae85f8264479bac19d85418d92392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPool: {fileID: 562298207}
+  enemySpawner: {fileID: 562298207}
   bulletSystem: {fileID: 363245577}
 --- !u!114 &562298207
 MonoBehaviour:
@@ -424,12 +426,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdcdf257e0242258e7a67fe13d80e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCount: 7
-  container: {fileID: 178513672}
-  prefab: {fileID: 559606060570185700, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  worldTransform: {fileID: 1683128698}
   enemyPositions: {fileID: 7166351703523243261}
   character: {fileID: 4414282821800802401}
+  pool:
+    initialCount: 7
+    container: {fileID: 178513672}
+    prefab: {fileID: -5836771138193451148, guid: 87fe189881a524806800482ac8eaaa83,
+      type: 3}
+  worldTransform: {fileID: 1683128698}
+--- !u!114 &562298208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562298203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8114bde2dd91498596cb208a7486d2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyManager: {fileID: 562298205}
 --- !u!1 &883274639
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +750,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1879759789}
   - component: {fileID: 1879759790}
+  - component: {fileID: 1879759792}
+  - component: {fileID: 1879759791}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
@@ -767,12 +786,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57ed31af8d94ec3b11df7e2b588d40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 3951702117947426123}
   bulletSystem: {fileID: 363245577}
   inputManager: {fileID: 1134805361}
-  moveComponent: {fileID: 4414282821800802398}
-  hitPointsComponent: {fileID: 4414282821800802401}
   weaponComponent: {fileID: 4414282821800802400}
+--- !u!114 &1879759791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879759788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d17a331f154e4ab050333d8c0c3fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 1134805361}
+  moveComponent: {fileID: 4414282821800802398}
+--- !u!114 &1879759792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879759788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622939ecaca24861999aa2a5da3e7ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 3951702117947426123}
+  hitPointsComponent: {fileID: 4414282821800802401}
 --- !u!1 &61006797492197339
 GameObject:
   m_ObjectHideFlags: 0

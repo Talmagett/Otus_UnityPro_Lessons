@@ -1,47 +1,32 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
     public sealed class EnemyManager : MonoBehaviour
     {
-        [SerializeField] private EnemyPool enemyPool;
+        [SerializeField] private EnemySpawner enemySpawner;
+
         [SerializeField] private BulletSystem bulletSystem;
 
-        private const float SpawnCooldown = 1;
-        private float _spawnTimer=0;
-
-        private void Update()
+        public void Spawn()
         {
-            if (_spawnTimer > SpawnCooldown)
-            {
-                Spawn();
-                _spawnTimer = 0;
-            }
-
-            _spawnTimer += Time.deltaTime;
-        }
-
-        private void Spawn()
-        {
-            var enemy = enemyPool.SpawnEnemy();
-            if (enemy is not null)
-            {
-                enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
-                enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
-            }
+            var enemy = enemySpawner.SpawnEnemy();
+            enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty += OnDestroyed;
+            enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
         }
 
         private void OnDestroyed(GameObject enemy)
         {
-            enemy.GetComponent<HitPointsComponent>().HpEmpty -= OnDestroyed;
+            enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty -= OnDestroyed;
             enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
 
-            enemyPool.UnspawnEnemy(enemy);
+            enemySpawner.UnspawnEnemy(enemy.GetComponent<Enemy>());
         }
 
         private void OnFire(BulletConfig bulletConfig, Vector2 position, Vector2 direction)
         {
-            bulletSystem.FlyBulletByArgs(new BulletSystem.Args
+            bulletSystem.SpawnBullet(new BulletSystem.Args
             {
                 isPlayer = false,
                 physicsLayer = (int)bulletConfig.physicsLayer,
