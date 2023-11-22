@@ -5,7 +5,7 @@ namespace ShootEmUp
 {
     public sealed class BulletSystem : MonoBehaviour
     {
-        [SerializeField] private BulletPool bulletPool;
+        [SerializeField] private BulletSpawner bulletSpawner;
         [SerializeField] private LevelBounds levelBounds;
 
         private readonly HashSet<Bullet> _activeBullets = new();
@@ -13,10 +13,10 @@ namespace ShootEmUp
 
         private void FixedUpdate()
         {
-            RemoveBulletsOutsideBounds();
+            CheckOutsideBounds();
         }
 
-        private void RemoveBulletsOutsideBounds()
+        private void CheckOutsideBounds()
         {
             _cache.Clear();
             _cache.AddRange(_activeBullets);
@@ -29,9 +29,9 @@ namespace ShootEmUp
             }
         }
 
-        public void FlyBulletByArgs(Args args)
+        public void SpawnBullet(Args args)
         {
-            var bullet = bulletPool.SpawnBullet();
+            var bullet = bulletSpawner.SpawnBullet();
 
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
@@ -46,7 +46,7 @@ namespace ShootEmUp
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            BulletUtils.DealDamage(bullet, collision.gameObject);
+            DealDamage(bullet, collision.gameObject);
             RemoveBullet(bullet);
         }
 
@@ -55,8 +55,17 @@ namespace ShootEmUp
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
-                bulletPool.UnspawnBullet(bullet);
+                bulletSpawner.UnspawnBullet(bullet);
             }
+        }
+        
+        private void DealDamage(Bullet bullet, GameObject other)
+        {
+            if (!other.TryGetComponent(out TeamComponent team)) return;
+
+            if (bullet.IsPlayer == team.IsPlayer) return;
+
+            if (other.TryGetComponent(out HitPointsComponent hitPoints)) hitPoints.TakeDamage(bullet.Damage);
         }
 
         public struct Args

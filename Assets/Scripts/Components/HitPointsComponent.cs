@@ -5,7 +5,7 @@ namespace ShootEmUp
 {
     public sealed class HitPointsComponent : MonoBehaviour
     {
-        public event Action<GameObject> HpEmpty;
+        public event Action<GameObject> OnHitPointsEmpty;
 
         [SerializeField] private int hitPoints;
 
@@ -17,7 +17,7 @@ namespace ShootEmUp
         public void TakeDamage(int damage)
         {
             hitPoints -= damage;
-            if (hitPoints <= 0) HpEmpty?.Invoke(gameObject);
+            if (hitPoints <= 0) OnHitPointsEmpty?.Invoke(gameObject);
         }
     }
 }

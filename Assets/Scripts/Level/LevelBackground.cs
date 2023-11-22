@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -9,33 +8,31 @@ namespace ShootEmUp
         [SerializeField] private float endPositionY;
         [SerializeField] private float movingSpeedY;
 
-        private float positionX;
-        private float positionZ;
-        private Transform myTransform;
+        private float _positionX;
+        private float _positionZ;
+        private Transform _myTransform;
 
         private void Awake()
         {
-            this.myTransform = this.transform;
-            var position = this.myTransform.position;
-            this.positionX = position.x;
-            this.positionZ = position.z;
+            _myTransform = transform;
+            var position = _myTransform.position;
+            _positionX = position.x;
+            _positionZ = position.z;
         }
 
         private void FixedUpdate()
         {
-            if (this.myTransform.position.y <= this.endPositionY)
-            {
-                this.myTransform.position = new Vector3(
-                    this.positionX,
-                    this.startPositionY,
-                    this.positionZ
+            if (_myTransform.position.y <= endPositionY)
+                _myTransform.position = new Vector3(
+                    _positionX,
+                    startPositionY,
+                    _positionZ
                 );
-            }
 
-            this.myTransform.position -= new Vector3(
-                this.positionX,
-                this.movingSpeedY * Time.fixedDeltaTime,
-                this.positionZ
+            _myTransform.position -= new Vector3(
+                _positionX,
+                movingSpeedY * Time.fixedDeltaTime,
+                _positionZ
             );
         }
     }
