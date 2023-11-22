@@ -12,20 +12,15 @@ namespace ShootEmUp
 
         private void OnEnable()
         {
-            inputManager.OnFire += OnFireFire;
+            inputManager.OnFire += OnFire;
         }
 
         private void OnDisable()
         {
-            inputManager.OnFire -= OnFireFire;
+            inputManager.OnFire -= OnFire;
         }
 
-        private void OnFireFire()
-        {
-            Fire();
-        }
-
-        private void Fire()
+        private void OnFire()
         {
             bulletSystem.SpawnBullet(new BulletSystem.Args
             {
