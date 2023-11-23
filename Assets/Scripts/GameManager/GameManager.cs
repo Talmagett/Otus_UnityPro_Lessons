@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GameManager
@@ -14,7 +14,7 @@ namespace GameManager
 
     public sealed class GameManager : MonoBehaviour
     {
-        public GameState State { get; private set; } = GameState.Prepare;
+        [ShowInInspector] [ReadOnly] public GameState State { get; private set; } = GameState.Prepare;
 
         private readonly List<IGameListener> _gameListeners = new();
 
@@ -25,39 +25,34 @@ namespace GameManager
         public void AddListener(IGameListener listener)
         {
             _gameListeners.Add(listener);
-            if(listener is IGameUpdateListener updateListener)
+            if (listener is IGameUpdateListener updateListener)
                 _gameUpdateListeners.Add(updateListener);
-            if(listener is IGameFixedUpdateListener fixedUpdateListener)
+            if (listener is IGameFixedUpdateListener fixedUpdateListener)
                 _gameFixedUpdateListeners.Add(fixedUpdateListener);
-            if(listener is IGameLateUpdateListener lateUpdateListener)
+            if (listener is IGameLateUpdateListener lateUpdateListener)
                 _gameLateUpdateListeners.Add(lateUpdateListener);
         }
 
         public void AddListeners(IGameListener[] listeners)
         {
-            foreach (var listener in listeners)
-            {
-                AddListener(listener);
-            }
+            foreach (var listener in listeners) AddListener(listener);
         }
-        
+
         public void RemoveListener(IGameListener listener)
         {
             _gameListeners.Remove(listener);
-            if(listener is IGameUpdateListener updateListener)
+            if (listener is IGameUpdateListener updateListener)
                 _gameUpdateListeners.Remove(updateListener);
-            if(listener is IGameFixedUpdateListener fixedUpdateListener)
+            if (listener is IGameFixedUpdateListener fixedUpdateListener)
                 _gameFixedUpdateListeners.Remove(fixedUpdateListener);
-            if(listener is IGameLateUpdateListener lateUpdateListener)
+            if (listener is IGameLateUpdateListener lateUpdateListener)
                 _gameLateUpdateListeners.Remove(lateUpdateListener);
         }
-        
+
         public void RemoveListeners(IGameListener[] listeners)
         {
-            foreach (var listener in listeners)
-            {
+            foreach (var listener in listeners) 
                 RemoveListener(listener);
-            }
         }
 
         public void Clear()
@@ -104,36 +99,28 @@ namespace GameManager
         {
             if (State != GameState.Playing)
                 return;
-            
+
             var deltaTime = Time.deltaTime;
-            foreach (var gameUpdateListener in _gameUpdateListeners)
-            {
-                gameUpdateListener.OnGameUpdate(deltaTime);
-            }
+            foreach (var gameUpdateListener in _gameUpdateListeners) gameUpdateListener.OnGameUpdate(deltaTime);
         }
-        
+
         private void FixedUpdate()
         {
             if (State != GameState.Playing)
                 return;
-            
+
             var deltaTime = Time.deltaTime;
             foreach (var gameUpdateListener in _gameFixedUpdateListeners)
-            {
                 gameUpdateListener.OnGameFixedUpdate(deltaTime);
-            }
         }
-        
+
         private void LateUpdate()
         {
             if (State != GameState.Playing)
                 return;
-            
+
             var deltaTime = Time.deltaTime;
-            foreach (var gameUpdateListener in _gameLateUpdateListeners)
-            {
-                gameUpdateListener.OnGameLateUpdate(deltaTime);
-            }
+            foreach (var gameUpdateListener in _gameLateUpdateListeners) gameUpdateListener.OnGameLateUpdate(deltaTime);
         }
     }
 }

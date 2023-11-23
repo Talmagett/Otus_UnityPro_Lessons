@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using GameManager;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
@@ -11,12 +9,13 @@ namespace ShootEmUp
         [SerializeField] private BulletSystem bulletSystem;
 
         [SerializeField] private GameManager.GameManager manager;
+
         public void Spawn()
         {
             var enemy = enemySpawner.SpawnEnemy();
             enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty += OnDestroyed;
             enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
-            
+
             manager.AddListeners(enemy.GetComponents<IGameListener>());
         }
 
@@ -26,6 +25,7 @@ namespace ShootEmUp
             enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
 
             enemySpawner.UnspawnEnemy(enemy.GetComponent<Enemy>());
+
             manager.RemoveListeners(enemy.GetComponents<IGameListener>());
         }
 

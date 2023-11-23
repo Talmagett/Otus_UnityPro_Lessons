@@ -9,7 +9,13 @@ namespace GameManager
         [SerializeField] private GameManager gameManager;
         [SerializeField] private List<GameObject> listenersGameObjects = new();
 
+        
         private void OnValidate()
+        {
+            RemoveNotIGameListeners();
+        }
+
+        private void RemoveNotIGameListeners()
         {
             var cache = new List<GameObject>();
             foreach (var listener in listenersGameObjects)
@@ -19,7 +25,8 @@ namespace GameManager
             if (cache.Count > 0)
                 Debug.LogWarning("You are trying to add GameObject which has no IGameListener interface");
 
-            foreach (var item in cache) listenersGameObjects.Remove(item);
+            foreach (var item in cache)
+                listenersGameObjects.Remove(item);
         }
 
         private void Awake()

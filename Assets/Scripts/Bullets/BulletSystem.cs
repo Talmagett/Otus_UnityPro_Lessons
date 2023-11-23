@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour,IGameFixedUpdateListener
+    public sealed class BulletSystem : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private BulletSpawner bulletSpawner;
         [SerializeField] private LevelBounds levelBounds;
         [SerializeField] private GameManager.GameManager gameManager;
-        
+
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
-        
+
         public void OnGameFixedUpdate(float deltaTime)
         {
             CheckOutsideBounds();
         }
-        
+
         private void CheckOutsideBounds()
         {
             _cache.Clear();
@@ -26,7 +26,7 @@ namespace ShootEmUp
             for (int i = 0, count = _cache.Count; i < count; i++)
             {
                 var bullet = _cache[i];
-                if (!levelBounds.InBounds(bullet.transform.position)) 
+                if (!levelBounds.InBounds(bullet.transform.position))
                     RemoveBullet(bullet);
             }
         }
@@ -42,8 +42,8 @@ namespace ShootEmUp
             bullet.SetOwner(args.isPlayer);
             bullet.SetVelocity(args.velocity);
 
-            gameManager.AddListener(bullet);
-            
+            gameManager.AddListeners(bullet.GetComponents<IGameListener>());
+
             if (_activeBullets.Add(bullet))
                 bullet.OnCollisionEntered += OnBulletCollision;
         }
@@ -60,10 +60,11 @@ namespace ShootEmUp
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
                 bulletSpawner.UnspawnBullet(bullet);
-                gameManager.RemoveListener(bullet);
+
+                gameManager.RemoveListeners(bullet.GetComponents<IGameListener>());
             }
         }
-        
+
         private void DealDamage(Bullet bullet, GameObject other)
         {
             if (!other.TryGetComponent(out TeamComponent team)) return;
@@ -82,6 +83,5 @@ namespace ShootEmUp
             public int damage;
             public bool isPlayer;
         }
-
     }
 }
