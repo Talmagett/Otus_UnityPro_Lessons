@@ -1,21 +1,23 @@
 using System.Collections.Generic;
+using GameManager;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem : MonoBehaviour,IGameFixedUpdateListener
     {
         [SerializeField] private BulletSpawner bulletSpawner;
         [SerializeField] private LevelBounds levelBounds;
-
+        [SerializeField] private GameManager.GameManager gameManager;
+        
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
-
-        private void FixedUpdate()
+        
+        public void OnGameFixedUpdate(float deltaTime)
         {
             CheckOutsideBounds();
         }
-
+        
         private void CheckOutsideBounds()
         {
             _cache.Clear();
@@ -40,6 +42,8 @@ namespace ShootEmUp
             bullet.SetOwner(args.isPlayer);
             bullet.SetVelocity(args.velocity);
 
+            gameManager.AddListener(bullet);
+            
             if (_activeBullets.Add(bullet))
                 bullet.OnCollisionEntered += OnBulletCollision;
         }
@@ -56,6 +60,7 @@ namespace ShootEmUp
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
                 bulletSpawner.UnspawnBullet(bullet);
+                gameManager.RemoveListener(bullet);
             }
         }
         
@@ -77,5 +82,6 @@ namespace ShootEmUp
             public int damage;
             public bool isPlayer;
         }
+
     }
 }

@@ -1,8 +1,9 @@
+using GameManager;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour, IGameFixedUpdateListener
     {
         public delegate void FireHandler(BulletConfig bulletConfig, Vector2 position, Vector2 direction);
 
@@ -25,13 +26,13 @@ namespace ShootEmUp
             _currentTime = countdown;
         }
 
-        private void FixedUpdate()
+        public void OnGameFixedUpdate(float deltaTime)
         {
             if (!moveAgent.IsReached) return;
 
             if (!_characterTarget.IsHitPointsExists()) return;
 
-            _currentTime -= Time.fixedDeltaTime;
+            _currentTime -= deltaTime;
             if (_currentTime <= 0)
             {
                 Fire();

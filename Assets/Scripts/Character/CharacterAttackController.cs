@@ -1,24 +1,15 @@
+using GameManager;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterAttackController : MonoBehaviour
+    public sealed class CharacterAttackController : MonoBehaviour,IGameStartListener,IGameFinishListener,IGamePauseListener,IGameResumeListener
     {
         [SerializeField] private BulletSystem bulletSystem;
         [SerializeField] private InputManager inputManager;
 
         [Space] 
         [SerializeField] private WeaponComponent weaponComponent;
-
-        private void OnEnable()
-        {
-            inputManager.OnFire += OnFire;
-        }
-
-        private void OnDisable()
-        {
-            inputManager.OnFire -= OnFire;
-        }
 
         private void OnFire()
         {
@@ -31,6 +22,26 @@ namespace ShootEmUp
                 position = weaponComponent.Position,
                 velocity = weaponComponent.Rotation * Vector3.up * weaponComponent.BulletConfig.speed
             });
+        }
+
+        public void OnGameStart()
+        {            
+            inputManager.OnFire += OnFire;
+        }
+
+        public void OnGameFinish()
+        {
+            inputManager.OnFire -= OnFire;
+        }
+
+        public void OnGamePause()
+        {
+            inputManager.OnFire -= OnFire;
+        }
+
+        public void OnGameResume()
+        {            
+            inputManager.OnFire += OnFire;
         }
     }
 }   

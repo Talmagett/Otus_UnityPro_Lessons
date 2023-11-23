@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 namespace Level
 {
-    public class GameStarter:MonoBehaviour
+    public class GameStarter : MonoBehaviour
     {
         [SerializeField] private int delay;
         [SerializeField] private GameManager.GameManager gameManager;
-        
+
         public void StartGame()
         {
             StartCoroutine(CountDown());
@@ -15,11 +16,14 @@ namespace Level
 
         private IEnumerator CountDown()
         {
-            for (;delay >= 0; delay--)
+            while (delay>0)
             {
-                yield return new WaitForSeconds(1);
                 print(delay);
+                yield return new WaitForSeconds(1);
+                delay--;
             }
+
+            print("Start");
             gameManager.StartGame();
         }
     }

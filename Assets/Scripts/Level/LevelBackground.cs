@@ -1,8 +1,9 @@
+using GameManager;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class LevelBackground : MonoBehaviour
+    public sealed class LevelBackground : MonoBehaviour,IGameFixedUpdateListener
     {
         [SerializeField] private float startPositionY;
         [SerializeField] private float endPositionY;
@@ -20,7 +21,7 @@ namespace ShootEmUp
             _positionZ = position.z;
         }
 
-        private void FixedUpdate()
+        public void OnGameFixedUpdate(float deltaTime)
         {
             if (_myTransform.position.y <= endPositionY)
                 _myTransform.position = new Vector3(
