@@ -51,7 +51,7 @@ namespace GameManager
 
         public void RemoveListeners(IGameListener[] listeners)
         {
-            foreach (var listener in listeners) 
+            foreach (var listener in listeners)
                 RemoveListener(listener);
         }
 
@@ -65,6 +65,9 @@ namespace GameManager
 
         public void StartGame()
         {
+            if (State != GameState.Prepare)
+                return;
+
             State = GameState.Playing;
             foreach (var stateListener in _gameListeners)
                 if (stateListener is IGameStartListener onGameStarted)
@@ -73,6 +76,9 @@ namespace GameManager
 
         public void PauseGame()
         {
+            if (State != GameState.Playing)
+                return;
+
             State = GameState.Paused;
             foreach (var stateListener in _gameListeners)
                 if (stateListener is IGamePauseListener onGameStarted)
@@ -81,6 +87,9 @@ namespace GameManager
 
         public void ResumeGame()
         {
+            if (State != GameState.Paused)
+                return;
+
             State = GameState.Playing;
             foreach (var stateListener in _gameListeners)
                 if (stateListener is IGameResumeListener onGameStarted)
@@ -89,6 +98,9 @@ namespace GameManager
 
         public void FinishGame()
         {
+            if (State != GameState.Playing)
+                return;
+
             State = GameState.Finished;
             foreach (var stateListener in _gameListeners)
                 if (stateListener is IGameFinishListener onGameStarted)
@@ -109,7 +121,7 @@ namespace GameManager
             if (State != GameState.Playing)
                 return;
 
-            var deltaTime = Time.deltaTime;
+            var deltaTime = Time.fixedDeltaTime;
             foreach (var gameUpdateListener in _gameFixedUpdateListeners)
                 gameUpdateListener.OnGameFixedUpdate(deltaTime);
         }

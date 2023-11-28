@@ -1,9 +1,14 @@
+using Components;
 using GameManager;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Character
 {
-    public class CharacterDeathObserver:MonoBehaviour,IGameStartListener,IGameFinishListener,IGamePauseListener,IGameResumeListener
+    public class CharacterDeathObserver : MonoBehaviour,
+        IGameStartListener, 
+        IGameFinishListener, 
+        IGamePauseListener, 
+        IGameResumeListener
     {
         [SerializeField] private GameManager.GameManager gameManager;
         [SerializeField] private HitPointsComponent hitPointsComponent;

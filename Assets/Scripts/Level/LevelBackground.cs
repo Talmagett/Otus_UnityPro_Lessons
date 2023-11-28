@@ -1,9 +1,10 @@
 using GameManager;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Level
 {
-    public sealed class LevelBackground : MonoBehaviour,IGameFixedUpdateListener
+    public sealed class LevelBackground : MonoBehaviour,
+        IGameFixedUpdateListener
     {
         [SerializeField] private float startPositionY;
         [SerializeField] private float endPositionY;

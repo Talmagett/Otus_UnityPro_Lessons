@@ -1,9 +1,11 @@
+using Components;
 using GameManager;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Enemy.Agents
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour, IGameFixedUpdateListener
+    public sealed class EnemyMoveAgent : MonoBehaviour,
+        IGameFixedUpdateListener
     {
         public bool IsReached { get; private set; }
 

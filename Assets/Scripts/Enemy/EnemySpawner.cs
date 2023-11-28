@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
+using Common;
+using Components;
+using Enemy.Agents;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Enemy
 {
     public sealed class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private HitPointsComponent character;
-        [SerializeField] private Pool<Enemy> pool; 
-        
+        [SerializeField] private Pool<Enemy> pool;
+
         [SerializeField] private Transform worldTransform;
 
         private void Awake()
@@ -19,13 +20,13 @@ namespace ShootEmUp
 
         public Enemy SpawnEnemy()
         {
-            Enemy enemy = pool.GetInstance(worldTransform);
+            var enemy = pool.GetInstance(worldTransform);
 
             var spawnPosition = enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
             var attackPosition = enemyPositions.RandomAttackPosition();
-            
+
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
             enemy.GetComponent<EnemyAttackAgent>().SetTarget(character);
             return enemy;

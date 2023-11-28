@@ -9,7 +9,7 @@ namespace GameManager
         [SerializeField] private GameManager gameManager;
         [SerializeField] private List<GameObject> listenersGameObjects = new();
 
-        
+
         private void OnValidate()
         {
             RemoveNotIGameListeners();

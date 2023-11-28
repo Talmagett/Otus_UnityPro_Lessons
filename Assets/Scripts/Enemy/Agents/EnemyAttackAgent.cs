@@ -1,20 +1,25 @@
+using Bullets;
+using Components;
 using GameManager;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Enemy.Agents
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour, IGameFixedUpdateListener
+    public sealed class EnemyAttackAgent : MonoBehaviour,
+        IGameFixedUpdateListener
     {
-        public delegate void FireHandler(BulletConfig bulletConfig, Vector2 position, Vector2 direction);
-
-        public event FireHandler OnFire;
-
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private EnemyMoveAgent moveAgent;
         [SerializeField] private float countdown;
 
         private HitPointsComponent _characterTarget;
         private float _currentTime;
+        private BulletSystem _bulletSystem;
+
+        public void Construct(BulletSystem bulletSystem)
+        {
+            _bulletSystem = bulletSystem;
+        }
 
         public void SetTarget(HitPointsComponent target)
         {
@@ -45,7 +50,16 @@ namespace ShootEmUp
             var startPosition = weaponComponent.Position;
             var vector = (Vector2)_characterTarget.transform.position - startPosition;
             var direction = vector.normalized;
-            OnFire?.Invoke(weaponComponent.BulletConfig, startPosition, direction);
+
+            _bulletSystem.SpawnBullet(new BulletSystem.Args
+            {
+                isPlayer = false,
+                physicsLayer = (int)weaponComponent.BulletConfig.physicsLayer,
+                color = weaponComponent.BulletConfig.color,
+                damage = weaponComponent.BulletConfig.damage,
+                position = startPosition,
+                velocity = direction * weaponComponent.BulletConfig.speed
+            });
         }
     }
 }

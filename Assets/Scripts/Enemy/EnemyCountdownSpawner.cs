@@ -1,9 +1,10 @@
 using GameManager;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Enemy
 {
-    public class EnemyCountdownSpawner : MonoBehaviour, IGameUpdateListener
+    public class EnemyCountdownSpawner : MonoBehaviour,
+        IGameUpdateListener
     {
         [SerializeField] private EnemyManager enemyManager;
 

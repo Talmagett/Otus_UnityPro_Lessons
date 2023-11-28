@@ -1,45 +1,32 @@
-using GameManager;
+using Bullets;
+using Components;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Enemy
 {
     public sealed class EnemyManager : MonoBehaviour
     {
         [SerializeField] private EnemySpawner enemySpawner;
-        [SerializeField] private BulletSystem bulletSystem;
 
+        [Space] 
+        [SerializeField] private BulletSystem bulletSystem;
         [SerializeField] private GameManager.GameManager manager;
 
         public void Spawn()
         {
             var enemy = enemySpawner.SpawnEnemy();
             enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty += OnDestroyed;
-            enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
 
-            manager.AddListeners(enemy.GetComponents<IGameListener>());
+            enemy.Construct(manager, bulletSystem);
+            enemy.Initialize();
         }
 
         private void OnDestroyed(GameObject enemy)
         {
             enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty -= OnDestroyed;
-            enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
-
-            enemySpawner.UnspawnEnemy(enemy.GetComponent<Enemy>());
-
-            manager.RemoveListeners(enemy.GetComponents<IGameListener>());
-        }
-
-        private void OnFire(BulletConfig bulletConfig, Vector2 position, Vector2 direction)
-        {
-            bulletSystem.SpawnBullet(new BulletSystem.Args
-            {
-                isPlayer = false,
-                physicsLayer = (int)bulletConfig.physicsLayer,
-                color = bulletConfig.color,
-                damage = bulletConfig.damage,
-                position = position,
-                velocity = direction * bulletConfig.speed
-            });
+            var enemyComponent = enemy.GetComponent<Enemy>();
+            enemyComponent.Dispose();
+            enemySpawner.UnspawnEnemy(enemyComponent);
         }
     }
 }

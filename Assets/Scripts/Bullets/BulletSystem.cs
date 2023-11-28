@@ -1,14 +1,15 @@
 using System.Collections.Generic;
-using GameManager;
+    using GameManager;
+using Level;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Bullets
 {
-    public sealed class BulletSystem : MonoBehaviour, IGameFixedUpdateListener
+    public sealed partial class BulletSystem : MonoBehaviour, 
+        IGameFixedUpdateListener
     {
         [SerializeField] private BulletSpawner bulletSpawner;
         [SerializeField] private LevelBounds levelBounds;
-        [SerializeField] private GameManager.GameManager gameManager;
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
@@ -42,7 +43,6 @@ namespace ShootEmUp
             bullet.SetOwner(args.isPlayer);
             bullet.SetVelocity(args.velocity);
 
-            gameManager.AddListeners(bullet.GetComponents<IGameListener>());
 
             if (_activeBullets.Add(bullet))
                 bullet.OnCollisionEntered += OnBulletCollision;
@@ -50,7 +50,6 @@ namespace ShootEmUp
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            DealDamage(bullet, collision.gameObject);
             RemoveBullet(bullet);
         }
 
@@ -61,27 +60,7 @@ namespace ShootEmUp
                 bullet.OnCollisionEntered -= OnBulletCollision;
                 bulletSpawner.UnspawnBullet(bullet);
 
-                gameManager.RemoveListeners(bullet.GetComponents<IGameListener>());
             }
-        }
-
-        private void DealDamage(Bullet bullet, GameObject other)
-        {
-            if (!other.TryGetComponent(out TeamComponent team)) return;
-
-            if (bullet.IsPlayer == team.IsPlayer) return;
-
-            if (other.TryGetComponent(out HitPointsComponent hitPoints)) hitPoints.TakeDamage(bullet.Damage);
-        }
-
-        public struct Args
-        {
-            public Vector2 position;
-            public Vector2 velocity;
-            public Color color;
-            public int physicsLayer;
-            public int damage;
-            public bool isPlayer;
         }
     }
 }

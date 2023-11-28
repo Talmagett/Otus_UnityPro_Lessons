@@ -1,6 +1,7 @@
+using Bullets;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Components
 {
     public sealed class WeaponComponent : MonoBehaviour
     {

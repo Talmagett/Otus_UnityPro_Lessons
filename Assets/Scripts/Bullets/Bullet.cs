@@ -1,10 +1,14 @@
 using System;
+using Components;
 using GameManager;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Bullets
 {
-    public sealed class Bullet : MonoBehaviour, IGameStartListener, IGameFinishListener, IGamePauseListener,
+    public sealed class Bullet : MonoBehaviour, 
+        IGameStartListener, 
+        IGameFinishListener, 
+        IGamePauseListener,
         IGameResumeListener
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
@@ -17,9 +21,26 @@ namespace ShootEmUp
 
         private Vector2 _velocity;
 
+        private IGameListener[] _listeners;
+        public IGameListener[] GetListeners()
+        {
+            if(_listeners==null)
+                _listeners = GetComponents<IGameListener>();
+            return _listeners;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             OnCollisionEntered?.Invoke(this, collision);
+            
+            if (!collision.gameObject.TryGetComponent(out TeamComponent team)) 
+                return;
+
+            if (IsPlayer == team.IsPlayer) 
+                return;
+
+            if (collision.gameObject.TryGetComponent(out HitPointsComponent hitPoints)) 
+                hitPoints.TakeDamage(Damage);
         }
 
         public void SetVelocity(Vector2 velocity)

@@ -1,15 +1,21 @@
+using Bullets;
+using Components;
 using GameManager;
+using Input;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Character
 {
-    public sealed class CharacterAttackController : MonoBehaviour,IGameStartListener,IGameFinishListener,IGamePauseListener,IGameResumeListener
+    public sealed class CharacterAttackController : MonoBehaviour,
+        IGameStartListener,
+        IGameFinishListener,
+        IGamePauseListener,
+        IGameResumeListener
     {
         [SerializeField] private BulletSystem bulletSystem;
         [SerializeField] private InputManager inputManager;
 
-        [Space] 
-        [SerializeField] private WeaponComponent weaponComponent;
+        [Space] [SerializeField] private WeaponComponent weaponComponent;
 
         private void OnFire()
         {
@@ -25,7 +31,7 @@ namespace ShootEmUp
         }
 
         public void OnGameStart()
-        {            
+        {
             inputManager.OnFire += OnFire;
         }
 
@@ -40,8 +46,8 @@ namespace ShootEmUp
         }
 
         public void OnGameResume()
-        {            
+        {
             inputManager.OnFire += OnFire;
         }
     }
-}   
+}

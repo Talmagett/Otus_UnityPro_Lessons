@@ -1,39 +1,33 @@
-using System;
 using GameManager;
 using UnityEngine;
 
 namespace UI
 {
-    public class GameStateListenerUI : MonoBehaviour, IGameStartListener, IGameFinishListener, IGamePauseListener,
+    public class GameStateListenerUI : MonoBehaviour,
+        IGameStartListener,
+        IGameFinishListener,
+        IGamePauseListener,
         IGameResumeListener
     {
-        [SerializeField] private GameObject startButton;
-        [SerializeField] private GameObject pauseButton;
-        [SerializeField] private GameObject resumeButton;
-        [SerializeField] private GameObject gameFinish;
-        
+        [SerializeField] private GameState activateOnState;
         public void OnGameStart()
         {
-            startButton.SetActive(false);
-            pauseButton.SetActive(true);
+            gameObject.SetActive(activateOnState==GameState.Playing);
         }
 
         public void OnGameFinish()
         {
-            pauseButton.SetActive(false);
-            gameFinish.SetActive(true);
+            gameObject.SetActive(activateOnState==GameState.Finished);
         }
 
         public void OnGamePause()
         {
-            pauseButton.SetActive(false);
-            resumeButton.SetActive(true);
+            gameObject.SetActive(activateOnState==GameState.Paused);
         }
 
         public void OnGameResume()
         {
-            pauseButton.SetActive(true);
-            resumeButton.SetActive(false);
+            gameObject.SetActive(activateOnState==GameState.Playing);
         }
     }
 }
