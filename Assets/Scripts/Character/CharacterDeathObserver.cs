@@ -1,41 +1,57 @@
+using System;
 using Components;
 using GameManager;
 using UnityEngine;
+using Zenject;
 
 namespace Character
 {
-    public class CharacterDeathObserver : MonoBehaviour,
+    public class CharacterDeathObserver :
         IGameStartListener, 
         IGameFinishListener, 
         IGamePauseListener, 
-        IGameResumeListener
+        IGameResumeListener,
+        IDisposable
     {
-        [SerializeField] private GameManager.GameManager gameManager;
-        [SerializeField] private HitPointsComponent hitPointsComponent;
+        private readonly GameManager.GameManager _gameManager;
+        private readonly HitPointsComponent _hitPointsComponent;
+        
+        [Inject]
+        public CharacterDeathObserver(GameManager.GameManager gameManager, HitPointsComponent hitPointsComponent)
+        {
+            _gameManager = gameManager;
+            _hitPointsComponent = hitPointsComponent;
+            _gameManager.AddListener(this);
+        }
 
         private void OnCharacterDeath(GameObject _)
         {
-            gameManager.FinishGame();
+            _gameManager.FinishGame();
         }
 
         public void OnGameStart()
         {
-            hitPointsComponent.OnHitPointsEmpty += OnCharacterDeath;
+            _hitPointsComponent.OnHitPointsEmpty += OnCharacterDeath;
         }
 
         public void OnGameFinish()
         {
-            hitPointsComponent.OnHitPointsEmpty -= OnCharacterDeath;
+            _hitPointsComponent.OnHitPointsEmpty -= OnCharacterDeath;
         }
 
         public void OnGamePause()
         {
-            hitPointsComponent.OnHitPointsEmpty -= OnCharacterDeath;
+            _hitPointsComponent.OnHitPointsEmpty -= OnCharacterDeath;
         }
 
         public void OnGameResume()
         {
-            hitPointsComponent.OnHitPointsEmpty += OnCharacterDeath;
+            _hitPointsComponent.OnHitPointsEmpty += OnCharacterDeath;
+        }
+
+        public void Dispose()
+        {
+            _gameManager.RemoveListener(this);            
         }
     }
 }

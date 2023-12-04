@@ -1,18 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace GameManager
 {
-    [RequireComponent(typeof(GameManager))]
     public class GameManagerInstaller : MonoBehaviour
     {
-        [SerializeField] private GameManager gameManager;
         [SerializeField] private List<GameObject> listenersGameObjects = new();
-
-
+        private GameManager _gameManager;
+        
         private void OnValidate()
         {
             RemoveNotIGameListeners();
+        }
+        
+        [Inject]
+        public void Construct(GameManager gameManager)
+        {
+            _gameManager = gameManager;
         }
 
         private void RemoveNotIGameListeners()
@@ -34,13 +39,8 @@ namespace GameManager
             foreach (var listener in listenersGameObjects)
             {
                 var listeners = listener.GetComponents<IGameListener>();
-                gameManager.AddListeners(listeners);
+                _gameManager.AddListeners(listeners);
             }
-        }
-
-        private void OnDestroy()
-        {
-            gameManager.Clear();
         }
     }
 }

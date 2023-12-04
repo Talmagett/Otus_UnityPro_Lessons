@@ -1,14 +1,15 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Input
 {
-    public sealed class InputManager : MonoBehaviour
+    public sealed class InputManager : ITickable
     {
         public float MoveDirection { get; private set; }
         public event Action OnFire;
 
-        private void Update()
+        public void Tick()
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
             {

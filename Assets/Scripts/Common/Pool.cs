@@ -15,7 +15,15 @@ namespace Common
 
         private readonly Queue<T> _pool = new();
 
-        public void InitSpawn()
+        public Pool(int initialCount,Transform container, T prefab)
+        {
+            this.initialCount = initialCount;
+            this.container = container;
+            this.prefab = prefab;
+            InitSpawn();
+        }
+        
+        private void InitSpawn()
         {
             for (var i = 0; i < initialCount; i++)
             {

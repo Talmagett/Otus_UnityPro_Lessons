@@ -1,12 +1,20 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace GameManager
 {
     public class GameLauncher : MonoBehaviour
     {
         [SerializeField] private int delay;
-        [SerializeField] private GameManager gameManager;
+
+        private GameManager _gameManager;
+        
+        [Inject]
+        public void Construct(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
 
         public void StartGame()
         {
@@ -23,7 +31,7 @@ namespace GameManager
             }
 
             print("Start");
-            gameManager.StartGame();
+            _gameManager.StartGame();
         }
     }
 }

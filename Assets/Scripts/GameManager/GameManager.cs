@@ -1,18 +1,12 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace GameManager
 {
-    public enum GameState
-    {
-        Prepare,
-        Playing,
-        Paused,
-        Finished
-    }
-
-    public sealed class GameManager : MonoBehaviour
+    public sealed class GameManager : ITickable, IFixedTickable, ILateTickable
     {
         [ShowInInspector] [ReadOnly] public GameState State { get; private set; } = GameState.Prepare;
 
@@ -53,14 +47,6 @@ namespace GameManager
         {
             foreach (var listener in listeners)
                 RemoveListener(listener);
-        }
-
-        public void Clear()
-        {
-            _gameListeners.Clear();
-            _gameUpdateListeners.Clear();
-            _gameFixedUpdateListeners.Clear();
-            _gameLateUpdateListeners.Clear();
         }
 
         public void StartGame()
@@ -106,8 +92,8 @@ namespace GameManager
                 if (stateListener is IGameFinishListener onGameStarted)
                     onGameStarted.OnGameFinish();
         }
-
-        private void Update()
+        
+        public void Tick()
         {
             if (State != GameState.Playing)
                 return;
@@ -116,7 +102,7 @@ namespace GameManager
             foreach (var gameUpdateListener in _gameUpdateListeners) gameUpdateListener.OnGameUpdate(deltaTime);
         }
 
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if (State != GameState.Playing)
                 return;
@@ -126,13 +112,14 @@ namespace GameManager
                 gameUpdateListener.OnGameFixedUpdate(deltaTime);
         }
 
-        private void LateUpdate()
+        public void LateTick()
         {
             if (State != GameState.Playing)
                 return;
 
             var deltaTime = Time.deltaTime;
-            foreach (var gameUpdateListener in _gameLateUpdateListeners) gameUpdateListener.OnGameLateUpdate(deltaTime);
+            foreach (var gameUpdateListener in _gameLateUpdateListeners) 
+                gameUpdateListener.OnGameLateUpdate(deltaTime);
         }
     }
 }

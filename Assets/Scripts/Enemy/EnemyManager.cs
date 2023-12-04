@@ -1,23 +1,30 @@
 using Bullets;
 using Components;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager
     {
-        [SerializeField] private EnemySpawner enemySpawner;
+        private EnemySpawner _enemySpawner;
+        private BulletSystem _bulletSystem;
+        private GameManager.GameManager _gameManager;
 
-        [Space] 
-        [SerializeField] private BulletSystem bulletSystem;
-        [SerializeField] private GameManager.GameManager manager;
+        [Inject]
+        public EnemyManager(GameManager.GameManager gameManager,EnemySpawner enemySpawner,BulletSystem bulletSystem)
+        {
+            _gameManager = gameManager;
+            _enemySpawner = enemySpawner;
+            _bulletSystem = bulletSystem;
+        }
 
         public void Spawn()
         {
-            var enemy = enemySpawner.SpawnEnemy();
+            var enemy = _enemySpawner.SpawnEnemy();
             enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty += OnDestroyed;
 
-            enemy.Construct(manager, bulletSystem);
+            enemy.Construct(_gameManager, _bulletSystem);
             enemy.Initialize();
         }
 
@@ -26,7 +33,7 @@ namespace Enemy
             enemy.GetComponent<HitPointsComponent>().OnHitPointsEmpty -= OnDestroyed;
             var enemyComponent = enemy.GetComponent<Enemy>();
             enemyComponent.Dispose();
-            enemySpawner.UnspawnEnemy(enemyComponent);
+            _enemySpawner.UnspawnEnemy(enemyComponent);
         }
     }
 }

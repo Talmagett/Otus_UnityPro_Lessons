@@ -1,22 +1,25 @@
+using System;
 using System.Collections.Generic;
     using GameManager;
 using Level;
 using UnityEngine;
+using Zenject;
 
 namespace Bullets
 {
-    public sealed partial class BulletSystem : MonoBehaviour, 
-        IGameFixedUpdateListener
+    public sealed class BulletSystem : 
+        IFixedTickable
     {
-        [SerializeField] private BulletSpawner bulletSpawner;
-        [SerializeField] private LevelBounds levelBounds;
+        private readonly BulletSpawner _bulletSpawner;
+        private LevelBounds _levelBounds;
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
 
-        public void OnGameFixedUpdate(float deltaTime)
+        public BulletSystem(BulletSpawner bulletSpawner, LevelBounds levelBounds)
         {
-            CheckOutsideBounds();
+            _bulletSpawner = bulletSpawner;
+            _levelBounds = levelBounds;
         }
 
         private void CheckOutsideBounds()
@@ -27,14 +30,14 @@ namespace Bullets
             for (int i = 0, count = _cache.Count; i < count; i++)
             {
                 var bullet = _cache[i];
-                if (!levelBounds.InBounds(bullet.transform.position))
+                if (!_levelBounds.InBounds(bullet.transform.position))
                     RemoveBullet(bullet);
             }
         }
 
-        public void SpawnBullet(Args args)
+        public void SpawnBullet(BulletArgs args)
         {
-            var bullet = bulletSpawner.SpawnBullet();
+            var bullet = _bulletSpawner.SpawnBullet();
 
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
@@ -42,7 +45,6 @@ namespace Bullets
             bullet.SetDamage(args.damage);
             bullet.SetOwner(args.isPlayer);
             bullet.SetVelocity(args.velocity);
-
 
             if (_activeBullets.Add(bullet))
                 bullet.OnCollisionEntered += OnBulletCollision;
@@ -58,9 +60,13 @@ namespace Bullets
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
-                bulletSpawner.UnspawnBullet(bullet);
-
+                _bulletSpawner.UnspawnBullet(bullet);
             }
+        }
+
+        public void FixedTick()
+        {
+            CheckOutsideBounds();
         }
     }
 }

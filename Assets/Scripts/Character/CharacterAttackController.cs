@@ -1,53 +1,72 @@
+using System;
 using Bullets;
 using Components;
 using GameManager;
 using Input;
 using UnityEngine;
+using Zenject;
 
 namespace Character
 {
-    public sealed class CharacterAttackController : MonoBehaviour,
+    public sealed class CharacterAttackController :
         IGameStartListener,
         IGameFinishListener,
         IGamePauseListener,
-        IGameResumeListener
+        IGameResumeListener,
+        IDisposable
     {
-        [SerializeField] private BulletSystem bulletSystem;
-        [SerializeField] private InputManager inputManager;
-
-        [Space] [SerializeField] private WeaponComponent weaponComponent;
+        private readonly GameManager.GameManager _gameManager;
+        private readonly InputManager _inputManager;
+        private readonly BulletSystem _bulletSystem;
+        private readonly WeaponComponent _weaponComponent;
+        
+        [Inject]
+        public CharacterAttackController(GameManager.GameManager gameManager,InputManager inputManager,BulletSystem bulletSystem,WeaponComponent weaponComponent)
+        {
+            _gameManager = gameManager;
+            _inputManager = inputManager;
+            _bulletSystem = bulletSystem;
+            _weaponComponent = weaponComponent;
+            
+            _gameManager.AddListener(this);
+        }
 
         private void OnFire()
         {
-            bulletSystem.SpawnBullet(new BulletSystem.Args
+            _bulletSystem.SpawnBullet(new BulletArgs
             {
                 isPlayer = true,
-                physicsLayer = (int)weaponComponent.BulletConfig.physicsLayer,
-                color = weaponComponent.BulletConfig.color,
-                damage = weaponComponent.BulletConfig.damage,
-                position = weaponComponent.Position,
-                velocity = weaponComponent.Rotation * Vector3.up * weaponComponent.BulletConfig.speed
+                physicsLayer = (int)_weaponComponent.BulletConfig.physicsLayer,
+                color = _weaponComponent.BulletConfig.color,
+                damage = _weaponComponent.BulletConfig.damage,
+                position = _weaponComponent.Position,
+                velocity = _weaponComponent.Rotation * Vector3.up * _weaponComponent.BulletConfig.speed
             });
         }
 
         public void OnGameStart()
         {
-            inputManager.OnFire += OnFire;
+            _inputManager.OnFire += OnFire;
         }
 
         public void OnGameFinish()
         {
-            inputManager.OnFire -= OnFire;
+            _inputManager.OnFire -= OnFire;
         }
 
         public void OnGamePause()
         {
-            inputManager.OnFire -= OnFire;
+            _inputManager.OnFire -= OnFire;
         }
 
         public void OnGameResume()
         {
-            inputManager.OnFire += OnFire;
+            _inputManager.OnFire += OnFire;
+        }
+
+        public void Dispose()
+        {
+            _gameManager.RemoveListener(this);
         }
     }
 }

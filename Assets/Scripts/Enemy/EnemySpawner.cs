@@ -2,39 +2,44 @@ using Common;
 using Components;
 using Enemy.Agents;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy
 {
-    public sealed class EnemySpawner : MonoBehaviour
+    public sealed class EnemySpawner
     {
-        [SerializeField] private EnemyPositions enemyPositions;
-        [SerializeField] private HitPointsComponent character;
-        [SerializeField] private Pool<Enemy> pool;
+        private readonly EnemyPositions _enemyPositions;
+        private readonly HitPointsComponent _character;
+        private readonly Pool<Enemy> _pool;
 
-        [SerializeField] private Transform worldTransform;
-
-        private void Awake()
+        private readonly Transform _worldTransform;
+        [Inject]
+        public EnemySpawner(EnemyPositions enemyPositions, HitPointsComponent character,
+            Transform poolTransform, Transform worldTransform,Enemy prefab)
         {
-            pool.InitSpawn();
+            _enemyPositions = enemyPositions;
+            _character = character;
+            _worldTransform = worldTransform;
+            _pool = new Pool<Enemy>(7,poolTransform, prefab);
         }
 
         public Enemy SpawnEnemy()
         {
-            var enemy = pool.GetInstance(worldTransform);
+            var enemy = _pool.GetInstance(_worldTransform);
 
-            var spawnPosition = enemyPositions.RandomSpawnPosition();
+            var spawnPosition = _enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
-            var attackPosition = enemyPositions.RandomAttackPosition();
+            var attackPosition = _enemyPositions.RandomAttackPosition();
 
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
-            enemy.GetComponent<EnemyAttackAgent>().SetTarget(character);
+            enemy.GetComponent<EnemyAttackAgent>().SetTarget(_character);
             return enemy;
         }
 
         public void UnspawnEnemy(Enemy enemy)
         {
-            pool.Release(enemy);
+            _pool.Release(enemy);
         }
     }
 }

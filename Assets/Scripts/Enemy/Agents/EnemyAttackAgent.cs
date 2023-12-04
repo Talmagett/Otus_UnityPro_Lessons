@@ -51,7 +51,7 @@ namespace Enemy.Agents
             var vector = (Vector2)_characterTarget.transform.position - startPosition;
             var direction = vector.normalized;
 
-            _bulletSystem.SpawnBullet(new BulletSystem.Args
+            _bulletSystem.SpawnBullet(new BulletArgs
             {
                 isPlayer = false,
                 physicsLayer = (int)weaponComponent.BulletConfig.physicsLayer,
