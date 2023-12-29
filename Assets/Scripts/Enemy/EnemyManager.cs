@@ -7,11 +7,10 @@ namespace Enemy
 {
     public sealed class EnemyManager
     {
-        private EnemySpawner _enemySpawner;
-        private BulletSystem _bulletSystem;
-        private GameManager.GameManager _gameManager;
+        private readonly EnemySpawner _enemySpawner;
+        private readonly BulletSystem _bulletSystem;
+        private readonly GameManager.GameManager _gameManager;
 
-        [Inject]
         public EnemyManager(GameManager.GameManager gameManager,EnemySpawner enemySpawner,BulletSystem bulletSystem)
         {
             _gameManager = gameManager;

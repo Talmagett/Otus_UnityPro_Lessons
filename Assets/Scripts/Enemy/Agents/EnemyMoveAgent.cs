@@ -1,18 +1,25 @@
 using Components;
 using GameManager;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy.Agents
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour,
-        IGameFixedUpdateListener
+    public sealed class EnemyMoveAgent : IGameFixedUpdateListener
     {
         public bool IsReached { get; private set; }
 
-        [SerializeField] private MoveComponent moveComponent;
+        private readonly MoveComponent _moveComponent;
+        private readonly Transform _transform;
+        
         private Vector2 _destination;
         private const float ReachingDistance = 0.25f;
 
+        public EnemyMoveAgent(MoveComponent moveComponent,Transform transform)
+        {
+            _moveComponent = moveComponent;
+            _transform = transform;
+        }
         public void SetDestination(Vector2 endPoint)
         {
             _destination = endPoint;
@@ -23,7 +30,7 @@ namespace Enemy.Agents
         {
             if (IsReached) return;
 
-            var vector = _destination - (Vector2)transform.position;
+            var vector = _destination - (Vector2)_transform.position;
             if (vector.magnitude <= ReachingDistance)
             {
                 IsReached = true;
@@ -31,7 +38,7 @@ namespace Enemy.Agents
             }
 
             var direction = vector.normalized * Time.fixedDeltaTime;
-            moveComponent.Move(direction);
+            _moveComponent.Move(direction);
         }
     }
 }

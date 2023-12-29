@@ -5,19 +5,20 @@ using UnityEngine;
 
 namespace Enemy.Agents
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour,
+    public sealed class EnemyAttackAgent :
         IGameFixedUpdateListener
     {
-        [SerializeField] private WeaponComponent weaponComponent;
-        [SerializeField] private EnemyMoveAgent moveAgent;
-        [SerializeField] private float countdown;
+        private readonly WeaponComponent _weaponComponent;
+        private EnemyMoveAgent moveAgent;
+        private float countdown;
 
         private HitPointsComponent _characterTarget;
         private float _currentTime;
         private BulletSystem _bulletSystem;
 
-        public void Construct(BulletSystem bulletSystem)
+        public EnemyAttackAgent(WeaponComponent weaponComponent,BulletSystem bulletSystem)
         {
+            _weaponComponent = weaponComponent;
             _bulletSystem = bulletSystem;
         }
 
@@ -47,18 +48,18 @@ namespace Enemy.Agents
 
         private void Fire()
         {
-            var startPosition = weaponComponent.Position;
+            var startPosition = _weaponComponent.Position;
             var vector = (Vector2)_characterTarget.transform.position - startPosition;
             var direction = vector.normalized;
 
             _bulletSystem.SpawnBullet(new BulletArgs
             {
                 isPlayer = false,
-                physicsLayer = (int)weaponComponent.BulletConfig.physicsLayer,
-                color = weaponComponent.BulletConfig.color,
-                damage = weaponComponent.BulletConfig.damage,
+                physicsLayer = (int)_weaponComponent.BulletConfig.physicsLayer,
+                color = _weaponComponent.BulletConfig.color,
+                damage = _weaponComponent.BulletConfig.damage,
                 position = startPosition,
-                velocity = direction * weaponComponent.BulletConfig.speed
+                velocity = direction * _weaponComponent.BulletConfig.speed
             });
         }
     }

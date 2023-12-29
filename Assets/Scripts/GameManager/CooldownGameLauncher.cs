@@ -4,7 +4,7 @@ using Zenject;
 
 namespace GameManager
 {
-    public class GameLauncher : MonoBehaviour
+    public class CooldownGameLauncher : MonoBehaviour
     {
         [SerializeField] private int delay;
 

@@ -16,8 +16,6 @@ GameObject:
   - component: {fileID: 5568771391735819372}
   - component: {fileID: 5568771391735819373}
   - component: {fileID: 5568771391735819374}
-  - component: {fileID: 8186052948131603766}
-  - component: {fileID: 6896809305229427933}
   - component: {fileID: -5836771138193451148}
   m_Layer: 11
   m_Name: Enemy
@@ -185,34 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3195880656587174614}
   bulletConfig: {fileID: 11400000, guid: f09d228218d96004d9d0cb4f598ef183, type: 2}
---- !u!114 &8186052948131603766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559606060570185700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bdb5771141e4cf18c434a69ec116e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveComponent: {fileID: 5568771391735819372}
---- !u!114 &6896809305229427933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559606060570185700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba7965842e74a9f89ba3aa66d61da46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponComponent: {fileID: 5568771391735819374}
-  moveAgent: {fileID: 8186052948131603766}
-  countdown: 1
 --- !u!114 &-5836771138193451148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b039fe582142f599b037bf6d8cbd40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponComponent: {fileID: 5568771391735819374}
+  moveComponent: {fileID: 5568771391735819372}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,18 +8,19 @@ namespace Common
     [Serializable]
     public class Pool<T> where T : Component
     {
-        [Header("Pool")] [SerializeField] private int initialCount = 50;
+        [Header("Pool")]
 
-        [SerializeField] protected Transform container;
         [SerializeField] protected T prefab;
+        [SerializeField] protected Transform container;
+        [SerializeField] private int initialCount = 50;
 
         private readonly Queue<T> _pool = new();
 
-        public Pool(int initialCount,Transform container, T prefab)
+        public Pool(T prefab,Transform container, int initialCount)
         {
-            this.initialCount = initialCount;
-            this.container = container;
             this.prefab = prefab;
+            this.container = container;
+            this.initialCount = initialCount;
             InitSpawn();
         }
         

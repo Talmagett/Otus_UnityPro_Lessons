@@ -13,14 +13,14 @@ namespace Enemy
         private readonly Pool<Enemy> _pool;
 
         private readonly Transform _worldTransform;
-        [Inject]
+        
         public EnemySpawner(EnemyPositions enemyPositions, HitPointsComponent character,
-            Transform poolTransform, Transform worldTransform,Enemy prefab)
+            PoolArgs<Enemy> enemyPoolArgs)
         {
             _enemyPositions = enemyPositions;
             _character = character;
-            _worldTransform = worldTransform;
-            _pool = new Pool<Enemy>(7,poolTransform, prefab);
+            _worldTransform = enemyPoolArgs.WorldTransform;
+            _pool = new Pool<Enemy>(enemyPoolArgs.Prefab,enemyPoolArgs.Container,enemyPoolArgs.InitialCount);
         }
 
         public Enemy SpawnEnemy()

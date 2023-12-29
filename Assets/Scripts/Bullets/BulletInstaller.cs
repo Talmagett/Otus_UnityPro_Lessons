@@ -1,27 +1,25 @@
+using Common;
 using Level;
 using UnityEngine;
 using Zenject;
 
 namespace Bullets
 {
-    [System.Serializable]
-    public class BulletInstaller
+    public class BulletInstaller : MonoInstaller
     {
         [SerializeField] private LevelBounds levelBounds;
-        [SerializeField] private Transform poolTransform;
-        [SerializeField] private Transform worldTransform;
-        [SerializeField] private Bullet bulletPrefab;
-        public void InstallBindings(DiContainer container)
+        [SerializeField] private PoolArgs<Bullet> bulletPoolArgs;
+
+        public override void InstallBindings()
         {
-            container.Bind<BulletSpawner>()
+            Container.Bind<BulletSpawner>()
                 .AsSingle()
-                .WithArguments(poolTransform,worldTransform,bulletPrefab)
+                .WithArguments(bulletPoolArgs)
                 .NonLazy();
-            container.BindInterfacesAndSelfTo<BulletSystem>()
+            Container.BindInterfacesAndSelfTo<BulletSystem>()
                 .AsSingle()
                 .WithArguments(levelBounds)
                 .NonLazy();
-            
         }
     }
 }

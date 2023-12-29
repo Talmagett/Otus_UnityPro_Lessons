@@ -1,5 +1,6 @@
 using GameManager;
 using UnityEngine;
+using Zenject;
 
 namespace Level
 {
@@ -13,7 +14,15 @@ namespace Level
         private float _positionX;
         private float _positionZ;
         private Transform _myTransform;
+        
+        private GameManager.GameManager _gameManager;
 
+        [Inject]
+        public void Construct(GameManager.GameManager gameManager)
+        {
+            _gameManager = gameManager;
+            _gameManager.AddListener(this);
+        }
         private void Awake()
         {
             _myTransform = transform;
