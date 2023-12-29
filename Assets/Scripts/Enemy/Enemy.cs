@@ -1,8 +1,6 @@
-using System;
 using Bullets;
 using Components;
 using Enemy.Agents;
-using GameManager;
 using UnityEngine;
 
 namespace Enemy
@@ -12,27 +10,28 @@ namespace Enemy
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private MoveComponent moveComponent;
         
-        private GameManager.GameManager _gameManager;
-        public EnemyAttackAgent EnemyAttackAgent { get; private set; }
-        public EnemyMoveAgent EnemyMoveAgent { get; private set; }
+        private EnemyAttackAgent _enemyAttackAgent;
+        private EnemyMoveAgent _enemyMoveAgent;
         
-        public void Construct(GameManager.GameManager gameManager, BulletSystem bulletSystem)
+        private EnemyMoveAttackController _enemyMoveAttackController;
+        
+        public void Construct(GameManager.GameManager gameManager, BulletSystem bulletSystem,HitPointsComponent character, Vector3 attackPositionPosition)
         {
-            _gameManager = gameManager;
-            EnemyMoveAgent = new EnemyMoveAgent(moveComponent,transform);
-            EnemyAttackAgent = new EnemyAttackAgent(weaponComponent, bulletSystem,EnemyMoveAgent);
+            _enemyMoveAgent = new EnemyMoveAgent(moveComponent,transform);
+            _enemyAttackAgent = new EnemyAttackAgent(weaponComponent, bulletSystem);
+            _enemyMoveAgent.SetDestination(attackPositionPosition);
+            _enemyAttackAgent.SetTarget(character);
+            _enemyMoveAttackController = new EnemyMoveAttackController(gameManager, _enemyAttackAgent, _enemyMoveAgent);
         }
 
         public void Initialize()
         {
-            _gameManager.AddListener(EnemyAttackAgent);
-            _gameManager.AddListener(EnemyMoveAgent);
+            _enemyMoveAttackController.Initialize();
         }
 
         public void Dispose()
         {
-            _gameManager.RemoveListener(EnemyMoveAgent);
-            _gameManager.RemoveListener(EnemyAttackAgent);
+            _enemyMoveAttackController.Dispose();
         }
     }
 }

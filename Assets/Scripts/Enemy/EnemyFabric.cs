@@ -32,16 +32,13 @@ namespace Enemy
         public Enemy SpawnEnemy()
         {
             var enemy = _pool.GetInstance(_worldTransform);
-            enemy.Construct(_gameManager, _bulletSystem);
 
             var spawnPosition = _enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
             var attackPosition = _enemyPositions.RandomAttackPosition();
 
-            enemy.EnemyMoveAgent.SetDestination(attackPosition.position);
-            enemy.EnemyAttackAgent.SetTarget(_character);
-            
+            enemy.Construct(_gameManager, _bulletSystem,_character,attackPosition.position);
 
             return enemy;
         }
