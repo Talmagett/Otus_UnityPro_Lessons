@@ -17,7 +17,8 @@ namespace Components
         public void TakeDamage(int damage)
         {
             hitPoints -= damage;
-            if (hitPoints <= 0) OnHitPointsEmpty?.Invoke(gameObject);
+            if (hitPoints <= 0)
+                OnHitPointsEmpty?.Invoke(gameObject);
         }
     }
 }

@@ -9,17 +9,18 @@ namespace Enemy.Agents
         IGameFixedUpdateListener
     {
         private readonly WeaponComponent _weaponComponent;
-        private EnemyMoveAgent moveAgent;
-        private float countdown;
+        private EnemyMoveAgent _moveAgent;
+        private float _countdown=1f;
 
         private HitPointsComponent _characterTarget;
         private float _currentTime;
-        private BulletSystem _bulletSystem;
+        private readonly BulletSystem _bulletSystem;
 
-        public EnemyAttackAgent(WeaponComponent weaponComponent,BulletSystem bulletSystem)
+        public EnemyAttackAgent(WeaponComponent weaponComponent,BulletSystem bulletSystem,EnemyMoveAgent moveAgent)
         {
             _weaponComponent = weaponComponent;
             _bulletSystem = bulletSystem;
+            _moveAgent = moveAgent;
         }
 
         public void SetTarget(HitPointsComponent target)
@@ -29,12 +30,12 @@ namespace Enemy.Agents
 
         public void Reset()
         {
-            _currentTime = countdown;
+            _currentTime = _countdown;
         }
 
         public void OnGameFixedUpdate(float deltaTime)
         {
-            if (!moveAgent.IsReached) return;
+            if (!_moveAgent.IsReached) return;
 
             if (!_characterTarget.IsHitPointsExists()) return;
 
@@ -42,7 +43,7 @@ namespace Enemy.Agents
             if (_currentTime <= 0)
             {
                 Fire();
-                _currentTime += countdown;
+                _currentTime += _countdown;
             }
         }
 

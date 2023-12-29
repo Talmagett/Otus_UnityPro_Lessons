@@ -1,39 +1,48 @@
+using Bullets;
 using Common;
 using Components;
-using Enemy.Agents;
 using UnityEngine;
 using Zenject;
 
 namespace Enemy
 {
-    public sealed class EnemySpawner
+    public sealed class EnemyFabric
     {
+        private readonly GameManager.GameManager _gameManager;
+
         private readonly EnemyPositions _enemyPositions;
         private readonly HitPointsComponent _character;
         private readonly Pool<Enemy> _pool;
+        private readonly BulletSystem _bulletSystem;
 
         private readonly Transform _worldTransform;
         
-        public EnemySpawner(EnemyPositions enemyPositions, HitPointsComponent character,
-            PoolArgs<Enemy> enemyPoolArgs)
+        [Inject]
+        public EnemyFabric(GameManager.GameManager gameManager,EnemyPositions enemyPositions, HitPointsComponent character,
+            PoolArgs<Enemy> enemyPoolArgs, BulletSystem bulletSystem)
         {
             _enemyPositions = enemyPositions;
             _character = character;
             _worldTransform = enemyPoolArgs.WorldTransform;
+            _gameManager = gameManager;
+            _bulletSystem = bulletSystem;
             _pool = new Pool<Enemy>(enemyPoolArgs.Prefab,enemyPoolArgs.Container,enemyPoolArgs.InitialCount);
         }
 
         public Enemy SpawnEnemy()
         {
             var enemy = _pool.GetInstance(_worldTransform);
+            enemy.Construct(_gameManager, _bulletSystem);
 
             var spawnPosition = _enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
 
             var attackPosition = _enemyPositions.RandomAttackPosition();
 
-            enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
-            enemy.GetComponent<EnemyAttackAgent>().SetTarget(_character);
+            enemy.EnemyMoveAgent.SetDestination(attackPosition.position);
+            enemy.EnemyAttackAgent.SetTarget(_character);
+            
+
             return enemy;
         }
 

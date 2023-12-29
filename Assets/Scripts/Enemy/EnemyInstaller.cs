@@ -13,7 +13,7 @@ namespace Enemy
         
         public override void InstallBindings()
         {
-            Container.Bind<EnemySpawner>()
+            Container.Bind<EnemyFabric>()
                 .AsSingle()
                 .WithArguments(enemyPositions,character,enemyPoolArgs)
                 .NonLazy();

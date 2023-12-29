@@ -13,25 +13,26 @@ namespace Enemy
         [SerializeField] private MoveComponent moveComponent;
         
         private GameManager.GameManager _gameManager;
-        private IGameListener[] _gameListeners;
-        private EnemyAttackAgent _enemyAttackAgent;
-        private EnemyMoveAgent _enemyMoveAgent;
+        public EnemyAttackAgent EnemyAttackAgent { get; private set; }
+        public EnemyMoveAgent EnemyMoveAgent { get; private set; }
+        
         public void Construct(GameManager.GameManager gameManager, BulletSystem bulletSystem)
         {
             _gameManager = gameManager;
-            _gameListeners = GetComponents<IGameListener>();
-            _enemyAttackAgent = new EnemyAttackAgent(weaponComponent, bulletSystem);
-            _enemyMoveAgent = new EnemyMoveAgent(moveComponent,transform);
+            EnemyMoveAgent = new EnemyMoveAgent(moveComponent,transform);
+            EnemyAttackAgent = new EnemyAttackAgent(weaponComponent, bulletSystem,EnemyMoveAgent);
         }
 
         public void Initialize()
         {
-            _gameManager.AddListeners(_gameListeners);
+            _gameManager.AddListener(EnemyAttackAgent);
+            _gameManager.AddListener(EnemyMoveAgent);
         }
 
         public void Dispose()
         {
-            _gameManager.RemoveListeners(_gameListeners);
+            _gameManager.RemoveListener(EnemyMoveAgent);
+            _gameManager.RemoveListener(EnemyAttackAgent);
         }
     }
 }

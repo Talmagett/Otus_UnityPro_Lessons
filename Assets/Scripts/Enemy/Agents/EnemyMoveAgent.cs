@@ -1,7 +1,6 @@
 using Components;
 using GameManager;
 using UnityEngine;
-using Zenject;
 
 namespace Enemy.Agents
 {
