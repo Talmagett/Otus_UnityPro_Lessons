@@ -14,3 +14,16 @@
     Соблюдение принципов SOLID
     Код-стайл, расположение файлов в проекте
     4*. UniRx приветствуется
+
+
+
+Move speed 20
+Intelligence 55
+Stamina 25
+Damage 50
+Dexterity 25
+Regeneration 5
+
+
+
+I'm the best warrior in the Light Kingdom

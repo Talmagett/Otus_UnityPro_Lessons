@@ -8,31 +8,37 @@ namespace Presenter
         private readonly PlayerLevel _playerLevel;
         private readonly PlayerExperienceView _playerExperienceView;
         private readonly PlayerLevelView _playerLevelView;
+        
         public PlayerLevelPresenter(PlayerLevel playerLevel,PlayerExperienceView playerExperienceView, PlayerLevelView playerLevelView)
         {
             _playerLevelView = playerLevelView;
             _playerLevel = playerLevel;
             _playerExperienceView = playerExperienceView;
 
-            _playerLevel.OnExperienceChanged += UpdateExperienceView;
-            _playerLevel.OnLevelUp += UpdateLevelView;
-            UpdateLevelView();
+            _playerLevel.OnExperienceChanged += OnExperienceChanged;
+            _playerLevel.OnLevelUp += OnLevelChanged;
+
+            _playerLevelView.AddOnLevelUpListener(_playerLevel.LevelUp);
+            
+            OnLevelChanged();
         }
 
-        private void UpdateExperienceView(int xp)
+        private void OnExperienceChanged(int xp)
         {
             _playerExperienceView.SetExperience(xp,_playerLevel.RequiredExperience);
+            _playerLevelView.SetVisibleLevelUpButton(_playerLevel.CanLevelUp());
         }
 
-        private void UpdateLevelView()
+        private void OnLevelChanged()
         {
             _playerLevelView.SetLevel(_playerLevel.CurrentLevel);
-            _playerExperienceView.SetExperience(_playerLevel.CurrentExperience,_playerLevel.RequiredExperience);
+            OnExperienceChanged(_playerLevel.CurrentExperience);
         }
         
         public void Dispose()
         {
-            _playerLevel.OnExperienceChanged -= UpdateExperienceView;
+            _playerLevelView.RemoveOnLevelUpListener(_playerLevel.LevelUp);
+            _playerLevel.OnExperienceChanged -= OnExperienceChanged;
         }
     }
 }

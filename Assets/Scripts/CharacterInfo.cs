@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
-[System.Serializable]
+
 public sealed class CharacterInfo
 {
     public event Action<CharacterStat> OnStatAdded;

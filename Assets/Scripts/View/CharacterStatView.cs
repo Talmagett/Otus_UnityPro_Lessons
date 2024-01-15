@@ -9,8 +9,7 @@ namespace View
         [SerializeField] private TMP_Text statText;
 
         [Button("Set Stat")]
-
-        public void SetText(string statName, int statValue)
+        public void SetStatData(string statName, int statValue)
         {
             statText.text = $"{statName} : {statValue}";
         }

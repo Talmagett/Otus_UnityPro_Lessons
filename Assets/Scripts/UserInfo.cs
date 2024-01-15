@@ -1,7 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-[System.Serializable]
+
 public sealed class UserInfo
 {
     public event Action<string> OnNameChanged;

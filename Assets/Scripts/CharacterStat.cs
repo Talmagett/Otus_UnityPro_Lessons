@@ -1,6 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
-[System.Serializable]
+
 public sealed class CharacterStat
 {
     public event Action<int> OnValueChanged; 
@@ -11,6 +11,11 @@ public sealed class CharacterStat
     [ShowInInspector, ReadOnly]
     public int Value { get; private set; }
 
+    public CharacterStat(string name, int value)
+    {
+        Name = name;
+        Value = value;
+    }
     [Button]
     public void ChangeValue(int value)
     {

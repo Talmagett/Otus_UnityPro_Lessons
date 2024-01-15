@@ -1,7 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
 
-[System.Serializable]
 public sealed class PlayerLevel
 {
     public event Action OnLevelUp;
