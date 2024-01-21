@@ -1,15 +1,13 @@
 using System;
 using Models;
-using View;
+using Views;
 
-namespace Presenter
+namespace Presenters
 {
     public class CharacterStatPresenter : IDisposable
     {
         private readonly CharacterStat _characterStat;
-        public CharacterStatView CharacterStatView { get; private set; }
 
-        public string StatName => _characterStat.Name;
         public CharacterStatPresenter(CharacterStat characterStat, CharacterStatView characterStatView)
         {
             _characterStat = characterStat;
@@ -17,14 +15,18 @@ namespace Presenter
             _characterStat.OnValueChanged += UpdateValue;
         }
 
+        public CharacterStatView CharacterStatView { get; }
+
+        public string StatName => _characterStat.Name;
+
         public void Dispose()
         {
             _characterStat.OnValueChanged -= UpdateValue;
         }
-        
+
         private void UpdateValue(int newValue)
         {
-            CharacterStatView.SetStatData(_characterStat.Name,newValue);
+            CharacterStatView.SetStatData($"{_characterStat.Name} : {newValue}");
         }
     }
 }

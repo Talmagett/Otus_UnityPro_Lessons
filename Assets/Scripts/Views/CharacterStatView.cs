@@ -2,16 +2,15 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
-namespace View
+namespace Views
 {
     public class CharacterStatView : MonoBehaviour
     {
         [SerializeField] private TMP_Text statText;
 
-        [Button("Set Stat")]
-        public void SetStatData(string statName, int statValue)
+        public void SetStatData(string stat)
         {
-            statText.text = $"{statName} : {statValue}";
+            statText.text = stat;
         }
     }
 }

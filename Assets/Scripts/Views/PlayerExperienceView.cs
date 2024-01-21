@@ -1,21 +1,28 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Sirenix.OdinInspector;
 
-namespace View
+namespace Views
 {
-    public class PlayerExperienceView:MonoBehaviour
+    public class PlayerExperienceView : MonoBehaviour
     {
         [SerializeField] private Image experienceBar;
         [SerializeField] private GameObject fullExperienceBar;
         [SerializeField] private TMP_Text experienceText;
-        
-        public void SetExperience(int currentExperience, int requireExperience)
+
+        public void SetExperienceText(string experience)
         {
-            experienceText.text = $"XP: {currentExperience} / {requireExperience}";
-            experienceBar.fillAmount = (float)currentExperience / requireExperience;
-            fullExperienceBar.SetActive(currentExperience >= requireExperience);
+            experienceText.text = experience;
+        }
+
+        public void SetExperienceFillAmount(float percent)
+        {
+            experienceBar.fillAmount = percent;
+        }
+        
+        public void SetFullExperienceBarActive(bool active)
+        {
+            fullExperienceBar.SetActive(active);
         }
     }
 }

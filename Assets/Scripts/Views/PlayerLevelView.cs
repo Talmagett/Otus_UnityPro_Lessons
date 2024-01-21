@@ -1,19 +1,18 @@
 using System;
 using TMPro;
 using UnityEngine;
-using Sirenix.OdinInspector;
 using UnityEngine.UI;
 
-namespace View
+namespace Views
 {
-    public class PlayerLevelView:MonoBehaviour
+    public class PlayerLevelView : MonoBehaviour
     {
         [SerializeField] private TMP_Text levelText;
         [SerializeField] private Button levelUpButton;
 
-        public void SetLevel(int level)
+        public void SetLevel(string text)
         {
-            levelText.text = $"Level: {level}";
+            levelText.text = text;
         }
 
         public void SetVisibleLevelUpButton(bool isActive)
@@ -23,12 +22,12 @@ namespace View
 
         public void AddOnLevelUpListener(Action onClick)
         {
-            levelUpButton.onClick.AddListener(()=>onClick());
+            levelUpButton.onClick.AddListener(() => onClick());
         }
 
         public void RemoveOnLevelUpListener(Action onClick)
         {
-            levelUpButton.onClick.RemoveListener(()=>onClick());
+            levelUpButton.onClick.RemoveListener(() => onClick());
         }
     }
 }

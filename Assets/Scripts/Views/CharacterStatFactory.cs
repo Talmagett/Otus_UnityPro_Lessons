@@ -1,9 +1,9 @@
 using Models;
 using UnityEngine;
 
-namespace View
+namespace Views
 {
-    public class CharacterStatFabric : MonoBehaviour
+    public class CharacterStatFactory : MonoBehaviour
     {
         [SerializeField] private Transform statsParent;
         [SerializeField] private CharacterStatView characterStatViewPrefab;
@@ -11,7 +11,8 @@ namespace View
         public CharacterStatView CreateStat(CharacterStat stat)
         {
             var characterStatView = Instantiate(characterStatViewPrefab, statsParent);
-            characterStatView.SetStatData(stat.Name,stat.Value);
+
+            characterStatView.SetStatData($"{stat.Name} : {stat.Value}");
             return characterStatView;
         }
 
