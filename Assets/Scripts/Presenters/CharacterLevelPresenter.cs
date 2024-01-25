@@ -6,8 +6,8 @@ namespace Presenters
 {
     public class CharacterLevelPresenter : IDisposable
     {
-        private readonly CharacterLevel _characterLevel;
         private readonly CharacterExperienceView _characterExperienceView;
+        private readonly CharacterLevel _characterLevel;
         private readonly CharacterLevelView _characterLevelView;
 
         public CharacterLevelPresenter(CharacterLevel characterLevel, CharacterExperienceView characterExperienceView,
@@ -34,7 +34,8 @@ namespace Presenters
         private void OnExperienceChanged(int xp)
         {
             var requiredXp = _characterLevel.RequiredExperience;
-            _characterExperienceView.SetExperience($"XP: {xp} / {requiredXp}", (float)xp / requiredXp, xp >= requiredXp);
+            _characterExperienceView.SetExperience($"XP: {xp} / {requiredXp}", (float)xp / requiredXp,
+                xp >= requiredXp);
             _characterLevelView.SetVisibleLevelUpButton(_characterLevel.CanLevelUp());
         }
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Models;
-using Presenters;
 using UnityEngine;
 using UnityEngine.Events;
 using Views;
@@ -13,9 +12,10 @@ namespace UI
     {
         [SerializeField] private TavernCharacterView buttonPrefab;
         [SerializeField] private Transform tavernCharactersPrefab;
-
-        private TavernCharacterService _tavernCharacterService;
+        
         private CharacterPopup _characterPopup;
+        private TavernCharacterService _tavernCharacterService;
+
         [Inject]
         public void Construct(CharacterPopup characterPopup,
             TavernCharacterService tavernCharacterService)
@@ -40,7 +40,7 @@ namespace UI
 
         private UnityAction OpenCharacterData(string characterName)
         {
-            return () => { _characterPopup.ShowCharacter(characterName);};
+            return () => { _characterPopup.ShowCharacter(characterName); };
         }
     }
 }

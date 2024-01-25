@@ -23,7 +23,7 @@ namespace Views
                 DestroyImmediate(statsParent.GetChild(0).gameObject);
             }
         }
-        
+
         public void DestroyStat(CharacterStatView characterStatView)
         {
             Destroy(characterStatView.transform.gameObject);

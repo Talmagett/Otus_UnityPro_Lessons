@@ -2,23 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Models;
-using UI;
 using Views;
 
 namespace Presenters
 {
     public class CharacterStatsInfoPresenter : IDisposable
     {
-        private readonly CharacterStatsInfo _characterStatsInfo;
         private readonly CharacterStatFactory _characterStatFactory;
+        private readonly CharacterStatsInfo _characterStatsInfo;
         private readonly List<CharacterStatPresenter> _presenters = new();
 
-        public CharacterStatsInfoPresenter(CharacterStatsInfo characterStatsInfo, CharacterStatFactory characterStatFactory)
+        public CharacterStatsInfoPresenter(CharacterStatsInfo characterStatsInfo,
+            CharacterStatFactory characterStatFactory)
         {
             _characterStatsInfo = characterStatsInfo;
             _characterStatFactory = characterStatFactory;
             _characterStatFactory.ClearStats();
-            
+
             _characterStatsInfo.OnStatAdded += AddStat;
             _characterStatsInfo.OnStatRemoved += RemoveStat;
             foreach (var characterStat in characterStatsInfo.GetStats())
