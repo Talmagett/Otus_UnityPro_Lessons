@@ -1,70 +1,46 @@
+using System.Collections.Generic;
 using Models;
-using Sirenix.Utilities;
+using Presenters;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using Views;
 using Zenject;
 using CharacterInfo = Models.CharacterInfo;
 
 namespace UI
 {
-    public class TavernPopup : MonoBehaviour, IPopup
+    public class TavernPopup : MonoBehaviour
     {
-        [SerializeField] private CharacterData[] characters;
-        [SerializeField] private Button[] buttons;
-        private CharacterInfo _characterInfo;
-        private PlayerLevel _playerLevel;
+        [SerializeField] private TavernCharacterView buttonPrefab;
+        [SerializeField] private Transform tavernCharactersPrefab;
 
-        private PopupManager _popupManager;
-
-        private UserInfo _userInfo;
-
-        private void Awake()
+        private TavernCharacterService _tavernCharacterService;
+        private CharacterPopup _characterPopup;
+        [Inject]
+        public void Construct(CharacterPopup characterPopup,
+            TavernCharacterService tavernCharacterService)
         {
-            for (var i = 0; i < buttons.Length; i++)
+            _tavernCharacterService = tavernCharacterService;
+            _characterPopup = characterPopup;
+            var characters = _tavernCharacterService.GetAllCharacters();
+            BindButtons(characters);
+        }
+
+        private void BindButtons(IReadOnlyList<CharacterInfo> characters)
+        {
+            foreach (var characterInfo in characters)
             {
-                var character = characters[i];
-                //вот тут хочу вызвать функцию с параметром, знаю что стоит использовать без ()=>
-                buttons[i].onClick.AddListener(OpenCharacterData(character));
+                var tavernCharacterView = Instantiate(buttonPrefab, tavernCharactersPrefab);
+                var characterName = characterInfo.Name;
+                var characterIcon = characterInfo.Icon;
+                tavernCharacterView.SetTavernCharacterData(characterIcon, characterName);
+                tavernCharacterView.SetOnCharacterChoose(OpenCharacterData(characterName));
             }
         }
 
-        public void Hide()
+        private UnityAction OpenCharacterData(string characterName)
         {
-        }
-
-        public void Show(params object[] args)
-        {
-        }
-
-        [Inject]
-        public void Construct(PopupManager popupManager)
-        {
-            _popupManager = popupManager;
-            _popupManager.AddPopup(this);
-        }
-
-        private UnityAction OpenCharacterData(CharacterData characterData)
-        {
-            return () =>
-            {
-                _userInfo = new UserInfo(characterData.UserName, characterData.Description, characterData.Icon);
-
-                _playerLevel = new PlayerLevel(characterData.Level);
-                if (_characterInfo != null)
-                {
-                    var prevCharacterStats = _characterInfo.GetStats();
-                    prevCharacterStats.ForEach(t => _characterInfo.RemoveStat(t));
-                }
-
-                _characterInfo = new CharacterInfo();
-
-                _popupManager.ShowPopup(typeof(CharacterPopup), _userInfo, _playerLevel, _characterInfo);
-
-
-                foreach (var statData in characterData.Stats)
-                    _characterInfo.AddStat(new CharacterStat(statData.Name, statData.Value));
-            };
+            return () => { _characterPopup.ShowCharacter(characterName);};
         }
     }
 }

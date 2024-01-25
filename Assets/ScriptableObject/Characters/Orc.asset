@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9485f64b7458c89640a1606cb727d, type: 3}
   m_Name: Orc
   m_EditorClassIdentifier: 
-  <UserName>k__BackingField: Thrall
+  <Name>k__BackingField: Thrall
   <Description>k__BackingField: For the ancenstors
   <Icon>k__BackingField: {fileID: 21300000, guid: 7c0892898786946a98a1057c9873611a, type: 3}
   <Level>k__BackingField: 2

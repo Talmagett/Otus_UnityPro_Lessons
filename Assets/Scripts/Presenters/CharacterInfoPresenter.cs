@@ -1,45 +1,50 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Models;
+using UnityEngine;
 using Views;
+using CharacterInfo = Models.CharacterInfo;
 
 namespace Presenters
 {
     public class CharacterInfoPresenter : IDisposable
     {
         private readonly CharacterInfo _characterInfo;
-        private readonly CharacterStatFactory _characterStatFactory;
-        private readonly List<CharacterStatPresenter> _presenters = new();
+        private readonly CharacterInfoView _characterInfoView;
 
-        public CharacterInfoPresenter(CharacterInfo characterInfo, CharacterStatFactory characterStatFactory)
+        public CharacterInfoPresenter(CharacterInfo characterInfo, CharacterInfoView characterInfoView)
         {
             _characterInfo = characterInfo;
-            _characterStatFactory = characterStatFactory;
-            _characterInfo.OnStatAdded += AddStat;
-            _characterInfo.OnStatRemoved += RemoveStat;
+            _characterInfoView = characterInfoView;
+
+            _characterInfo.OnNameChanged += ChangeName;
+            _characterInfo.OnDescriptionChanged += ChangeDescription;
+            _characterInfo.OnIconChanged += ChangeIcon;
+
+
+            ChangeName(_characterInfo.Name);
+            ChangeDescription(_characterInfo.Description);
+            ChangeIcon(_characterInfo.Icon);
         }
 
         public void Dispose()
         {
-            _characterInfo.OnStatAdded -= AddStat;
-            _characterInfo.OnStatRemoved -= RemoveStat;
+            _characterInfo.OnNameChanged -= ChangeName;
+            _characterInfo.OnDescriptionChanged -= ChangeDescription;
+            _characterInfo.OnIconChanged -= ChangeIcon;
         }
 
-        private void AddStat(CharacterStat stat)
+        private void ChangeName(string name)
         {
-            var characterStatView = _characterStatFactory.CreateStat(stat);
-            var characterStatPresenter = new CharacterStatPresenter(stat, characterStatView);
-            _presenters.Add(characterStatPresenter);
+            _characterInfoView.SetName(name);
         }
 
-        private void RemoveStat(CharacterStat stat)
+        private void ChangeDescription(string description)
         {
-            var characterStatPresenter = _presenters.FirstOrDefault(t => t.StatName == stat.Name);
-            if (characterStatPresenter == null)
-                return;
-            _characterStatFactory.DestroyStat(characterStatPresenter.CharacterStatView);
-            _presenters.Remove(characterStatPresenter);
+            _characterInfoView.SetDescription(description);
+        }
+
+        private void ChangeIcon(Sprite icon)
+        {
+            _characterInfoView.SetIcon(icon);
         }
     }
 }

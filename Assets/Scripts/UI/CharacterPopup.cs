@@ -4,7 +4,6 @@ using Presenters;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Views;
 using Zenject;
@@ -12,27 +11,32 @@ using CharacterInfo = Models.CharacterInfo;
 
 namespace UI
 {
-    public class CharacterPopup : MonoBehaviour, IPopup
+    public class CharacterPopup : MonoBehaviour
     {
-        [SerializeField] private PlayerExperienceView playerExperienceView;
-        [SerializeField] private PlayerLevelView playerLevelView;
-        [SerializeField] private UserInfoView userInfoView;
+        [SerializeField] private CharacterExperienceView _characterExperienceView;
+        [SerializeField] private CharacterLevelView _characterLevelView;
+        [SerializeField] private CharacterInfoView characterInfoView;
 
-        [FormerlySerializedAs("characterStatFabric")] [SerializeField]
-        private CharacterStatFactory characterStatFactory;
+        [SerializeField] private CharacterStatFactory characterStatFactory;
 
         [Space] [SerializeField] private Button closeButton;
 
         private CharacterInfo _characterInfo;
+        private CharacterStatsInfoPresenter _characterStatsInfoPresenter;
+        private CharacterLevel _characterLevel;
+
+        private CharacterStatsInfo _characterStatsInfo;
+
+        private CharacterLevelPresenter _characterLevelPresenter;
+
+        private TavernCharacterService _tavernCharacterService;
         private CharacterInfoPresenter _characterInfoPresenter;
-        private PlayerLevel _playerLevel;
 
-        private PlayerLevelPresenter _playerLevelPresenter;
-
-        private PopupManager _popupManager;
-
-        private UserInfo _userInfo;
-        private UserInfoPresenter _userInfoPresenter;
+        [Inject]
+        public void Construct(TavernCharacterService tavernCharacterService)
+        {
+            _tavernCharacterService = tavernCharacterService;
+        }
 
         private void Awake()
         {
@@ -44,51 +48,37 @@ namespace UI
             closeButton.onClick.RemoveListener(Hide);
         }
 
-        public void Hide()
+        public void ShowCharacter(string characterName)
         {
-            gameObject.SetActive(false);
-        }
-
-        public void Show(params object[] args)
-        {
-            foreach (var o in args)
-            {
-                if (o is UserInfo userInfo)
-                    _userInfo = userInfo;
-                if (o is PlayerLevel playerLevel)
-                    _playerLevel = playerLevel;
-                if (o is CharacterInfo characterInfo)
-                    _characterInfo = characterInfo;
-            }
-
-            _playerLevelPresenter = new PlayerLevelPresenter(_playerLevel, playerExperienceView, playerLevelView);
-            _userInfoPresenter = new UserInfoPresenter(_userInfo, userInfoView);
-            _characterInfoPresenter = new CharacterInfoPresenter(_characterInfo, characterStatFactory);
+            _characterInfo = _tavernCharacterService.GetCharacterInfoByName(characterName);
+            _characterLevel = _tavernCharacterService.GetCharacterLevel(characterName);
+            _characterStatsInfo = _tavernCharacterService.GetStats(characterName);
+            _characterLevelPresenter = new CharacterLevelPresenter(_characterLevel, _characterExperienceView, _characterLevelView);
+            _characterInfoPresenter = new CharacterInfoPresenter(_characterInfo, characterInfoView);
+            _characterStatsInfoPresenter = new CharacterStatsInfoPresenter(_characterStatsInfo, characterStatFactory);
             gameObject.SetActive(true);
         }
 
-        [Inject]
-        public void Construct(PopupManager popupManager)
+        public void Hide()
         {
-            _popupManager = popupManager;
-            _popupManager.AddPopup(this);
+            gameObject.SetActive(false);
         }
 
         [Button]
         public void SetUserData(string userName, string description, Sprite icon)
         {
             if (!userName.IsNullOrWhitespace())
-                _userInfo.ChangeName(userName);
+                _characterInfo.ChangeName(userName);
             if (!description.IsNullOrWhitespace())
-                _userInfo.ChangeDescription(description);
+                _characterInfo.ChangeDescription(description);
             if (icon != null)
-                _userInfo.ChangeIcon(icon);
+                _characterInfo.ChangeIcon(icon);
         }
 
         [Button]
         public void AddExperience(int xpValue)
         {
-            _playerLevel.AddExperience(xpValue);
+            _characterLevel.AddExperience(xpValue);
         }
 
         [Button]
@@ -96,11 +86,11 @@ namespace UI
         {
             try
             {
-                _characterInfo.GetStat(statName);
+                _characterStatsInfo.GetStat(statName);
             }
             catch (Exception e)
             {
-                _characterInfo.AddStat(new CharacterStat(statName, value));
+                _characterStatsInfo.AddStat(new CharacterStat(statName, value));
             }
         }
 
@@ -109,8 +99,8 @@ namespace UI
         {
             try
             {
-                var stat = _characterInfo.GetStat(statName);
-                _characterInfo.RemoveStat(stat);
+                var stat = _characterStatsInfo.GetStat(statName);
+                _characterStatsInfo.RemoveStat(stat);
             }
             catch (Exception e)
             {
@@ -123,7 +113,7 @@ namespace UI
         {
             try
             {
-                var stat = _characterInfo.GetStat(statName);
+                var stat = _characterStatsInfo.GetStat(statName);
                 stat.ChangeValue(newValue);
             }
             catch (Exception e)

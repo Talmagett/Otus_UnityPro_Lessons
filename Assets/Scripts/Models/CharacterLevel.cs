@@ -3,9 +3,9 @@ using Sirenix.OdinInspector;
 
 namespace Models
 {
-    public sealed class PlayerLevel
+    public sealed class CharacterLevel
     {
-        public PlayerLevel(int level = 1)
+        public CharacterLevel(int level = 1)
         {
             CurrentLevel = level;
         }

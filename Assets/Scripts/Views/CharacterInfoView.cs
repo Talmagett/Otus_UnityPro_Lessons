@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Views
 {
-    public class UserInfoView : MonoBehaviour
+    public class CharacterInfoView : MonoBehaviour
     {
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text descriptionText;

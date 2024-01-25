@@ -1,41 +1,51 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Models
 {
     public sealed class CharacterInfo
     {
-        [ShowInInspector] private readonly HashSet<CharacterStat> _stats = new();
+        public CharacterInfo()
+        {
+        }
 
-        public event Action<CharacterStat> OnStatAdded;
-        public event Action<CharacterStat> OnStatRemoved;
+        public CharacterInfo(string userName, string description, Sprite icon)
+        {
+            Name = userName;
+            Description = description;
+            Icon = icon;
+        }
+
+        [ShowInInspector] [ReadOnly] public string Name { get; private set; }
+
+        [ShowInInspector] [ReadOnly] public string Description { get; private set; }
+
+        [ShowInInspector] [ReadOnly] public Sprite Icon { get; private set; }
+
+        public event Action<string> OnNameChanged;
+        public event Action<string> OnDescriptionChanged;
+        public event Action<Sprite> OnIconChanged;
 
         [Button]
-        public void AddStat(CharacterStat stat)
+        public void ChangeName(string name)
         {
-            if (_stats.Add(stat)) OnStatAdded?.Invoke(stat);
+            Name = name;
+            OnNameChanged?.Invoke(name);
         }
 
         [Button]
-        public void RemoveStat(CharacterStat stat)
+        public void ChangeDescription(string description)
         {
-            if (_stats.Remove(stat)) OnStatRemoved?.Invoke(stat);
+            Description = description;
+            OnDescriptionChanged?.Invoke(description);
         }
 
-        public CharacterStat GetStat(string name)
+        [Button]
+        public void ChangeIcon(Sprite icon)
         {
-            foreach (var stat in _stats)
-                if (stat.Name == name)
-                    return stat;
-
-            throw new Exception($"Stat {name} is not found!");
-        }
-
-        public CharacterStat[] GetStats()
-        {
-            return _stats.ToArray();
+            Icon = icon;
+            OnIconChanged?.Invoke(icon);
         }
     }
 }

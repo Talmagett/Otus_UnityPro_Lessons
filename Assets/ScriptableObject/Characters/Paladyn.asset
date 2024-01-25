@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9485f64b7458c89640a1606cb727d, type: 3}
   m_Name: Paladyn
   m_EditorClassIdentifier: 
-  <UserName>k__BackingField: Uther
+  <Name>k__BackingField: Uther
   <Description>k__BackingField: I'm the best warrior in the Light Kingdom
   <Icon>k__BackingField: {fileID: 21300000, guid: 954d79ad0f5124da59b33552ab47a641, type: 3}
   <Level>k__BackingField: 2

@@ -1,11 +1,11 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Views
 {
-    public class PlayerLevelView : MonoBehaviour
+    public class CharacterLevelView : MonoBehaviour
     {
         [SerializeField] private TMP_Text levelText;
         [SerializeField] private Button levelUpButton;
@@ -20,14 +20,14 @@ namespace Views
             levelUpButton.gameObject.SetActive(isActive);
         }
 
-        public void AddOnLevelUpListener(Action onClick)
+        public void AddOnLevelUpListener(UnityAction onClick)
         {
-            levelUpButton.onClick.AddListener(() => onClick());
+            levelUpButton.onClick.AddListener(onClick);
         }
 
-        public void RemoveOnLevelUpListener(Action onClick)
+        public void RemoveOnLevelUpListener(UnityAction onClick)
         {
-            levelUpButton.onClick.RemoveListener(() => onClick());
+            levelUpButton.onClick.RemoveListener(onClick);
         }
     }
 }
