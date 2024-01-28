@@ -242,6 +242,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 0, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &80734492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80734493}
+  - component: {fileID: 80734494}
+  m_Layer: 0
+  m_Name: Tavern
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &80734493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80734492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 190703715}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &80734494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80734492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c4a983bef04fc18f81cb6093c62354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 1527558793024918016, guid: 296a169d409767140bf320b321cb430f, type: 3}
+  tavernCharactersPrefab: {fileID: 1115883824}
+--- !u!1 &190703714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 190703715}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &190703715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190703714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 274310870}
+  - {fileID: 80734493}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &213758977
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +532,118 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215468423}
   m_CullTransparentMesh: 1
+--- !u!1 &274310869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 274310870}
+  - component: {fileID: 274310875}
+  - component: {fileID: 274310874}
+  - component: {fileID: 274310873}
+  - component: {fileID: 274310872}
+  - component: {fileID: 274310871}
+  m_Layer: 0
+  m_Name: CharacterinfoPopup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &274310870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274310869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 190703715}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &274310871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274310869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50531e2244ef4dd0910bf96a939a8018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupGameObject: {fileID: 858326121}
+  closeButton: {fileID: 406799921}
+  <CharacterExperienceView>k__BackingField: {fileID: 274310874}
+  <CharacterLevelView>k__BackingField: {fileID: 274310875}
+  <CharacterInfoView>k__BackingField: {fileID: 274310873}
+  <CharacterStatFactory>k__BackingField: {fileID: 274310872}
+--- !u!114 &274310872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274310869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0752ec3498574f7796414e9cb95b715c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsParent: {fileID: 1362880859}
+  characterStatViewPrefab: {fileID: 5278015105647567742, guid: 5a3bc9c82cb53fd44989b8bd93267245, type: 3}
+--- !u!114 &274310873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274310869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1938e5947e9942899cf3a30a48cb9987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 1747899846}
+  descriptionText: {fileID: 977624031}
+  userIcon: {fileID: 495500370}
+--- !u!114 &274310874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274310869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f49204c0b6b42c69685da0959a918ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experienceBar: {fileID: 1879953480}
+  fullExperienceBar: {fileID: 1125022118}
+  experienceText: {fileID: 215468425}
+--- !u!114 &274310875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274310869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6da76493598476881057fd55e9e6489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 1367763609}
+  levelUpButton: {fileID: 301332459}
 --- !u!1 &301332457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,11 +1241,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858326122}
-  - component: {fileID: 858326125}
-  - component: {fileID: 858326126}
-  - component: {fileID: 858326127}
-  - component: {fileID: 858326129}
-  - component: {fileID: 858326128}
   m_Layer: 5
   m_Name: CharacterInfoPopup
   m_TagString: Untagged
@@ -1083,81 +1269,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &858326125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858326121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6da76493598476881057fd55e9e6489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelText: {fileID: 1367763609}
-  levelUpButton: {fileID: 301332459}
---- !u!114 &858326126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858326121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f49204c0b6b42c69685da0959a918ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  experienceBar: {fileID: 1879953480}
-  fullExperienceBar: {fileID: 1125022118}
-  experienceText: {fileID: 215468425}
---- !u!114 &858326127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858326121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1938e5947e9942899cf3a30a48cb9987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 1747899846}
-  descriptionText: {fileID: 977624031}
-  userIcon: {fileID: 495500370}
---- !u!114 &858326128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858326121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50531e2244ef4dd0910bf96a939a8018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterExperienceView: {fileID: 858326126}
-  _characterLevelView: {fileID: 858326125}
-  characterInfoView: {fileID: 858326127}
-  characterStatFactory: {fileID: 858326129}
-  closeButton: {fileID: 406799921}
---- !u!114 &858326129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858326121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0752ec3498574f7796414e9cb95b715c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statsParent: {fileID: 1362880859}
-  characterStatViewPrefab: {fileID: 5278015105647567742, guid: 5a3bc9c82cb53fd44989b8bd93267245, type: 3}
 --- !u!1 &913467803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1461,6 @@ GameObject:
   m_Component:
   - component: {fileID: 984761951}
   - component: {fileID: 984761953}
-  - component: {fileID: 984761954}
   m_Layer: 5
   m_Name: Tavern
   m_TagString: Untagged
@@ -1387,20 +1497,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984761950}
   m_CullTransparentMesh: 1
---- !u!114 &984761954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984761950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c4a983bef04fc18f81cb6093c62354, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonPrefab: {fileID: 1527558793024918016, guid: 296a169d409767140bf320b321cb430f, type: 3}
-  tavernCharactersPrefab: {fileID: 1115883824}
 --- !u!1 &997316759
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,8 +2897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5415d0b4db3d48e9b7d8a4cfd7658f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPopup: {fileID: 858326128}
-  tavernPopup: {fileID: 984761954}
+  characterPopupView: {fileID: 274310871}
+  tavernView: {fileID: 80734494}
   characters:
   - {fileID: 11400000, guid: bb3fc67507887be45b8a5effce465aee, type: 2}
   - {fileID: 11400000, guid: 9759cf51fdc310949935b291214d57b2, type: 2}

@@ -1,9 +1,11 @@
 using System;
+using JetBrains.Annotations;
 using Models;
 using Views;
 
 namespace Presenters
 {
+    [UsedImplicitly]
     public class CharacterLevelPresenter : IDisposable
     {
         private readonly CharacterExperienceView _characterExperienceView;

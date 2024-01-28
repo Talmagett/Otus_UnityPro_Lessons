@@ -1,10 +1,12 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using Views;
 using CharacterInfo = Models.CharacterInfo;
 
 namespace Presenters
 {
+    [UsedImplicitly]
     public class CharacterInfoPresenter : IDisposable
     {
         private readonly CharacterInfo _characterInfo;

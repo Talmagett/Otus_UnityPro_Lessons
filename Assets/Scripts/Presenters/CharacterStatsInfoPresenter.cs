@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Models;
 using Views;
 
 namespace Presenters
 {
+    [UsedImplicitly]
     public class CharacterStatsInfoPresenter : IDisposable
     {
         private readonly CharacterStatFactory _characterStatFactory;
@@ -23,7 +25,8 @@ namespace Presenters
             _characterStatsInfo.OnStatRemoved += RemoveStat;
             foreach (var characterStat in characterStatsInfo.GetStats())
             {
-                _characterStatFactory.CreateStat(characterStat);
+                var characterStatView = _characterStatFactory.CreateStat();
+                characterStatView.SetStatData($"{characterStat.Name} : {characterStat.Value}");
             }
         }
 
@@ -33,10 +36,12 @@ namespace Presenters
             _characterStatsInfo.OnStatRemoved -= RemoveStat;
         }
 
-        private void AddStat(CharacterStat stat)
+        private void AddStat(CharacterStat characterStat)
         {
-            var characterStatView = _characterStatFactory.CreateStat(stat);
-            var characterStatPresenter = new CharacterStatPresenter(stat, characterStatView);
+            var characterStatView = _characterStatFactory.CreateStat();
+            characterStatView.SetStatData($"{characterStat.Name} : {characterStat.Value}");
+            
+            var characterStatPresenter = new CharacterStatPresenter(characterStat, characterStatView);
             _presenters.Add(characterStatPresenter);
         }
 

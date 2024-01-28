@@ -1,18 +1,17 @@
 using Models;
 using UnityEngine;
+using Views;
 
-namespace Views
+namespace Presenters
 {
     public class CharacterStatFactory : MonoBehaviour
     {
         [SerializeField] private Transform statsParent;
         [SerializeField] private CharacterStatView characterStatViewPrefab;
 
-        public CharacterStatView CreateStat(CharacterStat stat)
+        public CharacterStatView CreateStat()
         {
             var characterStatView = Instantiate(characterStatViewPrefab, statsParent);
-
-            characterStatView.SetStatData($"{stat.Name} : {stat.Value}");
             return characterStatView;
         }
 
