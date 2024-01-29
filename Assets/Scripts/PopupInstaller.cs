@@ -13,7 +13,8 @@ public class PopupInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<TavernCharacterService>().AsSingle().WithArguments(characters).NonLazy();
-        Container.Bind<CharacterPopupPresenter>().AsSingle().WithArguments(characterPopupView).NonLazy();
+        Container.BindInterfacesAndSelfTo<CharacterPopupPresenter>().AsSingle().WithArguments(characterPopupView)
+            .NonLazy();
         Container.Bind<TavernPresenter>().AsSingle().WithArguments(tavernView).NonLazy();
     }
 }

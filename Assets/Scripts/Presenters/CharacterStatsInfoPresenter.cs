@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Models;
-using Views;
 
 namespace Presenters
 {
@@ -23,11 +22,8 @@ namespace Presenters
 
             _characterStatsInfo.OnStatAdded += AddStat;
             _characterStatsInfo.OnStatRemoved += RemoveStat;
-            foreach (var characterStat in characterStatsInfo.GetStats())
-            {
-                var characterStatView = _characterStatFactory.CreateStat();
-                characterStatView.SetStatData($"{characterStat.Name} : {characterStat.Value}");
-            }
+
+            foreach (var characterStat in characterStatsInfo.GetStats()) AddStat(characterStat);
         }
 
         public void Dispose()
@@ -40,7 +36,7 @@ namespace Presenters
         {
             var characterStatView = _characterStatFactory.CreateStat();
             characterStatView.SetStatData($"{characterStat.Name} : {characterStat.Value}");
-            
+
             var characterStatPresenter = new CharacterStatPresenter(characterStat, characterStatView);
             _presenters.Add(characterStatPresenter);
         }

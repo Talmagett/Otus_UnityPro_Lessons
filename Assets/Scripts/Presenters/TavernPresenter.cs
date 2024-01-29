@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using JetBrains.Annotations;
 using Models;
 using UnityEngine.Events;
@@ -9,11 +8,11 @@ namespace Presenters
     [UsedImplicitly]
     public class TavernPresenter
     {
-        private readonly TavernView _tavernView;
         private readonly CharacterPopupPresenter _characterPopupPresenter;
         private readonly TavernCharacterService _tavernCharacterService;
+        private readonly TavernView _tavernView;
 
-        public TavernPresenter(TavernView tavernView,CharacterPopupPresenter characterPopupPresenter,
+        public TavernPresenter(TavernView tavernView, CharacterPopupPresenter characterPopupPresenter,
             TavernCharacterService tavernCharacterService)
         {
             _tavernView = tavernView;
@@ -22,7 +21,7 @@ namespace Presenters
 
             CreateTavernCharacters();
         }
-        
+
         private void CreateTavernCharacters()
         {
             var characters = _tavernCharacterService.GetAllCharacters();
@@ -36,7 +35,7 @@ namespace Presenters
                 tavernCharacterView.SetOnCharacterChoose(OpenCharacterData(characterName));
             }
         }
-        
+
         private UnityAction OpenCharacterData(string characterName)
         {
             return () => { _characterPopupPresenter.ShowCharacter(characterName); };

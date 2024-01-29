@@ -1,4 +1,3 @@
-using System;
 using Presenters;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +8,15 @@ namespace Views
     {
         [SerializeField] private GameObject popupGameObject;
         [SerializeField] private Button closeButton;
-        [field:SerializeField, Space] public CharacterExperienceView CharacterExperienceView {get; private set;}
-        [field:SerializeField] public CharacterLevelView CharacterLevelView {get; private set;}
-        [field:SerializeField] public CharacterInfoView CharacterInfoView {get; private set;}
-        [field:SerializeField] public CharacterStatFactory CharacterStatFactory {get; private set;}
-        
+
+        [field: SerializeField]
+        [field: Space]
+        public CharacterExperienceView CharacterExperienceView { get; private set; }
+
+        [field: SerializeField] public CharacterLevelView CharacterLevelView { get; private set; }
+        [field: SerializeField] public CharacterInfoView CharacterInfoView { get; private set; }
+        [field: SerializeField] public CharacterStatFactory CharacterStatFactory { get; private set; }
+
         private void Awake()
         {
             closeButton.onClick.AddListener(Hide);

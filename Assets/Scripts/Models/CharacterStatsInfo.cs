@@ -15,20 +15,21 @@ namespace Models
         [Button]
         public void AddStat(CharacterStat stat)
         {
-            if (_stats.Add(stat)) OnStatAdded?.Invoke(stat);
+            if (_stats.Add(stat)) 
+                OnStatAdded?.Invoke(stat);
         }
 
         [Button]
         public void RemoveStat(CharacterStat stat)
         {
-            if (_stats.Remove(stat)) OnStatRemoved?.Invoke(stat);
+            if (_stats.Remove(stat)) 
+                OnStatRemoved?.Invoke(stat);
         }
 
         public CharacterStat GetStat(string name)
         {
-            foreach (var stat in _stats)
-                if (stat.Name == name)
-                    return stat;
+            foreach (var stat in _stats.Where(stat => stat.Name == name)) 
+                return stat;
 
             throw new Exception($"Stat {name} is not found!");
         }
