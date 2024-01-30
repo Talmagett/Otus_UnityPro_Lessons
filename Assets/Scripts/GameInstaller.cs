@@ -5,7 +5,6 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     [SerializeField] private UnitManager unitManager;
-
     [SerializeField] private ResourceService resourceService;
 
     public override void InstallBindings()
