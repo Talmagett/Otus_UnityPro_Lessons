@@ -10,8 +10,8 @@ namespace GameEngine
 
         [SerializeField] public int hitPoints;
 
-        [SerializeField] public Vector3 position;
+        [SerializeField] public string position;
 
-        [SerializeField] public Vector3 rotation;
+        [SerializeField] public string rotation;
     }
 }

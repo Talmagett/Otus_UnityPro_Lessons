@@ -44,6 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f95eeeaa9d74208bc380461260ebedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveLoaders:
+  - rid: 3036138661938200576
+  - rid: 3036138661938200577
+  references:
+    version: 2
+    RefIds:
+    - rid: 3036138661938200576
+      type: {class: ResourcesSaveLoader, ns: SaveLoaders, asm: Assembly-CSharp}
+    - rid: 3036138661938200577
+      type: {class: UnitSaveLoader, ns: SaveLoaders, asm: Assembly-CSharp}
 --- !u!1 &7795754885238930994
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 11441524719288143}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0

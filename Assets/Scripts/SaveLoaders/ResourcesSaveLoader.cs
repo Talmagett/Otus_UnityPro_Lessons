@@ -6,13 +6,13 @@ namespace SaveLoaders
 {
     public sealed class ResourcesSaveLoader : SaveLoader<ResourceData[], ResourceService>
     {
-        protected override void SetupData(ResourceService resourceService, ResourceData[] data)
+        protected override void SetupData(ResourceService resourceService, ResourceData[] loadedUnitsDataArray)
         {
             var resources = resourceService.GetResources().ToArray();
-            for (int i = 0; i < data.Length; i++)
+            for (int i = 0; i < loadedUnitsDataArray.Length; i++)
             {
-                if (resources[i].ID == data[i].id)
-                    resources[i].Amount = data[i].amount;
+                if (resources[i].ID == loadedUnitsDataArray[i].id)
+                    resources[i].Amount = loadedUnitsDataArray[i].amount;
             }
             resourceService.SetResources(resources);
         }

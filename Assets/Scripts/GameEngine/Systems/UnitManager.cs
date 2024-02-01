@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -15,6 +16,8 @@ namespace GameEngine
 
         [ShowInInspector, ReadOnly]
         private HashSet<Unit> sceneUnits = new();
+
+        [SerializeField] private List<Unit> unitsPrefab=new ();
 
         public UnitManager()
         {
@@ -55,6 +58,13 @@ namespace GameEngine
         public IEnumerable<Unit> GetAllUnits()
         {
             return this.sceneUnits;
+        }
+        
+        public Unit GetUnitPrefab(string type)
+        {
+            if (!unitsPrefab.Any(t=>t.name==type))
+                throw new NullReferenceException($"No such type of Unit - {type}");
+            return unitsPrefab.FirstOrDefault(t => t.name == type);
         }
     }
 }

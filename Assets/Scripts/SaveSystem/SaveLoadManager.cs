@@ -1,11 +1,11 @@
 using GameEngine;
-using Sirenix.OdinInspector;
-using UnityEngine;
+using JetBrains.Annotations;
 using Zenject;
 
 namespace SaveSystem
 {
-    public sealed class SaveLoadManager : MonoBehaviour
+    [UsedImplicitly]
+    public sealed class SaveLoadManager
     {
         private ISaveLoader[] _saveLoaders;
         private GameRepository _repository;
@@ -19,36 +19,19 @@ namespace SaveSystem
             _gameContext = gameContext;
         }
 
-        [Button]
         public void Load()
         {
             _repository.LoadState();
-            foreach (var saveLoader in _saveLoaders) saveLoader.LoadGame(_repository, _gameContext);
+            foreach (var saveLoader in _saveLoaders)
+                saveLoader.LoadGame(_repository, _gameContext);
         }
 
-        [Button]
         public void Save()
         {
-            foreach (var saveLoader in _saveLoaders) saveLoader.SaveGame(_repository, _gameContext);
+            foreach (var saveLoader in _saveLoaders)
+                saveLoader.SaveGame(_repository, _gameContext);
 
             _repository.SaveState();
-        }
-
-        //TODO: TIMER
-
-        private void OnApplicationFocus(bool hasFocus)
-        {
-            if (!hasFocus) Save();
-        }
-
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            if (pauseStatus) Save();
-        }
-
-        private void OnApplicationQuit()
-        {
-            Save();
         }
     }
 }

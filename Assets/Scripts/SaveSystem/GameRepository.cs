@@ -50,6 +50,7 @@ namespace SaveSystem
         public void SetData<T>(T value)
         {
             var serializedData = JsonConvert.SerializeObject(value);
+
             this.gameState[typeof(T).Name] = serializedData;
         }
     }

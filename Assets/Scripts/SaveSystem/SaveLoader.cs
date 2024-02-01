@@ -24,7 +24,7 @@ namespace SaveSystem
             repository.SetData(data);
         }
 
-        protected abstract void SetupData(TService service, TData data);
+        protected abstract void SetupData(TService service, TData loadedUnitsDataArray);
 
         protected abstract TData ConvertToData(TService service);
 
