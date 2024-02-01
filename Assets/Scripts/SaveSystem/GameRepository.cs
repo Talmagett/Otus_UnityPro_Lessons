@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -6,16 +9,22 @@ namespace SaveSystem
 {
     public sealed class GameRepository : IGameRepository
     {
-        private const string GAME_STATE_KEY = "GameState";
+        private const string GAME_SAVE_FILENAME = "save.txt";
 
         private Dictionary<string, string> gameState = new();
         
         public void LoadState()
         {
-            if (PlayerPrefs.HasKey(GAME_STATE_KEY))
+            string path = Application.persistentDataPath + $"/{GAME_SAVE_FILENAME}";
+            if(File.Exists(path))
             {
-                var serializedState = PlayerPrefs.GetString(GAME_STATE_KEY);
-                this.gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(serializedState);
+                StreamReader reader = new StreamReader(path);
+                
+                var data = reader.ReadToEnd();
+                reader.Close();
+                
+                var gameData = (CryptoServiceAES.Decrypt(data));
+                this.gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(gameData);
             }
             else
             {
@@ -26,7 +35,13 @@ namespace SaveSystem
         public void SaveState()
         {
             var serializedState = JsonConvert.SerializeObject(this.gameState);
-            PlayerPrefs.SetString(GAME_STATE_KEY, serializedState);
+
+            var encrypt = CryptoServiceAES.Encrypt(serializedState);
+
+            string path = Application.persistentDataPath + $"/{GAME_SAVE_FILENAME}";
+            StreamWriter writer = new StreamWriter(path, false);
+            writer.WriteLine(encrypt);
+            writer.Close();
         }
 
         public T GetData<T>()
