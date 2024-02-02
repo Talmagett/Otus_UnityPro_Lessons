@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using GameEngine;
 using SaveSystem;
@@ -12,19 +13,27 @@ namespace SaveLoaders
             var unitsOnLevel = unitManager.GetAllUnits().ToList();
             var loadedUnitsData = loadedUnitsDataArray.ToList();
 
-            //intersect
-            var result = 
-                unitsOnLevel.Join(loadedUnitsData, levelUnit => levelUnit.Type, loadedUnit => loadedUnit.type,
-                (levelUnit, loadedUnit) => new { levelUnit, loadedUnit });
+            var result = new List<(Unit, UnitData)>();
+            for (int i = loadedUnitsData.Count - 1; i >= 0; i--)
+            {
+                for (int j = unitsOnLevel.Count - 1; j >= 0; j--)
+                {
+                    if (loadedUnitsData[i].type != unitsOnLevel[j].Type) continue;
+                    
+                    result.Add((unitsOnLevel[j],loadedUnitsData[i]));
+                    loadedUnitsData.RemoveAt(i);
+                    unitsOnLevel.RemoveAt(j);
+                    break;
+                }
+            }
             
             foreach (var unitPair in result.ToList())
             {
-                unitPair.levelUnit.HitPoints = unitPair.loadedUnit.hitPoints;
+                unitPair.Item1.HitPoints = unitPair.Item2.hitPoints;
+                
+                //----Unit нельзя менять, а так тут должно быть это ) 
                 //unitPair.levelUnit.Position = unitPair.loadedUnit.position;
                 //unitPair.levelUnit.Rotation = unitPair.loadedUnit.rotation;
-                
-                unitsOnLevel.Remove(unitPair.levelUnit);
-                loadedUnitsData.Remove(unitPair.loadedUnit);
             }
             
             for (int i = unitsOnLevel.Count - 1; i >= 0; i--)

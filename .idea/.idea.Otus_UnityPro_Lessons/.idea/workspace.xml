@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38b34eff-38d7-44ac-b6e9-93567b8e1c0a" name="Changes" comment="">
+    <list default="true" id="38b34eff-38d7-44ac-b6e9-93567b8e1c0a" name="Changes" comment="updated unit save loader">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveLoaders/UnitSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveLoaders/UnitSaveLoader.cs" afterDir="false" />
     </list>
@@ -113,7 +113,7 @@
       <workItem from="1706605334250" duration="8023000" />
       <workItem from="1706770657726" duration="12842000" />
       <workItem from="1706846123830" duration="3000" />
-      <workItem from="1706846156256" duration="293000" />
+      <workItem from="1706846156256" duration="929000" />
     </task>
     <task id="LOCAL-00001" summary="added spaces, changed view dumb">
       <option name="closed" value="true" />
@@ -171,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706784012691</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="updated unit save loader">
+      <option name="closed" value="true" />
+      <created>1706846633253</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706846633253</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -197,6 +205,7 @@
     <MESSAGE value="made save and load" />
     <MESSAGE value="Added AES" />
     <MESSAGE value="removed file todo" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed file todo" />
+    <MESSAGE value="updated unit save loader" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated unit save loader" />
   </component>
 </project>
