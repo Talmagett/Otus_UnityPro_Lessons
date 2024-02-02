@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38b34eff-38d7-44ac-b6e9-93567b8e1c0a" name="Changes" comment="made save and load">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/CryptoServiceAES.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/CryptoServiceAES.cs.meta" afterDir="false" />
+    <list default="true" id="38b34eff-38d7-44ac-b6e9-93567b8e1c0a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/GameRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/GameRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Todo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveLoaders/UnitSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveLoaders/UnitSaveLoader.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +111,9 @@
       <workItem from="1706173565877" duration="12749000" />
       <workItem from="1706435045638" duration="1880000" />
       <workItem from="1706605334250" duration="8023000" />
-      <workItem from="1706770657726" duration="12697000" />
+      <workItem from="1706770657726" duration="12842000" />
+      <workItem from="1706846123830" duration="3000" />
+      <workItem from="1706846156256" duration="293000" />
     </task>
     <task id="LOCAL-00001" summary="added spaces, changed view dumb">
       <option name="closed" value="true" />
@@ -156,7 +155,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706778968284</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added AES">
+      <option name="closed" value="true" />
+      <created>1706783965816</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706783965816</updated>
+    </task>
+    <task id="LOCAL-00007" summary="removed file todo">
+      <option name="closed" value="true" />
+      <created>1706784012691</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706784012691</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -180,6 +195,8 @@
     <MESSAGE value="refactored, spaces" />
     <MESSAGE value="add repository and others" />
     <MESSAGE value="made save and load" />
-    <option name="LAST_COMMIT_MESSAGE" value="made save and load" />
+    <MESSAGE value="Added AES" />
+    <MESSAGE value="removed file todo" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed file todo" />
   </component>
 </project>

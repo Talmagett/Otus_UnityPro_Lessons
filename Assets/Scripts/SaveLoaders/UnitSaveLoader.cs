@@ -20,6 +20,9 @@ namespace SaveLoaders
             foreach (var unitPair in result.ToList())
             {
                 unitPair.levelUnit.HitPoints = unitPair.loadedUnit.hitPoints;
+                //unitPair.levelUnit.Position = unitPair.loadedUnit.position;
+                //unitPair.levelUnit.Rotation = unitPair.loadedUnit.rotation;
+                
                 unitsOnLevel.Remove(unitPair.levelUnit);
                 loadedUnitsData.Remove(unitPair.loadedUnit);
             }
@@ -35,8 +38,9 @@ namespace SaveLoaders
                 
                 var position = JsonUtility.FromJson<Vector3>(unitData.position);
                 var rotation = JsonUtility.FromJson<Vector3>(unitData.rotation);
-                
-                unitManager.SpawnUnit(unitPrefab,position,Quaternion.Euler(rotation));
+
+                var spawnedUnit = unitManager.SpawnUnit(unitPrefab,position,Quaternion.Euler(rotation));
+                spawnedUnit.HitPoints = unitData.hitPoints;
             }
             Debug.Log($"units were loaded");
         }
