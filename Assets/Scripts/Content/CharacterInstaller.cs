@@ -1,4 +1,10 @@
 using EcsEngine.Components;
+using EcsEngine.Components.Attack;
+using EcsEngine.Components.Life;
+using EcsEngine.Components.Movement;
+using EcsEngine.Components.Tags;
+using EcsEngine.Components.Transform;
+using EcsEngine.Components.Views;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
 

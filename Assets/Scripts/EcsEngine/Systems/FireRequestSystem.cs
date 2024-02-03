@@ -1,4 +1,8 @@
 using EcsEngine.Components;
+using EcsEngine.Components.Attack;
+using EcsEngine.Components.Life;
+using EcsEngine.Components.Tags;
+using EcsEngine.Components.Transform;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;

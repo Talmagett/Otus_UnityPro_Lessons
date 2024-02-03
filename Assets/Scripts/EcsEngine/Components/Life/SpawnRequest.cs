@@ -1,8 +1,6 @@
 using System;
-using Leopotam.EcsLite.Entities;
-using UnityEngine;
 
-namespace EcsEngine.Components
+namespace EcsEngine.Components.Life
 {
     [Serializable]
     public struct SpawnRequest

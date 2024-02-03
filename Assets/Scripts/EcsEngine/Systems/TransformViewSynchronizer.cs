@@ -1,4 +1,6 @@
 using EcsEngine.Components;
+using EcsEngine.Components.Transform;
+using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;

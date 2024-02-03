@@ -1,8 +1,8 @@
-using EcsEngine.Components;
+using EcsEngine.Components.Movement;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
 
-namespace GameEngine
+namespace GameSystems
 {
     internal sealed class CharacterMoveController : MonoBehaviour
     {

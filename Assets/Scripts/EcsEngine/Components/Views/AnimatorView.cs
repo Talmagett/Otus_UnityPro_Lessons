@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EcsEngine.Components
+namespace EcsEngine.Components.Views
 {
     [Serializable]
     public struct AnimatorView

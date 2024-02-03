@@ -1,6 +1,9 @@
 using System;
 using EcsEngine;
 using EcsEngine.Components;
+using EcsEngine.Components.Physics;
+using EcsEngine.Components.Tags;
+using EcsEngine.Components.Transform;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;

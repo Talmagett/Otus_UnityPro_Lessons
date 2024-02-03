@@ -1,4 +1,7 @@
 using EcsEngine.Components;
+using EcsEngine.Components.Life;
+using EcsEngine.Components.Physics;
+using EcsEngine.Components.Tags;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Helpers;

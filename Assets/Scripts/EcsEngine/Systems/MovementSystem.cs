@@ -1,4 +1,7 @@
 using EcsEngine.Components;
+using EcsEngine.Components.Movement;
+using EcsEngine.Components.Tags;
+using EcsEngine.Components.Transform;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;

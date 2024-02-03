@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameEngine
+namespace GameSystems
 {
     public sealed class FireInput : MonoBehaviour
     {

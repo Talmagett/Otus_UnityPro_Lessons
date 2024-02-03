@@ -1,13 +1,12 @@
 using System;
 using Leopotam.EcsLite.Entities;
-using UnityEngine;
 
-namespace EcsEngine.Components
+namespace EcsEngine.Components.Attack
 {
     [Serializable]
     public struct BulletWeapon
     {
-        public Transform firePoint;
+        public UnityEngine.Transform firePoint;
         public Entity bulletPrefab;
     }
 }

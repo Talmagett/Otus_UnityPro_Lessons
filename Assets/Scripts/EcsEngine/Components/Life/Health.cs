@@ -1,9 +1,9 @@
 using System;
 
-namespace EcsEngine.Components
+namespace EcsEngine.Components.Life
 {
     [Serializable]
-    public struct Damage
+    public struct Health
     {
         public int value;
     }

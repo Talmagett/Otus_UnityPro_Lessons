@@ -1,6 +1,6 @@
 using System;
 
-namespace EcsEngine.Components
+namespace EcsEngine.Components.Movement
 {
     [Serializable]
     public struct MoveSpeed

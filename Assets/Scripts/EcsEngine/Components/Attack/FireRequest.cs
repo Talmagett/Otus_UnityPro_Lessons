@@ -1,6 +1,6 @@
 using System;
 
-namespace EcsEngine.Components
+namespace EcsEngine.Components.Attack
 {
     [Serializable]
     public struct FireRequest

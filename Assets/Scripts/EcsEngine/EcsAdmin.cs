@@ -1,5 +1,6 @@
 using System;
 using EcsEngine.Components;
+using EcsEngine.Components.Life;
 using EcsEngine.Systems;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;

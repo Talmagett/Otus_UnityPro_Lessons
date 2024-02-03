@@ -1,8 +1,8 @@
-using EcsEngine.Components;
+using EcsEngine.Components.Attack;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
 
-namespace GameEngine
+namespace GameSystems
 {
     public sealed class CharacterFireController : MonoBehaviour
     {
