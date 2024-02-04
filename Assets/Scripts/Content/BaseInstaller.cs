@@ -1,6 +1,7 @@
 using EcsEngine.Components;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Tags;
+using EcsEngine.Components.Transform;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
 
@@ -14,17 +15,13 @@ namespace Content
         [SerializeField]
         private Transform spawnPoint;
 
-        [SerializeField]
-        private Entity archerPrefab;
-        
-        [SerializeField]
-        private Entity swordmanPrefab;
-        
         protected override void Install(Entity entity)
         {
+            entity.AddData(new Position {value = this.spawnPoint.position});
+            entity.AddData(new Rotation {value = this.transform.rotation});
             entity.AddData(new Health {value = health});
             entity.AddData(new DamagableTag());
-            entity.AddData(new PlayerTag{ID = playerID});
+            entity.AddData(new PlayerID{value = playerID});
         }
 
         protected override void Dispose(Entity entity)

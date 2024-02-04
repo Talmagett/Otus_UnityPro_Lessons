@@ -62,10 +62,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  playerID: 0
   spawnPoint: {fileID: 1118864686279533693}
   archerPrefab: {fileID: -7779247012608047461, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
     type: 3}
-  swordmanPrefab: {fileID: -6296594088941026264, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+  swordsmanPrefab: {fileID: -6296594088941026264, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
     type: 3}
 --- !u!1 &4286747243610973406
 GameObject:

@@ -1,8 +1,8 @@
 namespace EcsEngine.Components.Tags
 {
     [System.Serializable]
-    public struct PlayerTag
+    public struct PlayerID
     {
-        public int ID;
+        public int value;
     }
 }

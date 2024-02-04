@@ -51,12 +51,13 @@ namespace EcsEngine
 
                 //Game Logic:
                 .Add(new MovementSystem())
-                .Add(new FireRequestSystem())
+                //.Add(new FireRequestSystem())
                 .Add(new SpawnRequestSystem())
+                .Add(new UnitSpawnRequestSystem())
                 .Add(new HealthEmptySystem())
                 .Add(new DeathRequestSystem())
-                .Add(new BulletCollisionRequestSystem())
-                .Add(new BulletDestroySystem())
+                //.Add(new BulletCollisionRequestSystem())
+                //.Add(new BulletDestroySystem())
                 .Add(new TakeDamageRequestSystem())
                 
                 //Game Listeners:

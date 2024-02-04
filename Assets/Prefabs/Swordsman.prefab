@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8692576747330127514}
   - component: {fileID: -6296594088941026264}
+  - component: {fileID: 7209085871064911639}
   m_Layer: 0
-  m_Name: Swordman
+  m_Name: Swordsman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +46,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd6a35104234e9e9fea3a91a768a571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  installers: []
+  installers:
+  - {fileID: 7209085871064911639}
+--- !u!114 &7209085871064911639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b81c777e454dcb897454ff3b5abd8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 4
+  moveSpeed: 3
+  attackDelay: 1
+  attackRange: 1
+  animator: {fileID: 8692576747537636603}
 --- !u!1001 &8692576747530256569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118,6 +137,12 @@ PrefabInstance:
 --- !u!4 &8692576747530105463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438990, guid: bcc60fdbd3a37b44cbc0cb99db483477,
+    type: 3}
+  m_PrefabInstance: {fileID: 8692576747530256569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8692576747537636603 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9542722, guid: bcc60fdbd3a37b44cbc0cb99db483477,
     type: 3}
   m_PrefabInstance: {fileID: 8692576747530256569}
   m_PrefabAsset: {fileID: 0}
