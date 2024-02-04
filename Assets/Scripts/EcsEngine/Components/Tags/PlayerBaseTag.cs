@@ -3,8 +3,7 @@ using System;
 namespace EcsEngine.Components.Tags
 {
     [Serializable]
-    public struct PlayerID
+    public struct PlayerBaseTag
     {
-        public int value;
     }
 }

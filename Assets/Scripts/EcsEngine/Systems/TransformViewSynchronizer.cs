@@ -1,9 +1,7 @@
-using EcsEngine.Components;
 using EcsEngine.Components.Transform;
 using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 namespace EcsEngine.Systems
 {
@@ -14,18 +12,18 @@ namespace EcsEngine.Systems
 
         void IEcsPostRunSystem.PostRun(IEcsSystems systems)
         {
-            EcsPool<Rotation> rotationPool = this.rotationPool.Value;
+            var rotationPool = this.rotationPool.Value;
 
-            foreach (int entity in this.filter.Value)
+            foreach (var entity in filter.Value)
             {
-                ref TransformView transform = ref this.filter.Pools.Inc1.Get(entity);
-                Position position = this.filter.Pools.Inc2.Get(entity);
-                
+                ref var transform = ref filter.Pools.Inc1.Get(entity);
+                var position = filter.Pools.Inc2.Get(entity);
+
                 transform.value.position = position.value;
 
                 if (rotationPool.Has(entity))
                 {
-                    Quaternion rotation = rotationPool.Get(entity).value;
+                    var rotation = rotationPool.Get(entity).value;
                     transform.value.rotation = rotation;
                 }
             }

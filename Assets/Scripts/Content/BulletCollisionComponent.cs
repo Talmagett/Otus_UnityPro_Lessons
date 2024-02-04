@@ -1,10 +1,8 @@
-using System;
 using EcsEngine;
 using EcsEngine.Components;
 using EcsEngine.Components.Physics;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Transform;
-using Leopotam.EcsLite;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
 
@@ -14,10 +12,10 @@ namespace Content
     public sealed class BulletCollisionComponent : MonoBehaviour
     {
         private Entity entity;
-        
+
         private void Awake()
         {
-            this.entity = this.GetComponent<Entity>();
+            entity = GetComponent<Entity>();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -31,9 +29,9 @@ namespace Content
                 EcsAdmin.Instance.CreateEntity(EcsWorlds.Events)
                     .Add(new CollisionEnterRequest())
                     .Add(new BulletTag())
-                    .Add(new SourceEntity {value = this.entity.Id})
-                    .Add(new TargetEntity {value = target.Id})
-                    .Add(new Position {value = collision.GetContact(0).point});
+                    .Add(new SourceEntity { value = entity.Id })
+                    .Add(new TargetEntity { value = target.Id })
+                    .Add(new Position { value = collision.GetContact(0).point });
             }
         }
     }

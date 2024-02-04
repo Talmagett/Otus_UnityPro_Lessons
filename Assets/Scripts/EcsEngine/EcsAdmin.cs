@@ -1,5 +1,4 @@
 using System;
-using EcsEngine.Components;
 using EcsEngine.Components.Life;
 using EcsEngine.Systems;
 using Leopotam.EcsLite;
@@ -7,40 +6,26 @@ using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Entities;
 using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Helpers;
+using Leopotam.EcsLite.UnityEditor;
 using UnityEngine;
 
 namespace EcsEngine
 {
     public sealed class EcsAdmin : MonoBehaviour
     {
-        public static EcsAdmin Instance { get; private set; }
-        
-        private EcsWorld _world;
+        private EntityManager _entityManager;
         private EcsWorld _events;
         private IEcsSystems _systems;
-        private EntityManager _entityManager;
 
-        public EcsEntityBuilder CreateEntity(string worldName = null)
-        {
-            return new EcsEntityBuilder(_systems.GetWorld(worldName));
-        }
+        private EcsWorld _world;
+        public static EcsAdmin Instance { get; private set; }
 
-        public EcsWorld GetWorld(string worldName = null)
-        {
-            return worldName switch
-            {
-                null => _world,
-                EcsWorlds.Events => _events,
-                _ => throw new Exception($"World with name {worldName} is not found!")
-            };
-        }
-        
         private void Awake()
         {
             Instance = this;
-            
+
             _entityManager = new EntityManager();
-            
+
             _world = new EcsWorld();
             _events = new EcsWorld();
             _systems = new EcsSystems(_world);
@@ -59,7 +44,7 @@ namespace EcsEngine
                 //.Add(new BulletCollisionRequestSystem())
                 //.Add(new BulletDestroySystem())
                 .Add(new TakeDamageRequestSystem())
-                
+                .Add(new GamePlaySystem())
                 //Game Listeners:
 
                 //View:
@@ -69,8 +54,8 @@ namespace EcsEngine
 
                 //Editor:
 #if UNITY_EDITOR
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem(EcsWorlds.Events))
+                .Add(new EcsWorldDebugSystem())
+                .Add(new EcsWorldDebugSystem(EcsWorlds.Events))
 #endif
                 //Clean Up:
                 .Add(new OneFrameEventSystem())
@@ -108,6 +93,21 @@ namespace EcsEngine
                 _world.Destroy();
                 _world = null;
             }
+        }
+
+        public EcsEntityBuilder CreateEntity(string worldName = null)
+        {
+            return new EcsEntityBuilder(_systems.GetWorld(worldName));
+        }
+
+        public EcsWorld GetWorld(string worldName = null)
+        {
+            return worldName switch
+            {
+                null => _world,
+                EcsWorlds.Events => _events,
+                _ => throw new Exception($"World with name {worldName} is not found!")
+            };
         }
     }
 }

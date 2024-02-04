@@ -1,4 +1,3 @@
-using EcsEngine.Components;
 using EcsEngine.Components.Movement;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Transform;
@@ -14,17 +13,17 @@ namespace EcsEngine.Systems
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
-            float deltaTime = Time.deltaTime;
+            var deltaTime = Time.deltaTime;
 
-            EcsPool<MoveDirection> directionPool = this.filter.Pools.Inc1;
-            EcsPool<MoveSpeed> speedPool = this.filter.Pools.Inc2;
-            EcsPool<Position> positionPool = this.filter.Pools.Inc3;
+            var directionPool = filter.Pools.Inc1;
+            var speedPool = filter.Pools.Inc2;
+            var positionPool = filter.Pools.Inc3;
 
-            foreach (int entity in filter.Value)
+            foreach (var entity in filter.Value)
             {
-                MoveDirection moveDirection = directionPool.Get(entity);
-                MoveSpeed moveSpeed = speedPool.Get(entity);
-                ref Position position = ref positionPool.Get(entity);
+                var moveDirection = directionPool.Get(entity);
+                var moveSpeed = speedPool.Get(entity);
+                ref var position = ref positionPool.Get(entity);
 
                 position.value += moveDirection.value * moveSpeed.value * deltaTime;
             }

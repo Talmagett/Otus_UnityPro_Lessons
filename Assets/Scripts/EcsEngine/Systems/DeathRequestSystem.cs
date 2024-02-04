@@ -1,4 +1,3 @@
-using EcsEngine.Components;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Views;
@@ -9,21 +8,20 @@ namespace EcsEngine.Systems
 {
     internal sealed class DeathRequestSystem : IEcsRunSystem
     {
-        private EcsFilterInject<Inc<DeathRequest,TransformView>, Exc<Inactive>> filter;
-        
         private EcsPoolInject<DeathEvent> eventPool;
+        private EcsFilterInject<Inc<DeathRequest, GameObjectView>, Exc<Inactive>> filter;
         private EcsPoolInject<Inactive> tagPool;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
-            foreach (int entity in this.filter.Value)
+            foreach (var entity in filter.Value)
             {
-                this.filter.Pools.Inc1.Del(entity);
-                
+                filter.Pools.Inc1.Del(entity);
+
                 //TODO: переработать
-                this.filter.Pools.Inc2.Get(entity).value.gameObject.SetActive(false);
-                this.tagPool.Value.Add(entity) = new Inactive();
-                this.eventPool.Value.Add(entity) = new DeathEvent();
+                filter.Pools.Inc2.Get(entity).value.SetActive(false);
+                tagPool.Value.Add(entity) = new Inactive();
+                eventPool.Value.Add(entity) = new DeathEvent();
             }
         }
     }

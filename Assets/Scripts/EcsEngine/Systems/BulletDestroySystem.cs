@@ -1,4 +1,3 @@
-using EcsEngine.Components;
 using EcsEngine.Components.Tags;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -9,15 +8,15 @@ namespace EcsEngine.Systems
 {
     internal sealed class BulletDestroySystem : IEcsRunSystem
     {
-        private EcsFilterInject<Inc<BulletTag, Inactive>> filter;
         private EcsCustomInject<EntityManager> entityManager;
+        private EcsFilterInject<Inc<BulletTag, Inactive>> filter;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
-            foreach (int entity in this.filter.Value)
+            foreach (var entity in filter.Value)
             {
                 Debug.Log("DESTROYED");
-                this.entityManager.Value.Destroy(entity);
+                entityManager.Value.Destroy(entity);
             }
         }
     }

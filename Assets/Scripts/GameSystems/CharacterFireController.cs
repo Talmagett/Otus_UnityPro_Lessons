@@ -6,18 +6,13 @@ namespace GameSystems
 {
     public sealed class CharacterFireController : MonoBehaviour
     {
-        [SerializeField]
-        private Entity character;
+        [SerializeField] private Entity character;
 
-        [SerializeField]
-        private FireInput fireInput;
+        [SerializeField] private FireInput fireInput;
 
         private void Update()
         {
-            if (this.fireInput.IsFirePressDown())
-            {
-                this.character.SetData(new FireRequest());
-            }
+            if (fireInput.IsFirePressDown()) character.SetData(new FireRequest());
         }
     }
 }

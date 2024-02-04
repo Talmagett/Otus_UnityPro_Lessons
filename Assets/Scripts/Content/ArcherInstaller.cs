@@ -14,22 +14,20 @@ namespace Content
         [SerializeField] private float moveSpeed;
         [SerializeField] private float attackDelay;
         [SerializeField] private float attackRange;
-        
-        [Space]
-        [SerializeField]
-        private Animator animator;
+
+        [Space] [SerializeField] private Animator animator;
 
         protected override void Install(Entity entity)
         {
-            entity.AddData(new Position {value = this.transform.position});
-            entity.AddData(new Rotation {value = this.transform.rotation});
-            entity.AddData(new Health {value = health});
+            entity.AddData(new Position { value = transform.position });
+            entity.AddData(new Rotation { value = transform.rotation });
+            entity.AddData(new Health { value = health });
             entity.AddData(new DamagableTag());
-            entity.AddData(new MoveSpeed{value = moveSpeed});
-            entity.AddData(new MoveDirection{value = transform.forward});
-            
-            entity.AddData(new AnimatorView {value = this.animator});
-            entity.AddData(new TransformView {value = this.transform});
+            entity.AddData(new MoveSpeed { value = moveSpeed });
+            entity.AddData(new MoveDirection { value = transform.forward });
+
+            entity.AddData(new AnimatorView { value = animator });
+            entity.AddData(new TransformView { value = transform });
         }
 
         protected override void Dispose(Entity entity)

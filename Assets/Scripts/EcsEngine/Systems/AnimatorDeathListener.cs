@@ -1,4 +1,3 @@
-using EcsEngine.Components;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
@@ -15,9 +14,9 @@ namespace EcsEngine.Systems
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
-            foreach (int entity in this.filter.Value)
+            foreach (var entity in filter.Value)
             {
-                Animator animator = this.filter.Pools.Inc1.Get(entity).value;
+                var animator = filter.Pools.Inc1.Get(entity).value;
                 animator.SetTrigger(Death);
             }
         }

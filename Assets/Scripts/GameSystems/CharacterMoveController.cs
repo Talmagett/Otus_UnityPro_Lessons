@@ -6,16 +6,14 @@ namespace GameSystems
 {
     internal sealed class CharacterMoveController : MonoBehaviour
     {
-        [SerializeField]
-        private Entity character;
+        [SerializeField] private Entity character;
 
-        [SerializeField]
-        private MoveInput input;
-        
+        [SerializeField] private MoveInput input;
+
         private void Update()
         {
-            Vector3 inputDirection = this.input.GetDirection();
-            ref MoveDirection moveDirection = ref this.character.GetData<MoveDirection>();
+            var inputDirection = input.GetDirection();
+            ref var moveDirection = ref character.GetData<MoveDirection>();
             moveDirection.value = inputDirection;
         }
     }

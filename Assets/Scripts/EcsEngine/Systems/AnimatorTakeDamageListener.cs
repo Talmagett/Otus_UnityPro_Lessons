@@ -11,19 +11,19 @@ namespace EcsEngine.Systems
     {
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
 
-        private readonly EcsFilterInject<Inc<TakeDamageEvent, TargetEntity>> filter = EcsWorlds.Events;
-        
         private readonly EcsPoolInject<AnimatorView> animatorPool;
+
+        private readonly EcsFilterInject<Inc<TakeDamageEvent, TargetEntity>> filter = EcsWorlds.Events;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
-            foreach (int @event in this.filter.Value)
+            foreach (var @event in filter.Value)
             {
-                int target = this.filter.Pools.Inc2.Get(@event).value;
-                
-                if (this.animatorPool.Value.Has(target))
+                var target = filter.Pools.Inc2.Get(@event).value;
+
+                if (animatorPool.Value.Has(target))
                 {
-                    Animator animator = this.animatorPool.Value.Get(target).value;
+                    var animator = animatorPool.Value.Get(target).value;
                     animator.SetTrigger(TakeDamage);
                 }
             }
