@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd04c69e7ef14a4faa3ea6db6b3c5327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 0
+  playerType: 1
   redBase: {fileID: 254118207}
   blueBase: {fileID: 7657002863243684350}
   spawningUnitType: 0

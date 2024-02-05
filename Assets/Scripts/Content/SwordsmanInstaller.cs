@@ -1,3 +1,4 @@
+using EcsEngine.Components.Attack;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Movement;
 using EcsEngine.Components.Tags;
@@ -24,10 +25,14 @@ namespace Content
             entity.AddData(new Health { value = health });
             entity.AddData(new DamagableTag());
             entity.AddData(new MoveSpeed { value = moveSpeed });
-            entity.AddData(new MoveDirection { value = transform.forward });
+            
+            entity.AddData(new TargetChooserTag());
+            entity.AddData(new MoveToTargetTag());
 
             entity.AddData(new AnimatorView { value = animator });
             entity.AddData(new TransformView { value = transform });
+            
+            entity.AddData(new GameObjectView { value = gameObject });
         }
 
         protected override void Dispose(Entity entity)

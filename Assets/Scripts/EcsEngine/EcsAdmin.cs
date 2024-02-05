@@ -35,6 +35,8 @@ namespace EcsEngine
             _systems
 
                 //Game Logic:
+                .Add(new TargetSelectorSystem())
+                .Add(new MoveToTargetSystem())
                 .Add(new MovementSystem())
                 //.Add(new FireRequestSystem())
                 .Add(new SpawnRequestSystem())
@@ -45,6 +47,8 @@ namespace EcsEngine
                 //.Add(new BulletDestroySystem())
                 .Add(new TakeDamageRequestSystem())
                 .Add(new GamePlaySystem())
+                
+                
                 //Game Listeners:
 
                 //View:
