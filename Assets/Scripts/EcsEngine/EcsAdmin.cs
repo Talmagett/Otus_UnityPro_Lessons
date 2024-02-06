@@ -1,6 +1,7 @@
 using System;
 using EcsEngine.Components.Life;
 using EcsEngine.Systems;
+using EcsEngine.Systems.ViewSystems;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Entities;
@@ -36,15 +37,14 @@ namespace EcsEngine
 
                 //Game Logic:
                 .Add(new TargetSelectorSystem())
+                .Add(new EnemyInRangeCheckSystem())
                 .Add(new MoveToTargetSystem())
-                .Add(new MovementSystem())
-                //.Add(new FireRequestSystem())
+                
                 .Add(new SpawnRequestSystem())
                 .Add(new UnitSpawnRequestSystem())
+                
                 .Add(new HealthEmptySystem())
                 .Add(new DeathRequestSystem())
-                //.Add(new BulletCollisionRequestSystem())
-                //.Add(new BulletDestroySystem())
                 .Add(new TakeDamageRequestSystem())
                 .Add(new GamePlaySystem())
                 
@@ -55,7 +55,7 @@ namespace EcsEngine
                 .Add(new TransformViewSynchronizer())
                 .Add(new AnimatorDeathListener())
                 .Add(new AnimatorTakeDamageListener())
-
+                .Add(new AnimatorMoveListener())
                 //Editor:
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())

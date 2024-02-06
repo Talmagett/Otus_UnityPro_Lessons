@@ -17,7 +17,8 @@ namespace Content
         protected override void Install(Entity entity)
         {
             entity.AddData(new PlayerBaseTag());
-            entity.AddData(new Position { value = spawnPoint.position });
+            entity.AddData(new Position{value = transform.position});
+            entity.AddData(new SpawnPosition { value = spawnPoint.position });
             entity.AddData(new Rotation { value = transform.rotation });
             entity.AddData(new Health { value = health });
             entity.AddData(new DamagableTag());

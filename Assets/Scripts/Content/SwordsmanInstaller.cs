@@ -1,3 +1,4 @@
+using EcsEngine.Components;
 using EcsEngine.Components.Attack;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Movement;
@@ -26,7 +27,9 @@ namespace Content
             entity.AddData(new DamagableTag());
             entity.AddData(new MoveSpeed { value = moveSpeed });
             
-            entity.AddData(new TargetChooserTag());
+            entity.AddData(new AttackRange{value = attackRange});
+            
+            entity.AddData(new TargetEntity());
             entity.AddData(new MoveToTargetTag());
 
             entity.AddData(new AnimatorView { value = animator });

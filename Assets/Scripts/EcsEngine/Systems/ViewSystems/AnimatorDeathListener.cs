@@ -4,7 +4,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.ViewSystems
 {
     internal sealed class AnimatorDeathListener : IEcsRunSystem
     {

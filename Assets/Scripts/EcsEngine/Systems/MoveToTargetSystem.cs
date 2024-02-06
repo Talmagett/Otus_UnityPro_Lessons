@@ -1,4 +1,5 @@
 using EcsEngine.Components;
+using EcsEngine.Components.Attack;
 using EcsEngine.Components.Movement;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Transform;
@@ -10,10 +11,11 @@ namespace EcsEngine.Systems
 {
     public class MoveToTargetSystem: IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<MoveToTargetTag, MoveSpeed, Position,TargetEntity>, Exc<Inactive>> filter;
+        private readonly EcsFilterInject<Inc<MoveToTargetTag, MoveSpeed, Position, TargetEntity>, Exc<Inactive>> filter;
         
-        private readonly EcsPoolInject<Inactive> inactivePool;
-
+        private readonly EcsPoolInject<HasEnemyInRangeTag> enemyInRangePool;
+        private readonly EcsPoolInject<Rotation> rotationPool;
+        
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var deltaTime = Time.deltaTime;
@@ -25,19 +27,26 @@ namespace EcsEngine.Systems
             foreach (var entity in filter.Value)
             {
                 var targetEntity = targetPool.Get(entity).value;
-                if (inactivePool.Value.Has(targetEntity))
-                {
-                    targetPool.Del(entity);
-                    continue;
-                }
 
                 ref var targetPos = ref positionPool.Get(targetEntity);
                 ref var entityPos = ref positionPool.Get(entity);
-                var moveDirection = (targetPos.value - entityPos.value).normalized;
                 var moveSpeed = speedPool.Get(entity);
 
-                entityPos.value =Vector3.MoveTowards(entityPos.value, targetPos.value, moveSpeed.value * deltaTime);
-                //entityPos.value += moveDirection * (moveSpeed.value * deltaTime);
+
+
+                var isMoving = !enemyInRangePool.Value.Has(entity); 
+                    //Vector3.Distance(targetPos.value, entityPos.value) > 0.1f;
+                
+                
+                filter.Pools.Inc1.Get(entity).IsMoving = isMoving;
+                if (!isMoving)
+                    continue;
+                if (rotationPool.Value.Has(entity))
+                {
+                    rotationPool.Value.Get(entity).value=Quaternion.LookRotation(targetPos.value-entityPos.value);
+                }
+
+                entityPos.value = Vector3.MoveTowards(entityPos.value, targetPos.value, moveSpeed.value * deltaTime);
             }
         }
     }

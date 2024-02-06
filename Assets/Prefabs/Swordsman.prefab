@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
-  moveSpeed: 3
+  moveSpeed: 5
   attackDelay: 1
-  attackRange: 1
+  attackRange: 3
   animator: {fileID: 8692576747537636603}
 --- !u!1001 &8692576747530256569
 PrefabInstance:

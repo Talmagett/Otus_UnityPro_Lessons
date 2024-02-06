@@ -3,7 +3,7 @@ using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.ViewSystems
 {
     internal sealed class TransformViewSynchronizer : IEcsPostRunSystem
     {

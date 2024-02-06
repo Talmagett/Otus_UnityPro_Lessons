@@ -28,11 +28,12 @@ namespace EcsEngine.Systems
             {
                 var unitSpawnData = unitSpawnDataPool.Get(entity);
 
-                //Spawn bullet...
                 var spawnEvent = eventWorld.Value.NewEntity();
 
                 spawnPool.Value.Add(spawnEvent) = new SpawnRequest();
-                positionPool.Value.Add(spawnEvent) = new Position { value = unitSpawnData.spawnPoint };
+                var randPos = Random.insideUnitSphere * 3;
+                randPos.y = 0;
+                positionPool.Value.Add(spawnEvent) = new Position { value = unitSpawnData.spawnPoint + randPos};
                 rotationPool.Value.Add(spawnEvent) = new Rotation { value = unitSpawnData.rotation };
                 prefabPool.Value.Add(spawnEvent) = new Prefab { value = unitSpawnData.spawnPrefab };
                 playerIdPool.Value.Add(spawnEvent) = new PlayerID { value = unitSpawnData.playerId };

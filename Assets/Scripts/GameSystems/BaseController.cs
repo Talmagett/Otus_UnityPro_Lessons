@@ -42,7 +42,7 @@ namespace GameSystems
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            unitSpawnData.spawnPoint = baseEntity.GetData<Position>().value;
+            unitSpawnData.spawnPoint = baseEntity.GetData<SpawnPosition>().value;
             unitSpawnData.rotation = baseEntity.GetData<Rotation>().value;
             unitSpawnData.playerId = baseEntity.GetData<PlayerID>().value;
 
