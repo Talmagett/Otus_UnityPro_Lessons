@@ -4,7 +4,7 @@ using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Entities;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Attack
 {
     internal sealed class BulletDestroySystem : IEcsRunSystem
     {

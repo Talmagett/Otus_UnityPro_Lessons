@@ -1,6 +1,9 @@
 using System;
 using EcsEngine.Components.Life;
 using EcsEngine.Systems;
+using EcsEngine.Systems.Attack;
+using EcsEngine.Systems.Life;
+using EcsEngine.Systems.Movement;
 using EcsEngine.Systems.ViewSystems;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -36,6 +39,8 @@ namespace EcsEngine
             _systems
 
                 //Game Logic:
+                .Add(new CooldownSystem())
+                
                 .Add(new TargetSelectorSystem())
                 .Add(new EnemyInRangeCheckSystem())
                 .Add(new MoveToTargetSystem())
@@ -47,7 +52,6 @@ namespace EcsEngine
                 .Add(new DeathRequestSystem())
                 .Add(new TakeDamageRequestSystem())
                 .Add(new GamePlaySystem())
-                
                 
                 //Game Listeners:
 

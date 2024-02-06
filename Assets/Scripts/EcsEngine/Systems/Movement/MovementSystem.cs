@@ -5,7 +5,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Movement
 {
     internal sealed class MovementSystem : IEcsRunSystem
     {

@@ -1,13 +1,11 @@
-using System.Linq;
 using EcsEngine.Components;
-using EcsEngine.Components.Attack;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Transform;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Attack
 {
     public class TargetSelectorSystem : IEcsRunSystem
     {

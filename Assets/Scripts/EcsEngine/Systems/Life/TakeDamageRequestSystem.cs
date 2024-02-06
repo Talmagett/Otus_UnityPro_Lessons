@@ -5,7 +5,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Life
 {
     internal sealed class TakeDamageRequestSystem : IEcsRunSystem
     {

@@ -6,7 +6,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Helpers;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Attack
 {
     internal sealed class BulletCollisionRequestSystem : IEcsRunSystem
     {

@@ -7,7 +7,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Movement
 {
     public class MoveToTargetSystem: IEcsRunSystem
     {
@@ -32,11 +32,7 @@ namespace EcsEngine.Systems
                 ref var entityPos = ref positionPool.Get(entity);
                 var moveSpeed = speedPool.Get(entity);
 
-
-
                 var isMoving = !enemyInRangePool.Value.Has(entity); 
-                    //Vector3.Distance(targetPos.value, entityPos.value) > 0.1f;
-                
                 
                 filter.Pools.Inc1.Get(entity).IsMoving = isMoving;
                 if (!isMoving)

@@ -28,6 +28,7 @@ namespace Content
             entity.AddData(new MoveSpeed { value = moveSpeed });
             
             entity.AddData(new AttackRange{value = attackRange});
+            entity.AddData(new Cooldown{maxValue = attackDelay});
             
             entity.AddData(new TargetEntity());
             entity.AddData(new MoveToTargetTag());

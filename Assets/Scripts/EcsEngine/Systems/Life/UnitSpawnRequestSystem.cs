@@ -6,7 +6,7 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace EcsEngine.Systems
+namespace EcsEngine.Systems.Life
 {
     public class UnitSpawnRequestSystem : IEcsRunSystem
     {
