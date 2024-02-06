@@ -5,6 +5,5 @@ namespace EcsEngine.Components.Attack
     [Serializable]
     public struct HasEnemyInRangeTag
     {
-        
     }
 }

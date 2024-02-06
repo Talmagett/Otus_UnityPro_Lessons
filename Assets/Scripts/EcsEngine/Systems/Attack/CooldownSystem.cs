@@ -1,12 +1,11 @@
 using EcsEngine.Components.Attack;
-using EcsEngine.Components.Tags;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace EcsEngine.Systems.Attack
 {
-    public class CooldownSystem: IEcsRunSystem
+    public class CooldownSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Cooldown>> filter;
 

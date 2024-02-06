@@ -9,13 +9,15 @@ using UnityEngine;
 
 namespace EcsEngine.Systems.Attack
 {
-    public class EnemyInRangeCheckSystem: IEcsRunSystem
+    public class EnemyInRangeCheckSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<TargetEntity, MoveToTargetTag, Position, AttackRange>, Exc<Inactive, HasEnemyInRangeTag>> filter;
-        
-        private readonly EcsPoolInject<Position> positionPool;
         private readonly EcsPoolInject<HasEnemyInRangeTag> enemiesInAttackRangePool;
-        
+
+        private readonly EcsFilterInject<Inc<TargetEntity, MoveToTargetTag, Position, AttackRange>,
+            Exc<Inactive, HasEnemyInRangeTag>> filter;
+
+        private readonly EcsPoolInject<Position> positionPool;
+
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
             foreach (var entity in filter.Value)
@@ -23,7 +25,7 @@ namespace EcsEngine.Systems.Attack
                 ref var targetEntity = ref filter.Pools.Inc1.Get(entity);
                 if (targetEntity.value == -1)
                     continue;
-                
+
                 ref var targetPos = ref positionPool.Value.Get(targetEntity.value);
                 ref var entityPos = ref filter.Pools.Inc3.Get(entity);
 

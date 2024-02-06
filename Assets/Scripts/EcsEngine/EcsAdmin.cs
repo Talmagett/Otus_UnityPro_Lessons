@@ -40,19 +40,16 @@ namespace EcsEngine
 
                 //Game Logic:
                 .Add(new CooldownSystem())
-                
                 .Add(new TargetSelectorSystem())
                 .Add(new EnemyInRangeCheckSystem())
                 .Add(new MoveToTargetSystem())
-                
                 .Add(new SpawnRequestSystem())
                 .Add(new UnitSpawnRequestSystem())
-                
                 .Add(new HealthEmptySystem())
                 .Add(new DeathRequestSystem())
                 .Add(new TakeDamageRequestSystem())
                 .Add(new GamePlaySystem())
-                
+
                 //Game Listeners:
 
                 //View:

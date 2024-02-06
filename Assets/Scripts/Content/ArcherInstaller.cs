@@ -26,16 +26,16 @@ namespace Content
             entity.AddData(new Health { value = health });
             entity.AddData(new DamagableTag());
             entity.AddData(new MoveSpeed { value = moveSpeed });
-            
-            entity.AddData(new AttackRange{value = attackRange});
-            entity.AddData(new Cooldown{maxValue = attackDelay});
-            
+
+            entity.AddData(new AttackRange { value = attackRange });
+            entity.AddData(new Cooldown { maxValue = attackDelay });
+
             entity.AddData(new TargetEntity());
             entity.AddData(new MoveToTargetTag());
-            
+
             entity.AddData(new AnimatorView { value = animator });
             entity.AddData(new TransformView { value = transform });
-            
+
             entity.AddData(new GameObjectView { value = gameObject });
         }
 
