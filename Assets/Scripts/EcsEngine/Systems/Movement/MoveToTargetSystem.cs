@@ -36,10 +36,12 @@ namespace EcsEngine.Systems.Movement
                 var isMoving = !enemyInRangePool.Value.Has(entity);
 
                 filter.Pools.Inc1.Get(entity).IsMoving = isMoving;
-                if (!isMoving)
-                    continue;
+                
                 if (rotationPool.Value.Has(entity))
                     rotationPool.Value.Get(entity).value = Quaternion.LookRotation(targetPos.value - entityPos.value);
+                
+                if (!isMoving)
+                    continue;
 
                 entityPos.value = Vector3.MoveTowards(entityPos.value, targetPos.value, moveSpeed.value * deltaTime);
             }

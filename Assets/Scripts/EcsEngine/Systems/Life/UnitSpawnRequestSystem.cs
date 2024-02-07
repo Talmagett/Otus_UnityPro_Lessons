@@ -31,7 +31,7 @@ namespace EcsEngine.Systems.Life
                 var spawnEvent = eventWorld.Value.NewEntity();
 
                 spawnPool.Value.Add(spawnEvent) = new SpawnRequest();
-                var randPos = Random.insideUnitSphere * 3;
+                var randPos = Random.insideUnitSphere * 5;
                 randPos.y = 0;
                 positionPool.Value.Add(spawnEvent) = new Position { value = unitSpawnData.spawnPoint + randPos };
                 rotationPool.Value.Add(spawnEvent) = new Rotation { value = unitSpawnData.rotation };

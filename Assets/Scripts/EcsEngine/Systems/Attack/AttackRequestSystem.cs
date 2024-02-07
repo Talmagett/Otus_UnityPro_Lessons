@@ -14,6 +14,7 @@ namespace EcsEngine.Systems.Attack
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var cooldownPool = filter.Pools.Inc3;
+            var hasEnemyPool = filter.Pools.Inc2;
             foreach (var entity in filter.Value)
             {
                 if (!cooldownPool.Get(entity).canUse)
@@ -23,7 +24,7 @@ namespace EcsEngine.Systems.Attack
                 cooldown.value = cooldown.maxValue;
                 
                 attackPool.Value.Add(entity)=new AttackRequest();
-                filter.Pools.Inc2.Del(entity);
+                hasEnemyPool.Del(entity);
             }
         }
     }
