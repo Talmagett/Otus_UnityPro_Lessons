@@ -12,7 +12,7 @@ namespace GameSystems
 
         private void Update()
         {
-            if (fireInput.IsFirePressDown()) character.SetData(new FireRequest());
+            if (fireInput.IsFirePressDown()) character.SetData(new AttackRequest());
         }
     }
 }

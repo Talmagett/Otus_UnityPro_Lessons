@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace EcsEngine.Systems.Attack
 {
-    internal sealed class BulletDestroySystem : IEcsRunSystem
+    internal sealed class ArrowDestroySystem : IEcsRunSystem
     {
         private EcsCustomInject<EntityManager> entityManager;
-        private EcsFilterInject<Inc<BulletTag, Inactive>> filter;
+        private EcsFilterInject<Inc<ArrowTag, Inactive>> filter;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
         {

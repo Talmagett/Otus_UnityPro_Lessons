@@ -21,11 +21,10 @@ namespace EcsEngine.Systems.ViewSystems
             {
                 var target = filter.Pools.Inc2.Get(@event).value;
 
-                if (animatorPool.Value.Has(target))
-                {
-                    var animator = animatorPool.Value.Get(target).value;
-                    animator.SetTrigger(TakeDamage);
-                }
+                if (!animatorPool.Value.Has(target)) continue;
+                
+                var animator = animatorPool.Value.Get(target).value;
+                animator.SetTrigger(TakeDamage);
             }
         }
     }

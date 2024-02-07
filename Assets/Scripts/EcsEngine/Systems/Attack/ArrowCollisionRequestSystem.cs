@@ -5,10 +5,11 @@ using EcsEngine.Components.Tags;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Helpers;
+using UnityEngine;
 
 namespace EcsEngine.Systems.Attack
 {
-    internal sealed class BulletCollisionRequestSystem : IEcsRunSystem
+    internal sealed class ArrowCollisionRequestSystem : IEcsRunSystem
     {
         private readonly EcsPoolInject<DamagableTag> damagableTagPool;
 
@@ -17,7 +18,7 @@ namespace EcsEngine.Systems.Attack
 
         private readonly EcsWorldInject eventWorld = EcsWorlds.Events;
 
-        private readonly EcsFilterInject<Inc<CollisionEnterRequest, BulletTag, SourceEntity, TargetEntity>> filter =
+        private readonly EcsFilterInject<Inc<CollisionEnterRequest, ArrowTag, SourceEntity, TargetEntity>> filter =
             EcsWorlds.Events;
 
         private readonly EcsFactoryInject<TakeDamageRequest, SourceEntity, TargetEntity, Damage> takeDamageEmitter
@@ -34,7 +35,6 @@ namespace EcsEngine.Systems.Attack
 
                 var sourceEntity = sourcePool.Get(entity);
                 var bullet = sourceEntity.value;
-
                 if (!deathRequestPool.Value.Has(bullet))
                 {
                     var targetEntity = targetPool.Get(entity);

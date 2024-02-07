@@ -17,6 +17,9 @@ namespace Content
         [SerializeField] private float attackDelay;
         [SerializeField] private float attackRange;
 
+        [SerializeField] private Transform firePoint;
+        [SerializeField] private Entity arrowPrefab;
+        
         [Space] [SerializeField] private Animator animator;
 
         protected override void Install(Entity entity)
@@ -30,6 +33,12 @@ namespace Content
             entity.AddData(new AttackRange { value = attackRange });
             entity.AddData(new Cooldown { maxValue = attackDelay });
 
+            entity.AddData(new ArcherWeapon
+            {
+                firePoint = firePoint,
+                arrowPrefab = arrowPrefab
+            });
+            
             entity.AddData(new TargetEntity());
             entity.AddData(new MoveToTargetTag());
 

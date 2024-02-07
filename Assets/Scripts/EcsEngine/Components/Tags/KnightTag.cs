@@ -3,7 +3,8 @@ using System;
 namespace EcsEngine.Components.Tags
 {
     [Serializable]
-    public struct BulletTag
+    public struct KnightTag
     {
+        
     }
 }

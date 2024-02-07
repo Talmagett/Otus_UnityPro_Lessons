@@ -26,7 +26,9 @@ namespace EcsEngine.Systems.Movement
             foreach (var entity in filter.Value)
             {
                 var targetEntity = targetPool.Get(entity).value;
-
+                if (targetEntity==-1)
+                    continue;
+                
                 ref var targetPos = ref positionPool.Get(targetEntity);
                 ref var entityPos = ref positionPool.Get(entity);
                 var moveSpeed = speedPool.Get(entity);

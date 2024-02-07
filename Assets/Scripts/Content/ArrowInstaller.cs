@@ -8,17 +8,22 @@ using UnityEngine;
 
 namespace Content
 {
-    internal sealed class BulletInstaller : EntityInstaller
+    public class ArrowInstaller : EntityInstaller
     {
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private int damage;
+        
         protected override void Install(Entity entity)
         {
             entity.AddData(new ArrowTag());
             entity.AddData(new Position { value = transform.position });
             entity.AddData(new Rotation { value = transform.rotation });
-            entity.AddData(new MoveDirection { value = Vector3.forward });
-            entity.AddData(new MoveSpeed { value = 5 });
-            entity.AddData(new Damage { value = 3 });
+            entity.AddData(new MoveDirection { value = transform.forward });
+            entity.AddData(new MoveSpeed { value = moveSpeed });
+            entity.AddData(new Damage { value = damage });
+            
             entity.AddData(new TransformView { value = transform });
+            entity.AddData(new GameObjectView() { value = gameObject });
         }
 
         protected override void Dispose(Entity entity)

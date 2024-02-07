@@ -43,8 +43,16 @@ namespace EcsEngine
                 .Add(new TargetSelectorSystem())
                 .Add(new EnemyInRangeCheckSystem())
                 .Add(new MoveToTargetSystem())
-                .Add(new SpawnRequestSystem())
+                .Add(new MovementSystem())
+                
+                .Add(new AttackRequestSystem())
+                .Add(new ArcherAttackRequestSystem())
                 .Add(new UnitSpawnRequestSystem())
+                .Add(new SpawnRequestSystem())
+                
+                .Add(new ArrowCollisionRequestSystem())
+                .Add(new ArrowDestroySystem())
+                
                 .Add(new HealthEmptySystem())
                 .Add(new DeathRequestSystem())
                 .Add(new TakeDamageRequestSystem())
