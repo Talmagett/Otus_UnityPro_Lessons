@@ -14,15 +14,17 @@ namespace Content
     {
         [SerializeField] private int health;
         [SerializeField] private float moveSpeed;
-        [SerializeField] private float attackDelay;
-        [SerializeField] private float attackRange;
 
+        [Space] [SerializeField] private float attackDelay;
+
+        [SerializeField] private float attackRange;
         [SerializeField] private Transform firePoint;
         [SerializeField] private Entity arrowPrefab;
-        
+
         [Space] [SerializeField] private Animator animator;
         [SerializeField] private Renderer[] meshRenderers;
-        
+        [SerializeField] private ParticleSystem hitParticle;
+
         protected override void Install(Entity entity)
         {
             entity.AddData(new Position { value = transform.position });
@@ -34,18 +36,19 @@ namespace Content
             entity.AddData(new AttackRange { value = attackRange });
             entity.AddData(new Cooldown { maxValue = attackDelay });
 
-            entity.AddData(new ArcherWeapon
+            entity.AddData(new RangeWeapon
             {
                 firePoint = firePoint,
                 arrowPrefab = arrowPrefab
             });
-            
+
             entity.AddData(new TargetEntity());
             entity.AddData(new MoveToTargetTag());
 
+            entity.AddData(new HitParticle { value = hitParticle });
             entity.AddData(new AnimatorView { value = animator });
             entity.AddData(new TransformView { value = transform });
-            entity.AddData(new RendererView {values = meshRenderers});
+            entity.AddData(new RendererView { values = meshRenderers });
             entity.AddData(new GameObjectView { value = gameObject });
         }
 

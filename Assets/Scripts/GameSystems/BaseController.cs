@@ -14,15 +14,16 @@ namespace GameSystems
 
         [SerializeField] private Entity redBase;
         [SerializeField] private Entity blueBase;
-        
+
         [SerializeField] private Material redMaterial;
         [SerializeField] private Material blueMaterial;
-        
+
         [SerializeField] [EnumToggleButtons] private SpawningUnitType spawningUnitType;
 
         [SerializeField] private Entity archerPrefab;
 
         [SerializeField] private Entity swordsmanPrefab;
+
         [Button]
         public void Spawn()
         {

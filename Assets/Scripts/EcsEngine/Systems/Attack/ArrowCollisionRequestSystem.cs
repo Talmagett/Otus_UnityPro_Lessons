@@ -5,7 +5,6 @@ using EcsEngine.Components.Tags;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Helpers;
-using UnityEngine;
 
 namespace EcsEngine.Systems.Attack
 {

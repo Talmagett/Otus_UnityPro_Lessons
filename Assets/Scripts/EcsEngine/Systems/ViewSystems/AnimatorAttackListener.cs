@@ -1,5 +1,4 @@
 using EcsEngine.Components.Attack;
-using EcsEngine.Components.Life;
 using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;

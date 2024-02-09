@@ -26,9 +26,9 @@ namespace EcsEngine.Systems.Movement
             foreach (var entity in filter.Value)
             {
                 var targetEntity = targetPool.Get(entity).value;
-                if (targetEntity==-1)
+                if (targetEntity == -1)
                     continue;
-                
+
                 ref var targetPos = ref positionPool.Get(targetEntity);
                 ref var entityPos = ref positionPool.Get(entity);
                 var moveSpeed = speedPool.Get(entity);
@@ -36,10 +36,10 @@ namespace EcsEngine.Systems.Movement
                 var isMoving = !enemyInRangePool.Value.Has(entity);
 
                 filter.Pools.Inc1.Get(entity).IsMoving = isMoving;
-                
+
                 if (rotationPool.Value.Has(entity))
                     rotationPool.Value.Get(entity).value = Quaternion.LookRotation(targetPos.value - entityPos.value);
-                
+
                 if (!isMoving)
                     continue;
 

@@ -3,7 +3,7 @@ using System;
 namespace EcsEngine.Components.Attack
 {
     [Serializable]
-    public struct AttackEvent
+    public struct MeleeWeapon
     {
     }
 }

@@ -14,16 +14,13 @@ namespace EcsEngine.Systems.ViewSystems
         {
             var rendererPool = filter.Pools.Inc1;
             var materialPool = filter.Pools.Inc2;
-            
+
             foreach (var entity in filter.Value)
             {
                 Debug.Log($"{entity} was inited");
                 ref var rendererView = ref rendererPool.Get(entity);
                 var materialView = materialPool.Get(entity);
-                foreach (var renderer in rendererView.values)
-                {
-                    renderer.material = materialView.value;
-                }
+                foreach (var renderer in rendererView.values) renderer.material = materialView.value;
             }
         }
     }

@@ -17,6 +17,7 @@ namespace EcsEngine.Systems.Life
         private readonly EcsPoolInject<Health> healthPool;
         private readonly EcsPoolInject<OneFrame> oneFramePool = EcsWorlds.Events;
 
+
         private readonly EcsWorldInject world;
 
         void IEcsRunSystem.Run(IEcsSystems systems)

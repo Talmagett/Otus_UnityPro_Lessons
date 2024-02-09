@@ -8,10 +8,13 @@ namespace EcsEngine.Systems.Attack
 {
     public class AttackRequestSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<TargetEntity, HasEnemyInRangeTag, Cooldown>, Exc<Inactive,AttackRequest>> filter;
+        private readonly EcsPoolInject<AttackRequest> attackPool;
+
+        private readonly EcsFilterInject<Inc<TargetEntity, HasEnemyInRangeTag, Cooldown>, Exc<Inactive, AttackRequest>>
+            filter;
 
         private EcsPoolInject<AttackEvent> eventPool;
-        private readonly EcsPoolInject<AttackRequest> attackPool;
+
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var cooldownPool = filter.Pools.Inc3;
@@ -20,11 +23,11 @@ namespace EcsEngine.Systems.Attack
             {
                 if (!cooldownPool.Get(entity).canUse)
                     continue;
-                
+
                 ref var cooldown = ref cooldownPool.Get(entity);
                 cooldown.value = cooldown.maxValue;
-                
-                attackPool.Value.Add(entity)=new AttackRequest();
+
+                attackPool.Value.Add(entity) = new AttackRequest();
                 eventPool.Value.Add(entity) = new AttackEvent();
                 hasEnemyPool.Del(entity);
             }

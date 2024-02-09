@@ -1,4 +1,3 @@
-using System;
 using EcsEngine;
 using EcsEngine.Components;
 using EcsEngine.Components.Physics;
@@ -23,13 +22,13 @@ namespace Content
         {
             if (!other.gameObject.TryGetComponent(out Entity target)) return;
             if (target.HasData<ArrowTag>()) return;
-            
+
             EcsAdmin.Instance.CreateEntity(EcsWorlds.Events)
                 .Add(new CollisionEnterRequest())
                 .Add(new ArrowTag())
                 .Add(new SourceEntity { value = entity.Id })
                 .Add(new TargetEntity { value = target.Id })
-                .Add(new Position { value = other.ClosestPoint(transform.position)});
+                .Add(new Position { value = other.ClosestPoint(transform.position) });
         }
     }
 }

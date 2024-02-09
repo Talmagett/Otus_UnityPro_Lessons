@@ -62,10 +62,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b81c777e454dcb897454ff3b5abd8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 10
   moveSpeed: 5
-  attackDelay: 1
-  attackRange: 3
+  damage: 2
+  attackDelay: 2
+  attackRange: 5
   animator: {fileID: 8692576747537636603}
   meshRenderers:
   - {fileID: 8692576747532525789}

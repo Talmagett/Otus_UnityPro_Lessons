@@ -12,7 +12,9 @@ namespace Content
     {
         [SerializeField] private float moveSpeed;
         [SerializeField] private int damage;
-        
+
+        [SerializeField] private ParticleSystem hitParticle;
+
         protected override void Install(Entity entity)
         {
             entity.AddData(new ArrowTag());
@@ -21,9 +23,10 @@ namespace Content
             entity.AddData(new MoveDirection { value = transform.forward });
             entity.AddData(new MoveSpeed { value = moveSpeed });
             entity.AddData(new Damage { value = damage });
-            
+
+            entity.AddData(new HitParticle { value = hitParticle });
             entity.AddData(new TransformView { value = transform });
-            entity.AddData(new GameObjectView() { value = gameObject });
+            entity.AddData(new GameObjectView { value = gameObject });
         }
 
         protected override void Dispose(Entity entity)

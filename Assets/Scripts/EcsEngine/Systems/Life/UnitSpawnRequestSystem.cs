@@ -13,11 +13,11 @@ namespace EcsEngine.Systems.Life
     {
         private readonly EcsWorldInject eventWorld = EcsWorlds.Events;
         private readonly EcsFilterInject<Inc<SpawnRequest, UnitSpawnData>, Exc<Inactive>> filter;
+        private readonly EcsPoolInject<MaterialView> materialViewPool = EcsWorlds.Events;
         private readonly EcsPoolInject<PlayerID> playerIdPool = EcsWorlds.Events;
         private readonly EcsPoolInject<Position> positionPool = EcsWorlds.Events;
         private readonly EcsPoolInject<Prefab> prefabPool = EcsWorlds.Events;
         private readonly EcsPoolInject<Rotation> rotationPool = EcsWorlds.Events;
-        private readonly EcsPoolInject<MaterialView> materialViewPool = EcsWorlds.Events;
         private readonly EcsPoolInject<SpawnRequest> spawnPool = EcsWorlds.Events;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
