@@ -21,7 +21,8 @@ namespace Content
         [SerializeField] private Entity arrowPrefab;
         
         [Space] [SerializeField] private Animator animator;
-
+        [SerializeField] private Renderer[] meshRenderers;
+        
         protected override void Install(Entity entity)
         {
             entity.AddData(new Position { value = transform.position });
@@ -44,7 +45,7 @@ namespace Content
 
             entity.AddData(new AnimatorView { value = animator });
             entity.AddData(new TransformView { value = transform });
-
+            entity.AddData(new RendererView {values = meshRenderers});
             entity.AddData(new GameObjectView { value = gameObject });
         }
 

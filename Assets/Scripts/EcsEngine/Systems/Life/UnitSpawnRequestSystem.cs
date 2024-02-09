@@ -2,6 +2,7 @@ using EcsEngine.Components;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Transform;
+using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace EcsEngine.Systems.Life
         private readonly EcsPoolInject<Position> positionPool = EcsWorlds.Events;
         private readonly EcsPoolInject<Prefab> prefabPool = EcsWorlds.Events;
         private readonly EcsPoolInject<Rotation> rotationPool = EcsWorlds.Events;
-
+        private readonly EcsPoolInject<MaterialView> materialViewPool = EcsWorlds.Events;
         private readonly EcsPoolInject<SpawnRequest> spawnPool = EcsWorlds.Events;
 
         void IEcsRunSystem.Run(IEcsSystems systems)
@@ -37,8 +38,8 @@ namespace EcsEngine.Systems.Life
                 rotationPool.Value.Add(spawnEvent) = new Rotation { value = unitSpawnData.rotation };
                 prefabPool.Value.Add(spawnEvent) = new Prefab { value = unitSpawnData.spawnPrefab };
                 playerIdPool.Value.Add(spawnEvent) = new PlayerID { value = unitSpawnData.playerId };
-
-                Debug.Log($"Pew {unitSpawnData.spawnPrefab.name}!");
+                materialViewPool.Value.Add(spawnEvent) = new MaterialView { value = unitSpawnData.spawnMaterial };
+                Debug.Log($"Spawn {unitSpawnData.spawnPrefab.name}!");
                 unitSpawnDataPool.Del(entity);
                 requestPool.Del(entity);
             }

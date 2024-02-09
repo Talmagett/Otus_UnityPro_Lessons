@@ -71,6 +71,9 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1465722510666882349, guid: acbbc4d77f559004681ee4e137feaa28,
     type: 3}
   animator: {fileID: 1870072544967355838}
+  meshRenderers:
+  - {fileID: 1870072544963146254}
+  - {fileID: 1870072544955971606}
 --- !u!136 &1060377411399506642
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -298,9 +301,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04c79b5f6e9ebab48af48fdcf7b6d570, type: 3}
+--- !u!23 &1870072544955971606 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2308382, guid: 04c79b5f6e9ebab48af48fdcf7b6d570,
+    type: 3}
+  m_PrefabInstance: {fileID: 1870072544957858056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1870072544957762166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 494462, guid: 04c79b5f6e9ebab48af48fdcf7b6d570,
+    type: 3}
+  m_PrefabInstance: {fileID: 1870072544957858056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1870072544963146254 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13742854, guid: 04c79b5f6e9ebab48af48fdcf7b6d570,
     type: 3}
   m_PrefabInstance: {fileID: 1870072544957858056}
   m_PrefabAsset: {fileID: 0}

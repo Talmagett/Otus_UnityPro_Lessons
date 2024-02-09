@@ -135,6 +135,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base (Red)
       objectReference: {fileID: 0}
+    - target: {fileID: 4366908282635358130, guid: 7abfb19faaf1147e9816d9c6709f4689,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6752972809141786314, guid: 7abfb19faaf1147e9816d9c6709f4689,
         type: 3}
       propertyPath: playerID
@@ -1200,6 +1205,8 @@ MonoBehaviour:
   playerType: 1
   redBase: {fileID: 254118207}
   blueBase: {fileID: 7657002863243684350}
+  redMaterial: {fileID: 2100000, guid: 98a7fdcb4ebb44344b4afe0424d44b82, type: 2}
+  blueMaterial: {fileID: 2100000, guid: dccf8e44ede71db42b49378af93c5fb7, type: 2}
   spawningUnitType: 1
   archerPrefab: {fileID: -7779247012608047461, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
     type: 3}

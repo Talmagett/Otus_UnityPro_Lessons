@@ -9,5 +9,6 @@ namespace EcsEngine.Components.Life
         public Quaternion rotation;
         public Entity spawnPrefab;
         public int playerId;
+        public Material spawnMaterial;
     }
 }

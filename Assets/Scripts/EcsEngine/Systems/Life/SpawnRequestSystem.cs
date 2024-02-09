@@ -2,6 +2,7 @@ using EcsEngine.Components;
 using EcsEngine.Components.Life;
 using EcsEngine.Components.Tags;
 using EcsEngine.Components.Transform;
+using EcsEngine.Components.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Entities;
@@ -16,6 +17,7 @@ namespace EcsEngine.Systems.Life
         private readonly EcsFilterInject<Inc<SpawnRequest, Position, Rotation, Prefab, PlayerID>> filter =
             EcsWorlds.Events;
 
+        private readonly EcsPoolInject<MaterialView> materialPool=EcsWorlds.Events;
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
             foreach (var @event in filter.Value)
@@ -24,11 +26,16 @@ namespace EcsEngine.Systems.Life
                 var rotation = filter.Pools.Inc3.Get(@event).value;
                 var prefab = filter.Pools.Inc4.Get(@event).value;
                 var playerTag = filter.Pools.Inc5.Get(@event).value;
-
+                
                 var createdEntity = entityManager.Value.Create(prefab, position, rotation);
 
-                createdEntity.SetData(new PlayerID { value = playerTag });
+                if (materialPool.Value.Has(@event))
+                {
+                    createdEntity.SetData(new MaterialView{value = materialPool.Value.Get(@event).value});
+                }
 
+                createdEntity.SetData(new PlayerID { value = playerTag });
+                createdEntity.SetData(new Init());
                 eventWorld.Value.DelEntity(@event);
             }
         }

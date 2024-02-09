@@ -13,25 +13,34 @@ namespace GameSystems
         [SerializeField] [EnumToggleButtons] private PlayerType playerType;
 
         [SerializeField] private Entity redBase;
-
         [SerializeField] private Entity blueBase;
-
+        
+        [SerializeField] private Material redMaterial;
+        [SerializeField] private Material blueMaterial;
+        
         [SerializeField] [EnumToggleButtons] private SpawningUnitType spawningUnitType;
 
         [SerializeField] private Entity archerPrefab;
 
         [SerializeField] private Entity swordsmanPrefab;
-
         [Button]
         public void Spawn()
         {
             var unitSpawnData = new UnitSpawnData();
-            var baseEntity = playerType switch
+            Entity baseEntity;
+            switch (playerType)
             {
-                PlayerType.Blue => blueBase,
-                PlayerType.Red => redBase,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+                case PlayerType.Red:
+                    unitSpawnData.spawnMaterial = redMaterial;
+                    baseEntity = redBase;
+                    break;
+                case PlayerType.Blue:
+                    unitSpawnData.spawnMaterial = blueMaterial;
+                    baseEntity = blueBase;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
             baseEntity.SetData(new SpawnRequest());
 
@@ -45,7 +54,6 @@ namespace GameSystems
             unitSpawnData.spawnPoint = baseEntity.GetData<SpawnPosition>().value;
             unitSpawnData.rotation = baseEntity.GetData<Rotation>().value;
             unitSpawnData.playerId = baseEntity.GetData<PlayerID>().value;
-
             baseEntity.SetData(unitSpawnData);
         }
 

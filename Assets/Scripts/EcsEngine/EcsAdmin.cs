@@ -1,4 +1,5 @@
 using System;
+using EcsEngine.Components.Attack;
 using EcsEngine.Components.Life;
 using EcsEngine.Systems;
 using EcsEngine.Systems.Attack;
@@ -44,27 +45,29 @@ namespace EcsEngine
                 .Add(new EnemyInRangeCheckSystem())
                 .Add(new MoveToTargetSystem())
                 .Add(new MovementSystem())
-                
+
                 .Add(new AttackRequestSystem())
                 .Add(new ArcherAttackRequestSystem())
                 .Add(new UnitSpawnRequestSystem())
                 .Add(new SpawnRequestSystem())
-                
+
                 .Add(new ArrowCollisionRequestSystem())
                 .Add(new ArrowDestroySystem())
-                
+
                 .Add(new HealthEmptySystem())
                 .Add(new DeathRequestSystem())
                 .Add(new TakeDamageRequestSystem())
                 .Add(new GamePlaySystem())
 
                 //Game Listeners:
+                .Add(new MaterialViewSynchronizer())
 
                 //View:
                 .Add(new TransformViewSynchronizer())
-                .Add(new AnimatorDeathListener())
-                .Add(new AnimatorTakeDamageListener())
                 .Add(new AnimatorMoveListener())
+                .Add(new AnimatorAttackListener())
+                .Add(new AnimatorTakeDamageListener())
+                .Add(new AnimatorDeathListener())
                 //Editor:
 #if UNITY_EDITOR
                 .Add(new EcsWorldDebugSystem())
@@ -72,6 +75,8 @@ namespace EcsEngine
 #endif
                 //Clean Up:
                 .Add(new OneFrameEventSystem())
+                .DelHere<Init>()
+                .DelHere<AttackEvent>()
                 .DelHere<DeathEvent>();
         }
 

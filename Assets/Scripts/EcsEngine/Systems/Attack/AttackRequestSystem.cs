@@ -10,6 +10,7 @@ namespace EcsEngine.Systems.Attack
     {
         private readonly EcsFilterInject<Inc<TargetEntity, HasEnemyInRangeTag, Cooldown>, Exc<Inactive,AttackRequest>> filter;
 
+        private EcsPoolInject<AttackEvent> eventPool;
         private readonly EcsPoolInject<AttackRequest> attackPool;
         void IEcsRunSystem.Run(IEcsSystems systems)
         {
@@ -24,6 +25,7 @@ namespace EcsEngine.Systems.Attack
                 cooldown.value = cooldown.maxValue;
                 
                 attackPool.Value.Add(entity)=new AttackRequest();
+                eventPool.Value.Add(entity) = new AttackEvent();
                 hasEnemyPool.Del(entity);
             }
         }

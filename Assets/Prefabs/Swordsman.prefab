@@ -67,6 +67,9 @@ MonoBehaviour:
   attackDelay: 1
   attackRange: 3
   animator: {fileID: 8692576747537636603}
+  meshRenderers:
+  - {fileID: 8692576747532525789}
+  - {fileID: 8692576747533439705}
 --- !u!136 &155780154464776507
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,6 +172,18 @@ PrefabInstance:
 --- !u!4 &8692576747530105463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438990, guid: bcc60fdbd3a37b44cbc0cb99db483477,
+    type: 3}
+  m_PrefabInstance: {fileID: 8692576747530256569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8692576747532525789 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2334820, guid: bcc60fdbd3a37b44cbc0cb99db483477,
+    type: 3}
+  m_PrefabInstance: {fileID: 8692576747530256569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8692576747533439705 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13734496, guid: bcc60fdbd3a37b44cbc0cb99db483477,
     type: 3}
   m_PrefabInstance: {fileID: 8692576747530256569}
   m_PrefabAsset: {fileID: 0}
