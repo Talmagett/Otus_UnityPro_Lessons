@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e24a8fa3-2e14-4057-92f1-77c3f234e2b7" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/aa/16ccb7e8/Renderer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/e5/9f075d44/SkinnedMeshRenderer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EcsEngine/Components/Attack/Cooldown.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2bqh5qiL3hnLJpuKbQVZyd82xhN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hw7__ecs&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Talgar-PC\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Talgar-PC\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Talgar-PC\\AppData\\Local\\Symbols\\src&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Unity\Projects\Otus_UnityPro_Lessons -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Unity\Projects\Otus_UnityPro_Lessons" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Unity\Projects\Otus_UnityPro_Lessons -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Unity\Projects\Otus_UnityPro_Lessons" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e24a8fa3-2e14-4057-92f1-77c3f234e2b7" name="Changes" comment="" />
+      <created>1706948349042</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706948349042</updated>
+      <workItem from="1706948387239" duration="1855000" />
+      <workItem from="1707034910300" duration="4762000" />
+      <workItem from="1707040280148" duration="3864000" />
+      <workItem from="1707106801123" duration="257000" />
+      <workItem from="1707108479726" duration="2732000" />
+      <workItem from="1707112009659" duration="289000" />
+      <workItem from="1707213841267" duration="5798000" />
+      <workItem from="1707233019940" duration="1648000" />
+      <workItem from="1707238732833" duration="738000" />
+      <workItem from="1707294280904" duration="5278000" />
+      <workItem from="1707299746047" duration="5856000" />
+      <workItem from="1707359653976" duration="3869000" />
+      <workItem from="1707391870941" duration="2000" />
+      <workItem from="1707445156984" duration="52000" />
+      <workItem from="1707445246233" duration="6742000" />
+      <workItem from="1707454428115" duration="322000" />
+    </task>
+    <task id="LOCAL-00001" summary="resolved asmdef error">
+      <option name="closed" value="true" />
+      <created>1706948579380</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706948579380</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added a base installer">
+      <option name="closed" value="true" />
+      <created>1706950238631</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706950238631</updated>
+    </task>
+    <task id="LOCAL-00003" summary="made spawn with Odin, units die when 0">
+      <option name="closed" value="true" />
+      <created>1707041381073</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707041381073</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactored with Rider, added GamePlaySystem.cs, base is destroying">
+      <option name="closed" value="true" />
+      <created>1707047027003</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707047027003</updated>
+    </task>
+    <task id="LOCAL-00005" summary="changed to target chooser tag, added MoveToTargetSystem.cs">
+      <option name="closed" value="true" />
+      <created>1707151876845</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1707151876845</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added move animations, moveToTarget, stop on attack range">
+      <option name="closed" value="true" />
+      <created>1707217654936</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707217654937</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added cooldown">
+      <option name="closed" value="true" />
+      <created>1707219678487</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1707219678487</updated>
+    </task>
+    <task id="LOCAL-00008" summary="full refactored">
+      <option name="closed" value="true" />
+      <created>1707233547444</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1707233547444</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add archer some logic and animation">
+      <option name="closed" value="true" />
+      <created>1707304293704</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1707304293704</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added take damage, repaired rotation">
+      <option name="closed" value="true" />
+      <created>1707306291354</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1707306291354</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added initiation, material set on init">
+      <option name="closed" value="true" />
+      <created>1707447565365</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1707447565365</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added swordsman, and animations">
+      <option name="closed" value="true" />
+      <created>1707454658172</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707454658172</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="resolved asmdef error" />
+    <MESSAGE value="added a base installer" />
+    <MESSAGE value="made spawn with Odin, units die when 0" />
+    <MESSAGE value="refactored with Rider, added GamePlaySystem.cs, base is destroying" />
+    <MESSAGE value="changed to target chooser tag, added MoveToTargetSystem.cs" />
+    <MESSAGE value="added move animations, moveToTarget, stop on attack range" />
+    <MESSAGE value="added cooldown" />
+    <MESSAGE value="full refactored" />
+    <MESSAGE value="add archer some logic and animation" />
+    <MESSAGE value="added take damage, repaired rotation" />
+    <MESSAGE value="added initiation, material set on init" />
+    <MESSAGE value="added swordsman, and animations" />
+    <option name="LAST_COMMIT_MESSAGE" value="added swordsman, and animations" />
+  </component>
+</project>
