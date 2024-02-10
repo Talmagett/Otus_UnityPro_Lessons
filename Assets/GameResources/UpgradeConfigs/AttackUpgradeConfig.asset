@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f760e9dce779489a9bb26c86bbfcb9be, type: 3}
-  m_Name: UpgradeCatalog
+  m_Script: {fileID: 11500000, guid: fcb5d383a57d4dc7847b340c14e942d7, type: 3}
+  m_Name: AttackUpgradeConfig
   m_EditorClassIdentifier: 
-  configs:
-  - {fileID: 0}
+  id: attack
+  maxLevel: 10
+  priceTable:
+    basePrice: 10
+    levels: 00000000140000001e00000028000000320000003c00000046000000500000005a00000064000000

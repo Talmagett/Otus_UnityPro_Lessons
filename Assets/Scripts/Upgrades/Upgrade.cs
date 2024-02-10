@@ -40,8 +40,18 @@ namespace Sample
             this.currentLevel = level;
         }
 
+        protected virtual bool CanUpgrade()
+        {
+            return true;
+        }
+        
         public void LevelUp()
         {
+            if (!CanUpgrade())
+            {
+                throw new Exception($"Can not upgrade");
+            }
+
             if (this.Level >= this.MaxLevel)
             {
                 throw new Exception($"Can not increment level for upgrade {this.config.id}!");
