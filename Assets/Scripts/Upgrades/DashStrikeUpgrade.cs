@@ -5,11 +5,16 @@ namespace Sample
     public class DashStrikeUpgrade : Upgrade
     {
         private Upgrade[] _requiredUpgrades;
-        public DashStrikeUpgrade(UpgradeConfig config, params Upgrade[] requiredUpgrades) : base(config)
+        public DashStrikeUpgrade(UpgradeConfig config) : base(config)
         {
         }
 
-        protected override bool CanUpgrade()
+        public void AddRequirements(params Upgrade[] requiredUpgrades)
+        {
+            _requiredUpgrades = requiredUpgrades;
+        }
+        
+        public override bool CanUpgrade()
         {
             return _requiredUpgrades.All(upgrade => Level < upgrade.Level);
         }

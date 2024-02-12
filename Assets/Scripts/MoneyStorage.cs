@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 
 namespace Game.Gameplay.Player
 {
+    [System.Serializable]
     public sealed class MoneyStorage
     {
         public event Action<int> OnMoneyChanged;

@@ -40,7 +40,7 @@ namespace Sample
             this.currentLevel = level;
         }
 
-        protected virtual bool CanUpgrade()
+        public virtual bool CanUpgrade()
         {
             return true;
         }
