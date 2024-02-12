@@ -7,48 +7,55 @@ namespace Equipment
     //TODO: Реализовать экипировку
     public sealed class Equipment
     {
+        private readonly Character _character;
+        private readonly Inventory _inventory;
+
+        public Equipment(Character character, Inventory inventory)
+        {
+            _character = character;
+            _inventory = inventory;
+        }
+
         public event Action<Item> OnItemAdded;
         public event Action<Item> OnItemRemoved;
         public event Action<Item> OnItemChanged; 
 
         public void Setup(KeyValuePair<EquipmentType, Item> items)
         {
-            throw new NotImplementedException();
         }
 
         public Item GetItem(EquipmentType type)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public bool TryGetItem(EquipmentType type, out Item result)
         {
-            throw new NotImplementedException();
+            result = null;
+                
+            return true;
         }
 
         public void RemoveItem(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
         }
 
         public void AddItem(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
         }
 
         public void ChangeItem(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
         }
 
         public bool HasItem(EquipmentType type)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public KeyValuePair<EquipmentType, Item>[] GetItems()
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
