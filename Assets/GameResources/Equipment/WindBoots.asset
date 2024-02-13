@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22487d842414666b12f9ae5a7f89099, type: 3}
-  m_Name: Boots
+  m_Script: {fileID: 11500000, guid: b4ca805c88e74a7695a14e1e8493e715, type: 3}
+  m_Name: WindBoots
   m_EditorClassIdentifier: 
-  item:
-    name: Wind Boots
-    flags: 12
-    components: []
-  references:
-    version: 2
-    RefIds: []
+  <EquipmentType>k__BackingField: 0
+  <ItemConfig>k__BackingField: {fileID: 11400000, guid: 81ea04b6e8bbbde49a137b9cd757ca80, type: 2}

@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 namespace Sample
 {
     //Нельзя менять!
-    [System.Serializable]
     public sealed class Inventory
     {
         public event Action<Item> OnItemAdded;

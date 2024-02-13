@@ -1,3 +1,4 @@
+using System;
 using Sample;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,24 +8,24 @@ namespace Equipment
 {
     public class DebugEquipment : MonoBehaviour
     {
-        [ReadOnly, ShowInInspector] private Character _character;
-        [ReadOnly, ShowInInspector] private Inventory _inventory;
-
         private Equipment _equipment;
-        
+
         [Inject]
-        public void Construct(Character character, Inventory inventory)
+        public void Construct(Equipment equipment)
         {
-            _character = character;
-            _inventory = inventory;
-            
-            _equipment = new Equipment(_character,_inventory);
+            _equipment = equipment;
+        }
+
+        [Button]
+        public void EquipItem(EquipmentItemConfigs equipmentItemConfigs)
+        {
+            _equipment.EquipItem(equipmentItemConfigs.EquipmentType,equipmentItemConfigs.ItemConfig.item.Clone());
         }
         
         [Button]
-        public void EquipItem()
+        public void UnequipItem(EquipmentItemConfigs equipmentItemConfigs)
         {
-            
+            _equipment.UnequipItem(equipmentItemConfigs.EquipmentType,equipmentItemConfigs.ItemConfig.item.Clone());
         }
     }
 }

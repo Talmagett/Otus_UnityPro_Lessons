@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 namespace Sample
 {
     //Нельзя менять!
-    [System.Serializable]
     public sealed class Character
     {
         public event Action OnStateChanged;
@@ -14,10 +13,11 @@ namespace Sample
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<string, int> stats;
 
+       /* Zenject создает этот, а я хочу создать с параметрами
         public Character()
         {
             this.stats = new Dictionary<string, int>();
-        }
+        }*/
 
         public Character(params KeyValuePair<string, int>[] stats)
         {

@@ -9,26 +9,16 @@ namespace Equipment
     [Serializable]
     public sealed class Equipment
     {
-        private readonly Character _character;
-        private readonly Inventory _inventory;
-
-        public Equipment(Character character, Inventory inventory)
-        {
-            _character = character;
-            _inventory = inventory;
-        }
-
-        public event Action<Item> OnItemAdded;
-        public event Action<Item> OnItemRemoved;
-        public event Action<Item> OnItemChanged;
+        private readonly Dictionary<EquipmentType, Item> _equipment=new ();
         
-        private Dictionary<EquipmentType, Item> _equipment;
+        public event Action<Item> OnItemEquipped;
+        public event Action<Item> OnItemUnequipped;
         
         public void Setup(params KeyValuePair<EquipmentType, Item>[] items)
         {
             foreach (var itemPair in items)
             {
-                AddItem(itemPair.Key,itemPair.Value);
+                EquipItem(itemPair.Key,itemPair.Value);
             }
         }
 
@@ -44,26 +34,25 @@ namespace Equipment
             return hasItem;
         }
 
-        public void RemoveItem(EquipmentType type, Item item)
+        public void UnequipItem(EquipmentType type, Item item)
         {
-            if (_equipment.ContainsKey(type))
-                _equipment.Remove(type);
-        }
-
-        public void AddItem(EquipmentType type, Item item)
-        {
-            if (_equipment.ContainsKey(type))
-                _equipment[type] = item;
+            if (!_equipment.ContainsKey(type)) return;
             
-            _equipment.Add(type,item);
+            _equipment.Remove(type);
+            OnItemUnequipped?.Invoke(item);
         }
 
-        public void ChangeItem(EquipmentType type, Item item)
+        public void EquipItem(EquipmentType type, Item item)
         {
             if (HasItem(type))
-                _equipment[type] = item;
+            {
+                UnequipItem(type,_equipment[type]);
+            }
+            
+            _equipment.Add(type,item);
+            OnItemEquipped?.Invoke(item);
         }
-
+        
         public bool HasItem(EquipmentType type)
         {
             return _equipment.ContainsKey(type);
