@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
+using System.Reflection;
 
 namespace Sample
 {
@@ -17,8 +18,20 @@ namespace Sample
         [Button]
         public void GetStats()
         {
-            Debug.ClearDeveloperConsole();
-            foreach (var (key, value) in _character.GetStats()) print($"{key} : {value}");
+            ClearLog();
+            string printer="";
+            foreach (var (key, value) in _character.GetStats()) 
+                printer+=($"{key} : {value} \n");
+            print(printer);
+        }
+        
+        //этот класс не должен находиться здесь, чисто ради дебага оставил, ибо лень )
+        private void ClearLog()
+        {
+            var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
+            var type = assembly.GetType("UnityEditor.LogEntries");
+            var method = type.GetMethod("Clear");
+            method.Invoke(new object(), null);
         }
     }
 }

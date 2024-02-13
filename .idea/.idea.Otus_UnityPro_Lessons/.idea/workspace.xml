@@ -4,26 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7caab1ae-47e8-4de3-a70f-8bb3074d5e2a" name="Changes" comment="added debugs, equipment, effector, tests">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Character/Character.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Character/Character.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Character/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Character/Character.cs" afterDir="false" />
+    <list default="true" id="7caab1ae-47e8-4de3-a70f-8bb3074d5e2a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Character/DebugCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Character/DebugCharacter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Character/Stats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Character/Stats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/DebugEquipment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/DebugEquipment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Equipment.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Equipment.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Equipment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Equipment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentEffector/EquipmentEffector.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentEffector/EquipmentEffector.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentEffector/EquipmentEffector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentEffector/EquipmentEffector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentItemConfigs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentItemConfigs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Item/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Item/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Item/ItemConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Item/ItemConfig.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +101,8 @@
       <workItem from="1707714234040" duration="416000" />
       <workItem from="1707715274474" duration="1725000" />
       <workItem from="1707726494804" duration="3256000" />
-      <workItem from="1707792809118" duration="5677000" />
+      <workItem from="1707792809118" duration="5784000" />
+      <workItem from="1707798930503" duration="343000" />
     </task>
     <task id="LOCAL-00001" summary="add zenject">
       <option name="closed" value="true" />
@@ -152,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707798178975</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="cleanup">
+      <option name="closed" value="true" />
+      <created>1707798629620</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1707798629620</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -164,6 +156,7 @@
     <MESSAGE value="added zenject" />
     <MESSAGE value="added some tests, debug" />
     <MESSAGE value="added debugs, equipment, effector, tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="added debugs, equipment, effector, tests" />
+    <MESSAGE value="cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
   </component>
 </project>
