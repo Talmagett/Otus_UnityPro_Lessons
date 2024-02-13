@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Sample
 {
-    [System.Serializable]
+    [Serializable]
     public class Stats
     {
         [field: SerializeField] public string Name { get; private set; }

@@ -8,44 +8,40 @@ namespace Sample
     //Нельзя менять!
     public sealed class Character
     {
-        public event Action OnStateChanged;
-        
-        [ShowInInspector, ReadOnly]
-        private readonly Dictionary<string, int> stats;
+        [ShowInInspector] [ReadOnly] private readonly Dictionary<string, int> stats;
 
-       /* Zenject создает этот, а я хочу создать с параметрами
-        public Character()
-        {
-            this.stats = new Dictionary<string, int>();
-        }*/
+        /* Zenject создает этот, а я хочу создать с параметрами
+         public Character()
+         {
+             this.stats = new Dictionary<string, int>();
+         }*/
 
         public Character(params KeyValuePair<string, int>[] stats)
         {
             this.stats = new Dictionary<string, int>(stats);
         }
 
+        public event Action OnStateChanged;
+
         public int GetStat(string name)
         {
-            return this.stats[name];
+            return stats[name];
         }
 
         public void SetStat(string name, int value)
         {
-            this.stats[name] = value;
-            this.OnStateChanged?.Invoke();
+            stats[name] = value;
+            OnStateChanged?.Invoke();
         }
 
         public void RemoveStat(string name, int value)
         {
-            if (this.stats.Remove(name))
-            {
-                this.OnStateChanged?.Invoke();
-            }
+            if (stats.Remove(name)) OnStateChanged?.Invoke();
         }
 
         public KeyValuePair<string, int>[] GetStats()
         {
-            return this.stats.ToArray();
+            return stats.ToArray();
         }
     }
 }

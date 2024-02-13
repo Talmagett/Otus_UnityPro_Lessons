@@ -1,4 +1,3 @@
-using Equipment;
 using UnityEngine;
 
 namespace Sample

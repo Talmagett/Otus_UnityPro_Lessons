@@ -7,16 +7,11 @@ namespace Sample
     [Serializable]
     public sealed class Item
     {
-        public string Name => this.name;
+        [SerializeField] private string name;
 
-        [SerializeField]
-        private string name;
+        [SerializeField] private ItemFlags flags;
 
-        [SerializeField]
-        private ItemFlags flags;
-
-        [SerializeReference]
-        private object[] components;
+        [SerializeReference] private object[] components;
 
         public Item(
             string name,
@@ -29,15 +24,13 @@ namespace Sample
             this.components = components;
         }
 
+        public string Name => name;
+
         public T GetComponent<T>()
         {
-            foreach (var component in this.components)
-            {
+            foreach (var component in components)
                 if (component is T tComponent)
-                {
                     return tComponent;
-                }
-            }
 
             throw new Exception($"Component of type {typeof(T).Name} is not found!");
         }
@@ -47,18 +40,15 @@ namespace Sample
             var count = this.components.Length;
             var components = new object[count];
 
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 var component = this.components[i];
-                if (component is ICloneable cloneable)
-                {
-                    component = cloneable.Clone();
-                }
+                if (component is ICloneable cloneable) component = cloneable.Clone();
 
                 components[i] = component;
             }
-            
-            return new Item(this.name, this.flags, components);
+
+            return new Item(name, flags, components);
         }
     }
 }

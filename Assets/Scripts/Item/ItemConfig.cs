@@ -9,7 +9,6 @@ namespace Sample
     )]
     public sealed class ItemConfig : ScriptableObject
     {
-        [SerializeField]
-        public Item item;
+        [SerializeField] public Item item;
     }
 }

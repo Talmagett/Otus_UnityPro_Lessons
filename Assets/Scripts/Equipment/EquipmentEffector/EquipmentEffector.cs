@@ -1,7 +1,6 @@
 using System;
-using Sample;
 
-namespace Equipment.EquipmentEffector
+namespace Sample
 {
     public class EquipmentEffector : IDisposable
     {
@@ -17,6 +16,12 @@ namespace Equipment.EquipmentEffector
             _equipment.OnItemUnequipped += RemoveEffectFromCharacter;
         }
 
+        public void Dispose()
+        {
+            _equipment.OnItemEquipped -= AddEffectToCharacter;
+            _equipment.OnItemUnequipped -= RemoveEffectFromCharacter;
+        }
+
         private void AddEffectToCharacter(Item obj)
         {
             var stat = obj.GetComponent<Stats>();
@@ -24,8 +29,8 @@ namespace Equipment.EquipmentEffector
                 return;
 
             var statValue = _character.GetStat(stat.Name);
-            
-            _character.SetStat(stat.Name,statValue+stat.Value);
+
+            _character.SetStat(stat.Name, statValue + stat.Value);
         }
 
         private void RemoveEffectFromCharacter(Item obj)
@@ -35,15 +40,8 @@ namespace Equipment.EquipmentEffector
                 return;
 
             var statValue = _character.GetStat(stat.Name);
-            
-            _character.SetStat(stat.Name,statValue-stat.Value);
-        }
 
-
-        public void Dispose()
-        {
-            _equipment.OnItemEquipped -= AddEffectToCharacter;
-            _equipment.OnItemUnequipped -= RemoveEffectFromCharacter;
+            _character.SetStat(stat.Name, statValue - stat.Value);
         }
     }
 }

@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using NUnit.Framework;
-using Sample;
 using UnityEngine;
 
-namespace Equipment.Tests
+namespace Sample
 {
     [TestFixture]
     public class EquipmentTests
@@ -10,18 +10,19 @@ namespace Equipment.Tests
         private Character _character;
         private Inventory _inventory;
         private Equipment _equipment;
-        private EquipmentEffector.EquipmentEffector _equipmentEffector;
+        private EquipmentEffector _equipmentEffector;
 
+        
         [SetUp]
         public void Init()
         {
             _character = new Character(
-                new("damage", 5), 
-                new("health", 20), 
-                new("speed", 10));
+                new KeyValuePair<string, int>("damage", 5),
+                new KeyValuePair<string, int>("health", 20),
+                new KeyValuePair<string, int>("speed", 10));
             _inventory = new Inventory();
             _equipment = new Equipment();
-            _equipmentEffector = new EquipmentEffector.EquipmentEffector(_character, _equipment);
+            _equipmentEffector = new EquipmentEffector(_character, _equipment);
         }
 
         [Test]
@@ -34,7 +35,7 @@ namespace Equipment.Tests
         [Test]
         public void WhenBootsAdded_CheckInventory()
         {
-            var windBoots = new Item("windBoots", ItemFlags.EQUPPABLE | ItemFlags.EFFECTIBLE, new Stats("speed",5));
+            var windBoots = new Item("windBoots", ItemFlags.EQUPPABLE | ItemFlags.EFFECTIBLE, new Stats("speed", 5));
             _inventory.AddItem(windBoots);
             Assert.AreEqual(1, _inventory.GetCount("windBoots"));
         }
@@ -84,12 +85,12 @@ namespace Equipment.Tests
         public void CheckStats()
         {
             if (!_inventory.FindItem("windBoots", out var item)) return;
-            
+
             Assert.AreEqual(10, _character.GetStat("speed"));
-            
+
             _equipment.EquipItem(EquipmentType.LEGS, item);
             Assert.AreEqual(15, _character.GetStat("speed"));
-            
+
             _equipment.UnequipItem(EquipmentType.LEGS, item);
             Assert.AreEqual(10, _character.GetStat("speed"));
         }

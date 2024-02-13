@@ -18,10 +18,7 @@ namespace Sample
         public void GetStats()
         {
             Debug.ClearDeveloperConsole();
-            foreach (var (key, value) in _character.GetStats())
-            {
-                print($"{key} : {value}");
-            }
+            foreach (var (key, value) in _character.GetStats()) print($"{key} : {value}");
         }
     }
 }
