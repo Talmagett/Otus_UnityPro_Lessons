@@ -1,0 +1,36 @@
+using System;
+using Lessons.Lesson14_ModuleMechanics;
+using UnityEngine;
+
+namespace Lessons.Lesson15_VisualMechanics.Visual
+{
+    public class CharacterVisual : MonoBehaviour
+    {
+        //Data
+        [SerializeField] private Character _character;
+        [SerializeField] private Animator _animator;
+        
+        // //Logic
+        // private AnimatorController _animatorController;
+        //
+        // private void Awake()
+        // {
+        //     _animatorController = new AnimatorController(_character.MoveDirection, _character.IsDead, _animator, _character.FireRequest);
+        // }
+        //
+        // private void OnEnable()
+        // {
+        //     _animatorController.OnEnable();
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     _animatorController.OnDisable();
+        // }
+        //
+        // public void Update()
+        // {
+        //     _animatorController.Update();
+        // }
+    }
+}
