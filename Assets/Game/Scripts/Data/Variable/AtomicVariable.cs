@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.Lesson14_ModuleMechanics
+namespace Data.Variable
 {
     [Serializable, InlineProperty]
     public class AtomicVariable<T> : IAtomicVariable<T>

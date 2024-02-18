@@ -1,6 +1,4 @@
-using System;
-
-namespace Lessons.Lesson14_ModuleMechanics
+namespace Data.Event
 {
     public interface IAtomicAction
     {

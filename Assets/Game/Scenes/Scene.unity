@@ -289,6 +289,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91941558}
   m_CullTransparentMesh: 1
+--- !u!1 &146242974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146242975}
+  - component: {fileID: 146242976}
+  - component: {fileID: 146242977}
+  - component: {fileID: 146242978}
+  m_Layer: 0
+  m_Name: CharacterController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &146242975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146242974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 628485767}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &146242976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146242974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d550bec26094091bcfd3af8862d28f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 625937922}
+--- !u!114 &146242977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146242974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1404c10a4b4acd9b29fa8860364a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 625937922}
+--- !u!114 &146242978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146242974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020788e0c2ed4a8ab529514c99d26cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 625937922}
 --- !u!1001 &236932029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 7964997623459932075, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7964997623459932075, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
@@ -607,11 +680,25 @@ MonoBehaviour:
   IsDead:
     _value: 0
   Speed:
-    _value: 0
+    _value: 5
   CanMove:
-    _value: 0
-  FirePoint: {fileID: 0}
-  BulletPrefab: {fileID: 0}
+    _value: 1
+  FirePoint: {fileID: 1114354567}
+  BulletPrefab: {fileID: 7024305337996404995, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
+    type: 3}
+--- !u!114 &625937922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625937917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b17ddf35724ded85dcd711d9e7d66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 625937919}
 --- !u!1 &628485765
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +739,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 146242975}
   m_Father: {fileID: 1426773144}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -760,6 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1060751499}
   - component: {fileID: 1060751498}
+  - component: {fileID: 1060751500}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -825,6 +914,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
+--- !u!114 &1060751500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060751495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5feb8de59f034e209ef6babbfc28c4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 625937922}
+  followOffset: {x: 0, y: 0, z: -2}
+  followSpeed: 3
+--- !u!4 &1114354567 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1067890634428359185, guid: 3b5b2ae0f895574449961910366cbf8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 625937915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1125839404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,37 +1113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1280505816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1280505817}
-  m_Layer: 0
-  m_Name: InputInstaller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1280505817
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280505816}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1426773144}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1366530278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1208,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 628485767}
-  - {fileID: 1280505817}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

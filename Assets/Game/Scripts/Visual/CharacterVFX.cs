@@ -1,7 +1,7 @@
-using Lessons.Lesson14_ModuleMechanics;
+using Model;
 using UnityEngine;
 
-namespace Lessons.Lesson15_VisualMechanics.Visual
+namespace Visual
 {
     public class CharacterVFX : MonoBehaviour
     {

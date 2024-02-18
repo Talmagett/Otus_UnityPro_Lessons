@@ -1,4 +1,6 @@
-namespace Lessons.Lesson14_ModuleMechanics
+using Data.Variable;
+
+namespace Logic
 {
     public class CanMoveMechanics
     {

@@ -1,7 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 
-namespace Lessons.Lesson14_ModuleMechanics
+namespace Data.Event
 {
     [Serializable, InlineProperty]
     public sealed class AtomicEvent : IAtomicEvent

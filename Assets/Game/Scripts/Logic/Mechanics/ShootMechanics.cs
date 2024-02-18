@@ -1,7 +1,8 @@
-using Lessons.Lesson14_ModuleMechanics;
+using Data.Event;
+using Model;
 using UnityEngine;
 
-namespace Lessons.Lesson15_VisualMechanics.Mechanics
+namespace Logic.Mechanics
 {
     public class ShootMechanics
     {

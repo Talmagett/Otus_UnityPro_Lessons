@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Lessons.Lesson15_VisualMechanics
+namespace Entity.Components
 {
-    public interface IMoveable
+    public interface IComponent_Move
     {
         void Move(Vector3 moveDirection);
     }

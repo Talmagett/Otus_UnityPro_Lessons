@@ -1,6 +1,9 @@
+using Data.Event;
+using Data.Variable;
+using Logic;
 using UnityEngine;
 
-namespace Lessons.Lesson14_ModuleMechanics
+namespace Model
 {
     public class Bullet : MonoBehaviour
     {

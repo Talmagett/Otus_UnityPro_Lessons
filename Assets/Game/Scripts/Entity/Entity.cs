@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lessons.Lesson16_AtomicComponents.Entity
+namespace Entity
 {
     public class Entity : MonoBehaviour
     {

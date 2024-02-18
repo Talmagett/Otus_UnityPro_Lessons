@@ -1,6 +1,6 @@
 using System;
 
-namespace Lessons.Lesson14_ModuleMechanics
+namespace Data.Variable
 {
     public interface IAtomicVariable<T> : IAtomicValue<T>
     {

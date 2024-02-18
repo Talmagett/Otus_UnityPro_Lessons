@@ -1,8 +1,8 @@
-using System;
-using Lessons.Lesson14_ModuleMechanics;
+using Data.Event;
+using Data.Variable;
 using UnityEngine;
 
-namespace Lessons.Lesson15_VisualMechanics.Visual
+namespace Visual
 {
     public class AnimatorController
     {

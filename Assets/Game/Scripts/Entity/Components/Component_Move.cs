@@ -1,13 +1,13 @@
-using Lessons.Lesson14_ModuleMechanics;
+using Data.Event;
 using UnityEngine;
 
-namespace Lessons.Lesson16_AtomicComponents.Entity
+namespace Entity.Components
 {
-    public class MoveComponent : IMoveComponent
+    public class Component_Move : IComponent_Move
     {
         private readonly IAtomicAction<Vector3> _moved;
 
-        public MoveComponent(IAtomicAction<Vector3> moved)
+        public Component_Move(IAtomicAction<Vector3> moved)
         {
             _moved = moved;
         }

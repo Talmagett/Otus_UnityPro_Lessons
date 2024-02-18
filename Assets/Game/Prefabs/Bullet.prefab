@@ -160,12 +160,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed:
-    _value: 5
+    _value: 20
   MoveDirection:
     _value: {x: 0, y: 0, z: 1}
   CanMove:
     _value: 1
   Damage:
-    _value: 5
+    _value: 1
   LifeTime:
-    _value: 5
+    _value: 3

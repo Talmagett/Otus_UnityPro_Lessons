@@ -1,9 +1,11 @@
-using Lessons.Lesson15_VisualMechanics;
-using Lessons.Lesson15_VisualMechanics.Mechanics;
-using Lessons.Lesson16_AtomicComponents;
+using Data.Event;
+using Data.Variable;
+using Logic;
+using Logic.Mechanics;
+using Scripts;
 using UnityEngine;
 
-namespace Lessons.Lesson14_ModuleMechanics
+namespace Model
 {
     public class Character : MonoBehaviour
     {
@@ -19,6 +21,8 @@ namespace Lessons.Lesson14_ModuleMechanics
 
         public AtomicVariable<bool> CanMove;
 
+        public AtomicEvent<Vector3> Rotated;
+        
         [Header("Shoot")] 
         public AtomicEvent FireRequest;
         public AtomicEvent FireEvent;
@@ -39,7 +43,7 @@ namespace Lessons.Lesson14_ModuleMechanics
             _deathMechanics = new DeathMechanics(IsDead, Death);
             _movementMechanicsV2 = new MovementMechanicsV2(Speed, Moved, transform);
             _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
-            _rotateMechanicsV2 = new RotateMechanicsV2(Moved, transform);
+            _rotateMechanicsV2 = new RotateMechanicsV2(Rotated, transform);
             _shootMechanics = new ShootMechanics(FireEvent, FirePoint, BulletPrefab, transform);
         }
 

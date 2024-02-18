@@ -1,31 +1,35 @@
-using Lessons.Lesson14_ModuleMechanics;
+using Data.Event;
+using Data.Variable;
 using UnityEngine;
 
-public class TeleportMechanics
+namespace Scripts
 {
-    private readonly AtomicVariable<float> _speed;
-    private readonly AtomicEvent<Vector3> _teleported;
-    private readonly Transform _transform;
-
-    public TeleportMechanics(AtomicVariable<float> speed, AtomicEvent<Vector3> teleported, Transform transform)
+    public class TeleportMechanics
     {
-        _transform = transform;
-        _speed = speed;
-        _teleported = teleported;
-    }
+        private readonly AtomicVariable<float> _speed;
+        private readonly AtomicEvent<Vector3> _teleported;
+        private readonly Transform _transform;
 
-    public void OnEnable()
-    {
-        _teleported.Subscribe(OnTeleported);
-    }
+        public TeleportMechanics(AtomicVariable<float> speed, AtomicEvent<Vector3> teleported, Transform transform)
+        {
+            _transform = transform;
+            _speed = speed;
+            _teleported = teleported;
+        }
 
-    public void OnDisable()
-    {
-        _teleported.Unsubscribe(OnTeleported);
-    }
+        public void OnEnable()
+        {
+            _teleported.Subscribe(OnTeleported);
+        }
 
-    private void OnTeleported(Vector3 direction)
-    {
-        _transform.position = direction * _speed.Value * Time.deltaTime;
+        public void OnDisable()
+        {
+            _teleported.Unsubscribe(OnTeleported);
+        }
+
+        private void OnTeleported(Vector3 direction)
+        {
+            _transform.position = direction * _speed.Value * Time.deltaTime;
+        }
     }
 }

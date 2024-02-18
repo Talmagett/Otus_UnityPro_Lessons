@@ -1,7 +1,8 @@
-using Lessons.Lesson14_ModuleMechanics;
+using Data.Event;
+using Data.Variable;
 using UnityEngine;
 
-namespace Lessons.Lesson16_AtomicComponents
+namespace Scripts
 {
     public class MovementMechanicsV2
     {
