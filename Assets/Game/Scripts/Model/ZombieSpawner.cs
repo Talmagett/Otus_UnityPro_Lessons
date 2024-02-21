@@ -17,10 +17,18 @@ namespace Model
         
         private TimerMechanics _timerMechanics;
         private SpawnMechanics _spawnMechanics;
+
+        private DiContainer _diContainer;
+        
+        [Inject]
+        public void Construct(DiContainer diContainer)
+        {
+            _diContainer = diContainer;
+        }
         private void Awake()
         {
             _timerMechanics = new TimerMechanics(SpawnTimer,SpawnCooldown,CanSpawn);
-            _spawnMechanics = new SpawnMechanics(zombiePrefab,zombieParent,CanSpawn);
+            _spawnMechanics = new SpawnMechanics(zombiePrefab,zombieParent,CanSpawn,_diContainer);
         }
 
         private void OnEnable()
@@ -36,10 +44,7 @@ namespace Model
         private void Update()
         {
             _timerMechanics.Update();
-            /*if(!CanSpawn.Value)
-                DiContainer.Instantiate(_spawningObject, randPos, Quaternion.identity, _parent);
-*/
-            //_spawnMechanics.Update();
+            _spawnMechanics.Update();
         }
     }
 }
