@@ -2,7 +2,7 @@ using Data.Event;
 using Data.Variable;
 using UnityEngine;
 
-namespace Scripts
+namespace Logic.Mechanics
 {
     public class TeleportMechanics
     {

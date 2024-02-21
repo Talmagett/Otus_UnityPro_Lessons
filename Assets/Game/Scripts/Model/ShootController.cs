@@ -1,5 +1,3 @@
-using System;
-using Data.Event;
 using Entity.Components;
 using Systems;
 using UnityEngine;
@@ -10,19 +8,13 @@ namespace Model
     public class ShootController : MonoBehaviour
     {
         [SerializeField] private Entity.Entity entity;
+        private IComponent_Shoot _componentShoot;
 
         private InputSystem _inputSystem;
-        private IComponent_Shoot _componentShoot;
 
         private void Start()
         {
             entity.TryComponent(out _componentShoot);
-        }
-
-        [Inject]
-        public void Construct(InputSystem inputSystem)
-        {
-            _inputSystem = inputSystem;
         }
 
         private void OnEnable()
@@ -33,6 +25,12 @@ namespace Model
         private void OnDisable()
         {
             _inputSystem.OnShootEvent -= ShootRequest;
+        }
+
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
         }
 
         private void ShootRequest()

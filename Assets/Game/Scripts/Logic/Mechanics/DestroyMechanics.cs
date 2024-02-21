@@ -1,7 +1,7 @@
 using Data.Event;
 using UnityEngine;
 
-namespace Logic
+namespace Logic.Mechanics
 {
     public class DestroyMechanics
     {

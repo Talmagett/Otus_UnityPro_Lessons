@@ -1,9 +1,9 @@
 using Data.Event;
 using Data.Variable;
-using Model;
+using Entity.Components;
 using UnityEngine;
 
-namespace Logic
+namespace Logic.Mechanics
 {
     public class BulletCollisionMechanics
     {
@@ -18,12 +18,13 @@ namespace Logic
 
         public void OnTriggerEnter(Collider collider)
         {
-            if (collider.TryGetComponent(out Character character))
-            {
-                Debug.Log("Take Damage = " + _damage.Value);
-                character.TakeDamage.Invoke(_damage.Value);
-                _death.Invoke();
-            }
+            if (!collider.TryGetComponent(out Entity.Entity entity)) return;
+
+            if (!entity.TryComponent(out IComponent_Damagable damagable)) return;
+            
+            Debug.Log("Take Damage = " + _damage.Value);
+            damagable.TakeDamage(_damage.Value);
+            _death.Invoke();
         }
     }
 }

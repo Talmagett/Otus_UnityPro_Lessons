@@ -1,6 +1,6 @@
 using Data.Variable;
 
-namespace Logic
+namespace Logic.Mechanics
 {
     public class CanMoveMechanics
     {

@@ -1,6 +1,7 @@
 using Data.Event;
 using Data.Variable;
 using Logic;
+using Logic.Mechanics;
 using UnityEngine;
 
 namespace Model
@@ -16,19 +17,25 @@ namespace Model
         public AtomicVariable<int> Damage;
         public AtomicVariable<float> LifeTime;
         public AtomicEvent Death;
+        private BulletCollisionMechanics _bulletCollisionMechanics;
+        private DestroyMechanics _destroyMechanics;
+        private LifeTimeMechanics _lifeTimeMechanics;
 
         //Logic:
         private MovementMechanics _movementMechanics;
-        private BulletCollisionMechanics _bulletCollisionMechanics;
-        private LifeTimeMechanics _lifeTimeMechanics;
-        private DestroyMechanics _destroyMechanics;
-        
+
         private void Awake()
         {
             _movementMechanics = new MovementMechanics(Speed, MoveDirection, transform, CanMove);
             _bulletCollisionMechanics = new BulletCollisionMechanics(Damage, Death);
             _lifeTimeMechanics = new LifeTimeMechanics(LifeTime, Death);
             _destroyMechanics = new DestroyMechanics(Death, gameObject);
+        }
+
+        private void Update()
+        {
+            _movementMechanics.Update();
+            _lifeTimeMechanics.Update();
         }
 
         private void OnEnable()
@@ -39,12 +46,6 @@ namespace Model
         private void OnDisable()
         {
             _destroyMechanics.OnDisable();
-        }
-
-        private void Update()
-        {
-            _movementMechanics.Update();
-            _lifeTimeMechanics.Update();
         }
 
         private void OnTriggerEnter(Collider other)

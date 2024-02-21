@@ -1,4 +1,3 @@
-using System;
 using Entity.Components;
 using Systems;
 using UnityEngine;
@@ -9,15 +8,9 @@ namespace Model
     public class MoveController : MonoBehaviour
     {
         [SerializeField] private Entity.Entity entity;
+        private IComponent_Move _componentMove;
 
         private InputSystem _inputSystem;
-        private IComponent_Move _componentMove;
-        
-        [Inject]
-        public void Construct(InputSystem inputSystem)
-        {
-            _inputSystem = inputSystem;
-        }
 
         private void Start()
         {
@@ -26,10 +19,16 @@ namespace Model
 
         private void Update()
         {
-            if (_inputSystem.MoveDirection == Vector3.zero) 
+            if (_inputSystem.MoveDirection == Vector3.zero)
                 return;
-            
+
             _componentMove.Move(_inputSystem.MoveDirection);
+        }
+
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Visual
 {
-    public class AnimatorController
+    public class CharacterAnimatorController
     {
         private static readonly int MainState = Animator.StringToHash("MainState");
         private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
@@ -13,19 +13,19 @@ namespace Visual
         private const int Move = 1;
         private const int Death = 2;
         
-        private readonly IAtomicValue<Vector3> _moveDirection;
+        private readonly AtomicEvent<Vector3> _onMoved;
         private readonly IAtomicValue<bool> _isDead;
         private readonly Animator _animator;
         private readonly AtomicEvent _fireRequest;
 
-        public AnimatorController(
-            IAtomicValue<Vector3> moveDirection,
+        public CharacterAnimatorController(
+            AtomicEvent<Vector3> onMoved,
             IAtomicValue<bool> isDead,
             Animator animator,
             AtomicEvent fireRequest
             )
         {
-            _moveDirection = moveDirection;
+            _onMoved = onMoved;
             _isDead = isDead;
             _animator = animator;
             _fireRequest = fireRequest;
@@ -34,6 +34,7 @@ namespace Visual
         public void OnEnable()
         {
             _fireRequest.Subscribe(OnFireRequested);
+            //_onMoved.Subscribe();
         }
 
         public void OnDisable()
@@ -58,10 +59,10 @@ namespace Visual
                 return Death;
             }
 
-            if (_moveDirection.Value != Vector3.zero)
+            /*if (_onMoved != Vector3.zero)
             {
                 return Move;
-            }
+            }*/
 
             return IDLE;
         }

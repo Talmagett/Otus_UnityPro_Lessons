@@ -1,12 +1,14 @@
 using Data.Event;
 using Data.Variable;
+using Entity;
 using Logic;
 using Logic.Mechanics;
 using UnityEngine;
+using Zenject;
 
 namespace Model
 {
-    public class Character : MonoBehaviour
+    public class Zombie : MonoBehaviour
     {
         //Data:
         public AtomicVariable<int> HitPoints;
@@ -15,58 +17,58 @@ namespace Model
         public AtomicVariable<bool> IsDead;
         public AtomicEvent Death;
 
-        public AtomicEvent<Vector3> Moved;
         public AtomicVariable<float> Speed;
 
         public AtomicVariable<bool> CanMove;
 
-        public AtomicEvent<Vector3> Rotated;
-
-        [Header("Shoot")] public AtomicEvent FireRequest;
-
-        public AtomicEvent FireEvent;
-        public Transform FirePoint;
-        public Bullet BulletPrefab;
         private CanMoveMechanics _canMoveMechanics;
         private DeathMechanics _deathMechanics;
-        private MovementMechanicsV2 _movementMechanicsV2;
-        private RotateMechanicsV2 _rotateMechanicsV2;
-        private ShootMechanics _shootMechanics;
+        private DestroyMechanics _destroyMechanics;
+        private MoveToTargetMechanics _moveToTargetMechanics;
+        private RotateToMechanics _rotateMechanics;
 
+        [Header("Shoot")]
+        public AtomicEvent AttackEvent;
+        
         //Logic:
         private TakeDamageMechanics _takeDamageMechanics;
 
+        private CharacterEntity _characterEntity;
+        [Inject]
+        public void Construct(CharacterEntity characterEntity)
+        {
+            _characterEntity = characterEntity;
+        }
+        
         private void Awake()
         {
             _takeDamageMechanics = new TakeDamageMechanics(HitPoints, TakeDamage, Death);
             _deathMechanics = new DeathMechanics(IsDead, Death);
-            _movementMechanicsV2 = new MovementMechanicsV2(Speed, Moved, transform);
+            _destroyMechanics = new DestroyMechanics(Death, gameObject);
+            _moveToTargetMechanics = new MoveToTargetMechanics(Speed,transform,_characterEntity.transform, CanMove);
+            _rotateMechanics = new RotateToMechanics(transform,_characterEntity.transform,CanMove);
             _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
-            _rotateMechanicsV2 = new RotateMechanicsV2(Rotated, transform);
-            _shootMechanics = new ShootMechanics(FireEvent, FirePoint, BulletPrefab, transform);
         }
 
         private void Update()
         {
             _canMoveMechanics.Update();
+            _moveToTargetMechanics.Update();
+            _rotateMechanics.Update();
         }
 
         private void OnEnable()
         {
             _takeDamageMechanics.OnEnable();
             _deathMechanics.OnEnable();
-            _shootMechanics.OnEnable();
-            _movementMechanicsV2.OnEnable();
-            _rotateMechanicsV2.OnEnable();
+            _destroyMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
-            _movementMechanicsV2.OnDisable();
-            _rotateMechanicsV2.OnDisable();
             _takeDamageMechanics.OnDisable();
             _deathMechanics.OnDisable();
-            _shootMechanics.OnDisable();
+            _destroyMechanics.OnDisable();
         }
     }
 }

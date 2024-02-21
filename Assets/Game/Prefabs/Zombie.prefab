@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1437866824843364363}
+  - component: {fileID: 2455282153396891766}
   m_Layer: 0
   m_Name: '[VFX]'
   m_TagString: Untagged
@@ -64,6 +65,20 @@ Transform:
   m_Father: {fileID: 7964997623459932075}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2455282153396891766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5504973204458953652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8811515dbb394ac5ab5598cf27f181c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombie: {fileID: 414668343390717389}
+  attackVfx: {fileID: 1696610920232104273}
 --- !u!1 &5879414446769212800
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,6 +90,8 @@ GameObject:
   - component: {fileID: 7964997623459932075}
   - component: {fileID: 354380326650615950}
   - component: {fileID: 6486345383869258}
+  - component: {fileID: 414668343390717389}
+  - component: {fileID: 9019755438928712382}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -129,6 +146,39 @@ CapsuleCollider:
   m_Height: 2.4435
   m_Direction: 1
   m_Center: {x: 0, y: 1.27, z: 0}
+--- !u!114 &414668343390717389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879414446769212800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9f2dc2d5694fa581171aeb263862c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoints:
+    _value: 1
+  IsDead:
+    _value: 0
+  Speed:
+    _value: 3
+  CanMove:
+    _value: 1
+--- !u!114 &9019755438928712382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879414446769212800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879ca91093504f22b1669183a0d3650f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombie: {fileID: 414668343390717389}
 --- !u!1001 &1696610920246370783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,6 +272,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bf0b90e6d2294a4c8186ac5febf7653, type: 3}
+--- !u!198 &1696610920232104273 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19845262, guid: 9bf0b90e6d2294a4c8186ac5febf7653,
+    type: 3}
+  m_PrefabInstance: {fileID: 1696610920246370783}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1696610920246208439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 493160, guid: 9bf0b90e6d2294a4c8186ac5febf7653,

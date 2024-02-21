@@ -1,7 +1,7 @@
 using Data.Event;
 using UnityEngine;
 
-namespace Scripts
+namespace Logic.Mechanics
 {
     public class RotateMechanicsV2
     {

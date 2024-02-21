@@ -5,13 +5,13 @@ namespace Visual
 {
     public class AnimatorDispatcher : MonoBehaviour
     {
-        [SerializeField] private Character _character;
+        [SerializeField] private Character character;
         
         public void ReceiveEvent(string value)
         {
             if (value == "shoot")
             {
-                _character.FireEvent.Invoke(); 
+                character.FireEvent.Invoke(); 
             }
         }
     }

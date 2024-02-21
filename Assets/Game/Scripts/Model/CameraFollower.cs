@@ -7,9 +7,9 @@ namespace Model
     {
         [SerializeField] private Entity.Entity entity;
         [SerializeField] private Vector3 followOffset;
-        
+
         [SerializeField] private float followSpeed;
-        
+
         private IComponent_Position _componentPosition;
 
         private void Start()
@@ -22,7 +22,7 @@ namespace Model
             var targetPos = _componentPosition.GetPosition();
             targetPos.y = transform.position.y;
             targetPos += followOffset;
-            transform.position = Vector3.Lerp(transform.position, targetPos,followSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed * Time.deltaTime);
         }
     }
 }

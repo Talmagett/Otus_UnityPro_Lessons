@@ -2,7 +2,7 @@ using Data.Event;
 using Data.Variable;
 using UnityEngine;
 
-namespace Logic
+namespace Logic.Mechanics
 {
     public class DeathMechanics
     {

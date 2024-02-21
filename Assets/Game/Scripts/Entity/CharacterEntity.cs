@@ -11,7 +11,7 @@ namespace Entity
         private void Awake()
         {
             Add(new Component_Health(character.HitPoints));
-            
+            Add(new Component_Damagable(character.TakeDamage));
             Add(new Component_Move(character.Moved));
             Add(new Component_Position(transform));
             Add(new Component_Rotation(character.Rotated));

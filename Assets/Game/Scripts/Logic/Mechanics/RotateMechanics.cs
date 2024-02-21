@@ -1,18 +1,16 @@
 using Data.Variable;
 using UnityEngine;
 
-namespace Logic
+namespace Logic.Mechanics
 {
-    public class MovementMechanics
+    public class RotateMechanics
     {
-        private readonly IAtomicValue<float> _speed;
         private readonly IAtomicValue<Vector3> _moveDirection;
         private readonly Transform _target;
         private readonly IAtomicValue<bool> _canMove;
 
-        public MovementMechanics(IAtomicValue<float> speed, IAtomicValue<Vector3> moveDirection, Transform target, IAtomicValue<bool> canMove)
+        public RotateMechanics(IAtomicValue<Vector3> moveDirection, Transform target, IAtomicValue<bool> canMove)
         {
-            _speed = speed;
             _moveDirection = moveDirection;
             _target = target;
             _canMove = canMove;
@@ -24,8 +22,14 @@ namespace Logic
             {
                 return;
             }
+
+            if (_moveDirection.Value == Vector3.zero)
+            {
+                return;
+            }
             
-            _target.position += _moveDirection.Value * _speed.Value * Time.deltaTime;
+            var rotation = Quaternion.LookRotation(_moveDirection.Value);
+            _target.rotation = Quaternion.Lerp(_target.rotation, rotation, Time.deltaTime * 50f);
         }
     }
 }
