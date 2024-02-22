@@ -15,15 +15,21 @@ namespace Sample
         }
 
         [Button]
-        public void EquipItem(EquipmentItemConfigs equipmentItemConfigs)
+        public void EquipItem(ItemConfig itemConfig)
         {
-            _equipment.EquipItem(equipmentItemConfigs.EquipmentType, equipmentItemConfigs.ItemConfig.item.Clone());
+            var item = itemConfig.item.Clone();
+            var equipmentType = item.GetComponent<EquipmentTypeComponent>();
+
+            _equipment.EquipItem(equipmentType.Type,item);
         }
 
         [Button]
-        public void UnequipItem(EquipmentItemConfigs equipmentItemConfigs)
+        public void UnequipItem(ItemConfig itemConfig)
         {
-            _equipment.UnequipItem(equipmentItemConfigs.EquipmentType, equipmentItemConfigs.ItemConfig.item.Clone());
+            var item = itemConfig.item.Clone();
+            var equipmentType = item.GetComponent<EquipmentTypeComponent>();
+            
+            _equipment.UnequipItem(equipmentType.Type,item);
         }
     }
 }

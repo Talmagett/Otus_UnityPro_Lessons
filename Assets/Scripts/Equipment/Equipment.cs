@@ -54,5 +54,17 @@ namespace Sample
         {
             return _equipment.Select(item => new KeyValuePair<EquipmentType, Item>(item.Key, item.Value)).ToArray();
         }
+
+        public void EquipItem(Item item)
+        {
+            var equipmentType = item.GetComponent<EquipmentTypeComponent>();
+            EquipItem(equipmentType.Type, item);
+        }
+
+        public void UnequipItem(Item item)
+        {
+            var equipmentType = item.GetComponent<EquipmentTypeComponent>();
+            UnequipItem(equipmentType.Type, item);
+        }
     }
 }

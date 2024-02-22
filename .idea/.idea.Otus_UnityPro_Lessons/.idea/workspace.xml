@@ -5,8 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7caab1ae-47e8-4de3-a70f-8bb3074d5e2a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentTypeComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentTypeComponent.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Character/DebugCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Character/DebugCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/BladeMail.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/BladeMail.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/FireSword.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/FireSword.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/Helmet.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/Helmet.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/Shield.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/Shield.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/WindBoots.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Equipment/WindBoots.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Items/BladeMail.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameResources/Items/BladeMail.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Items/FireSword.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameResources/Items/FireSword.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Items/Helmet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameResources/Items/Helmet.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Items/Shield.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameResources/Items/Shield.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GameResources/Items/Wind Boots.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GameResources/Items/Wind Boots.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/DebugEquipment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/DebugEquipment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Equipment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Equipment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentItemConfigs.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/EquipmentItemConfigs.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +126,7 @@
       <workItem from="1707726494804" duration="3256000" />
       <workItem from="1707792809118" duration="5784000" />
       <workItem from="1707798930503" duration="343000" />
+      <workItem from="1708586880542" duration="2451000" />
     </task>
     <task id="LOCAL-00001" summary="add zenject">
       <option name="closed" value="true" />

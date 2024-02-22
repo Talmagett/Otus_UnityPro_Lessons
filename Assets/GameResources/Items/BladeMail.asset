@@ -17,6 +17,7 @@ MonoBehaviour:
     flags: 12
     components:
     - rid: 3036138930305236993
+    - rid: 3036139138972909568
   references:
     version: 2
     RefIds:
@@ -25,3 +26,7 @@ MonoBehaviour:
       data:
         <Name>k__BackingField: health
         <Value>k__BackingField: 40
+    - rid: 3036139138972909568
+      type: {class: EquipmentTypeComponent, ns: Sample, asm: Equipment}
+      data:
+        <Type>k__BackingField: 1

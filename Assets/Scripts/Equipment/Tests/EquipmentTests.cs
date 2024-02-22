@@ -11,7 +11,6 @@ namespace Sample
         private Inventory _inventory;
         private Equipment _equipment;
         private EquipmentEffector _equipmentEffector;
-
         
         [SetUp]
         public void Init()
@@ -35,7 +34,10 @@ namespace Sample
         [Test]
         public void WhenBootsAdded_CheckInventory()
         {
-            var windBoots = new Item("windBoots", ItemFlags.EQUPPABLE | ItemFlags.EFFECTIBLE, new Stats("speed", 5));
+            var windBoots = new Item("windBoots", ItemFlags.EQUPPABLE | ItemFlags.EFFECTIBLE,
+                new Stats("speed", 5),
+                    new EquipmentTypeComponent(EquipmentType.LEGS)
+                );
             _inventory.AddItem(windBoots);
             Assert.AreEqual(1, _inventory.GetCount("windBoots"));
         }
@@ -45,7 +47,7 @@ namespace Sample
         {
             if (!_inventory.FindItem("windBoots", out var item)) return;
 
-            _equipment.EquipItem(EquipmentType.LEGS, item);
+            _equipment.EquipItem(item);
             Assert.AreEqual(1, _equipment.HasItem(EquipmentType.LEGS));
         }
 
@@ -54,7 +56,7 @@ namespace Sample
         {
             if (!_inventory.FindItem("windBoots", out var item)) return;
 
-            _equipment.UnequipItem(EquipmentType.LEGS, item);
+            _equipment.UnequipItem(item);
             Assert.AreEqual(0, _equipment.HasItem(EquipmentType.LEGS));
         }
 
@@ -63,10 +65,10 @@ namespace Sample
         {
             if (!_inventory.FindItem("windBoots", out var item)) return;
 
-            _equipment.EquipItem(EquipmentType.LEGS, item);
+            _equipment.EquipItem(item);
             Assert.AreEqual(1, _equipment.HasItem(EquipmentType.LEGS));
 
-            _equipment.UnequipItem(EquipmentType.LEGS, item);
+            _equipment.UnequipItem(item);
             Assert.AreEqual(0, _equipment.HasItem(EquipmentType.LEGS));
         }
 
@@ -75,9 +77,9 @@ namespace Sample
         {
             if (!_inventory.FindItem("windBoots", out var item)) return;
 
-            _equipment.EquipItem(EquipmentType.LEGS, item);
+            _equipment.EquipItem(item);
 
-            _equipment.EquipItem(EquipmentType.LEGS, item);
+            _equipment.EquipItem(item);
             Assert.AreEqual(1, _equipment.HasItem(EquipmentType.LEGS));
         }
 
@@ -88,10 +90,10 @@ namespace Sample
 
             Assert.AreEqual(10, _character.GetStat("speed"));
 
-            _equipment.EquipItem(EquipmentType.LEGS, item);
+            _equipment.EquipItem(item);
             Assert.AreEqual(15, _character.GetStat("speed"));
 
-            _equipment.UnequipItem(EquipmentType.LEGS, item);
+            _equipment.UnequipItem(item);
             Assert.AreEqual(10, _character.GetStat("speed"));
         }
     }
