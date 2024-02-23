@@ -7,7 +7,7 @@ namespace Data.Variable
         T Value { get; }
     }
 
-    class AtomicValue<T> : IAtomicValue<T>
+    public class AtomicValue<T> : IAtomicValue<T>
     {
         public T Value => _function.Invoke();
         

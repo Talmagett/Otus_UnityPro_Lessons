@@ -17,24 +17,37 @@ namespace Model
 
         public AtomicEvent<Vector3> Moved;
         public AtomicVariable<float> Speed;
-
         public AtomicVariable<bool> CanMove;
-
         public AtomicEvent<Vector3> Rotated;
 
-        [Header("Shoot")] public AtomicEvent FireRequest;
-
+        [Header("Shoot")] 
+        
+        public AtomicEvent FireRequest;
+        
+        public AtomicVariable<int> BulletsCount;
+        public AtomicVariable<int> BulletsMaxCount;
+        public AtomicVariable<bool> CanShoot;
+        
+        public AtomicVariable<float> RefillTimer;
+        public AtomicVariable<float> RefillMaxTime;
+        public AtomicVariable<bool> OnRefilled; 
+            
         public AtomicEvent FireEvent;
         public Transform FirePoint;
         public Bullet BulletPrefab;
+        
+        //Logic:
+        private TakeDamageMechanics _takeDamageMechanics;
         private CanMoveMechanics _canMoveMechanics;
         private DeathMechanics _deathMechanics;
         private MovementMechanicsV2 _movementMechanicsV2;
         private RotateMechanicsV2 _rotateMechanicsV2;
-        private ShootMechanics _shootMechanics;
 
-        //Logic:
-        private TakeDamageMechanics _takeDamageMechanics;
+        private TimerMechanics _refillTimerMechanics;
+        private AmmoRefillMechanics _ammoRefillMechanics;
+        private CanShootMechanics _canShootMechanics;
+        private ShootMechanics _shootMechanics;
+        private AmmoMechanics _ammoMechanics;
 
         private void Awake()
         {
@@ -43,12 +56,20 @@ namespace Model
             _movementMechanicsV2 = new MovementMechanicsV2(Speed, Moved, transform);
             _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
             _rotateMechanicsV2 = new RotateMechanicsV2(Rotated, transform);
+
+            _refillTimerMechanics = new TimerMechanics(RefillTimer,RefillMaxTime,OnRefilled);
+            _ammoRefillMechanics = new AmmoRefillMechanics(BulletsCount,BulletsMaxCount,OnRefilled);
+            _canShootMechanics = new CanShootMechanics(BulletsCount,CanShoot);
+            _ammoMechanics = new AmmoMechanics(FireRequest, BulletsCount, CanShoot,FireEvent);
             _shootMechanics = new ShootMechanics(FireEvent, FirePoint, BulletPrefab, transform);
         }
 
         private void Update()
         {
             _canMoveMechanics.Update();
+            _refillTimerMechanics.Update();
+            _ammoRefillMechanics.Update();
+            _canShootMechanics.Update();
         }
 
         private void OnEnable()
@@ -58,6 +79,8 @@ namespace Model
             _shootMechanics.OnEnable();
             _movementMechanicsV2.OnEnable();
             _rotateMechanicsV2.OnEnable();
+            _ammoMechanics.OnEnable();
+            _refillTimerMechanics.OnEnable();
         }
 
         private void OnDisable()
@@ -67,6 +90,8 @@ namespace Model
             _takeDamageMechanics.OnDisable();
             _deathMechanics.OnDisable();
             _shootMechanics.OnDisable();
+            _ammoMechanics.OnDisable();
+            _refillTimerMechanics.OnDisable();
         }
     }
 }

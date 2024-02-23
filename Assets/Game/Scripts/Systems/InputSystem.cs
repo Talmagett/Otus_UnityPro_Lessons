@@ -12,7 +12,7 @@ namespace Systems
         public Vector3 MousePosition { get; private set; }
         
         public Vector3 MousePositionOnY { get; private set; }
-        public event Action OnShootEvent;
+        public event Action OnShootRequest;
         
         private Plane _hPlane = new Plane(Vector3.up, Vector3.zero);
 
@@ -63,7 +63,7 @@ namespace Systems
         {
             if (Input.GetMouseButtonDown(0))
             {
-                OnShootEvent?.Invoke();
+                OnShootRequest?.Invoke();
             }
         }
         

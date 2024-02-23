@@ -19,12 +19,12 @@ namespace Model
 
         private void OnEnable()
         {
-            _inputSystem.OnShootEvent += ShootRequest;
+            _inputSystem.OnShootRequest += ShootRequest;
         }
 
         private void OnDisable()
         {
-            _inputSystem.OnShootEvent -= ShootRequest;
+            _inputSystem.OnShootRequest -= ShootRequest;
         }
 
         [Inject]

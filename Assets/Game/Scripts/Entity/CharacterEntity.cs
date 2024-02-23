@@ -15,7 +15,7 @@ namespace Entity
             Add(new Component_Move(character.Moved));
             Add(new Component_Position(transform));
             Add(new Component_Rotation(character.Rotated));
-            Add(new Component_Shoot(character.FireEvent));
+            Add(new Component_Shoot(character.FireRequest));
         }
     }
 }
