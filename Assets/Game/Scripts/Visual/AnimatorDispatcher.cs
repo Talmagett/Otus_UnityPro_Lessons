@@ -4,7 +4,7 @@ namespace Visual
 {
     public class AnimatorDispatcher : MonoBehaviour
     {
-        [SerializeField] private Character character;
+        [SerializeField] private Model.Character character;
 
         public void ReceiveEvent(string value)
         {
