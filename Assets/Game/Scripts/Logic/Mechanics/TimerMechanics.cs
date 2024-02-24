@@ -5,11 +5,12 @@ namespace Logic.Mechanics
 {
     public class TimerMechanics
     {
-        private readonly AtomicVariable<float> _timer;
-        private readonly AtomicVariable<float> _maxCooldown;
         private readonly AtomicVariable<bool> _isFinished;
+        private readonly AtomicVariable<float> _maxCooldown;
+        private readonly AtomicVariable<float> _timer;
 
-        public TimerMechanics(AtomicVariable<float> timer, AtomicVariable<float> maxCooldown, AtomicVariable<bool> isFinished)
+        public TimerMechanics(AtomicVariable<float> timer, AtomicVariable<float> maxCooldown,
+            AtomicVariable<bool> isFinished)
         {
             _timer = timer;
             _maxCooldown = maxCooldown;

@@ -6,8 +6,8 @@ namespace Logic.Mechanics
 {
     public class LifeTimeMechanics
     {
-        private readonly IAtomicVariable<float> _lifeTime;
         private readonly IAtomicAction _death;
+        private readonly IAtomicVariable<float> _lifeTime;
 
         public LifeTimeMechanics(IAtomicVariable<float> lifeTime, IAtomicAction death)
         {
@@ -18,11 +18,8 @@ namespace Logic.Mechanics
         public void Update()
         {
             _lifeTime.Value -= Time.deltaTime;
-            
-            if (_lifeTime.Value <= 0)
-            {
-                _death.Invoke();
-            }
+
+            if (_lifeTime.Value <= 0) _death.Invoke();
         }
     }
 }

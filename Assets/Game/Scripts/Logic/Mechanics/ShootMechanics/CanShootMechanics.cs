@@ -1,6 +1,6 @@
 using Data.Variable;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.ShootMechanics
 {
     public class CanShootMechanics
     {

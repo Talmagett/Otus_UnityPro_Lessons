@@ -2,13 +2,13 @@ using Data.Event;
 using Model;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.ShootMechanics
 {
     public class ShootMechanics
     {
+        private readonly Bullet _bullet;
         private readonly IAtomicEvent _fireEvent;
         private readonly Transform _firePoint;
-        private readonly Bullet _bullet;
         private readonly Transform _transform;
 
         public ShootMechanics(IAtomicEvent fireEvent, Transform firePoint, Bullet bullet, Transform transform)

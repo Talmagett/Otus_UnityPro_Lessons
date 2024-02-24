@@ -6,9 +6,9 @@ namespace Logic.Mechanics
 {
     public class TakeDamageMechanics
     {
+        private readonly IAtomicAction _death;
         private readonly IAtomicVariable<int> _hitPoints;
         private readonly IAtomicEvent<int> _takeDamage;
-        private readonly IAtomicAction _death;
 
         public TakeDamageMechanics(IAtomicVariable<int> hitPoints, IAtomicEvent<int> takeDamage, IAtomicAction death)
         {
@@ -21,7 +21,7 @@ namespace Logic.Mechanics
         {
             _takeDamage.Subscribe(OnTakeDamage);
         }
-        
+
         public void OnDisable()
         {
             _takeDamage.Unsubscribe(OnTakeDamage);
@@ -32,10 +32,7 @@ namespace Logic.Mechanics
             var hitPoint = _hitPoints.Value - damage;
             _hitPoints.Value = Mathf.Max(0, hitPoint);
 
-            if (_hitPoints.Value == 0)
-            {
-                _death?.Invoke();
-            }
+            if (_hitPoints.Value == 0) _death?.Invoke();
         }
     }
 }

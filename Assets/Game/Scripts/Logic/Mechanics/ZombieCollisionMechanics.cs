@@ -23,7 +23,7 @@ namespace Logic.Mechanics
             if (!character.TryGetComponent(out Entity.Entity entity)) return;
 
             if (!entity.TryComponent(out IComponent_Damagable damagable)) return;
-            
+
             Debug.Log("Take Damage = " + _damage.Value);
             damagable.TakeDamage(_damage.Value);
             _death.Invoke();

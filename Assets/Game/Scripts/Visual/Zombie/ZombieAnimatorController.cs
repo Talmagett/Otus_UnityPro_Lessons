@@ -2,25 +2,24 @@ using Data.Event;
 using Data.Variable;
 using UnityEngine;
 
-namespace Visual
+namespace Visual.Zombie
 {
     public class ZombieAnimatorController
     {
-        private static readonly int MainState = Animator.StringToHash("MainState");
-        private static readonly int AttackTrigger = Animator.StringToHash("Attack");
-
         private const int Move = 1;
         private const int Death = 5;
-        
-        private readonly IAtomicValue<bool> _isDead;
+        private static readonly int MainState = Animator.StringToHash("MainState");
+        private static readonly int AttackTrigger = Animator.StringToHash("Attack");
         private readonly Animator _animator;
         private readonly AtomicEvent _attackEvent;
+
+        private readonly IAtomicValue<bool> _isDead;
 
         public ZombieAnimatorController(
             IAtomicValue<bool> isDead,
             Animator animator,
             AtomicEvent attackEvent
-            )
+        )
         {
             _isDead = isDead;
             _animator = animator;

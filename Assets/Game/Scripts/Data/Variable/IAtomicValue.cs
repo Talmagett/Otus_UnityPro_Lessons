@@ -9,13 +9,13 @@ namespace Data.Variable
 
     public class AtomicValue<T> : IAtomicValue<T>
     {
-        public T Value => _function.Invoke();
-        
         private readonly Func<T> _function;
 
         public AtomicValue(Func<T> function)
         {
             _function = function;
         }
+
+        public T Value => _function.Invoke();
     }
 }

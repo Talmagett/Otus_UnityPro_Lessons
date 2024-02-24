@@ -2,7 +2,7 @@ using Data.Event;
 using Data.Variable;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.TransformMechanics
 {
     public class TeleportCharacter : MonoBehaviour
     {
@@ -10,7 +10,7 @@ namespace Logic.Mechanics
         public AtomicVariable<float> Speed;
 
         private TeleportMechanics _teleportMechanics;
-    
+
         private void Awake()
         {
             _teleportMechanics = new TeleportMechanics(Speed, Teleported, transform);

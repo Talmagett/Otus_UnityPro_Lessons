@@ -15,14 +15,12 @@ namespace Entity
 
         public bool TryComponent<T>(out T component)
         {
-            for (int i = 0; i < _components.Count; i++)
-            {
+            for (var i = 0; i < _components.Count; i++)
                 if (_components[i] is T value)
                 {
                     component = value;
                     return true;
                 }
-            }
 
             component = default;
             return false;
@@ -30,13 +28,9 @@ namespace Entity
 
         public T Component<T>()
         {
-            for (int i = 0; i < _components.Count; i++)
-            {
+            for (var i = 0; i < _components.Count; i++)
                 if (_components[i] is T value)
-                {
                     return value;
-                }
-            }
 
             throw new Exception($"Component {typeof(T)} not find");
         }

@@ -6,12 +6,13 @@ namespace Logic.Mechanics
 {
     public class SpawnMechanics
     {
-        private readonly GameObject _spawningObject;
-        private readonly Transform _parent;
         private readonly IAtomicVariable<bool> _canSpawn;
         private readonly DiContainer _diContainer;
+        private readonly Transform _parent;
+        private readonly GameObject _spawningObject;
 
-        public SpawnMechanics(GameObject spawningObject,Transform parent, IAtomicVariable<bool> canSpawn, DiContainer diContainer)
+        public SpawnMechanics(GameObject spawningObject, Transform parent, IAtomicVariable<bool> canSpawn,
+            DiContainer diContainer)
         {
             _spawningObject = spawningObject;
             _parent = parent;

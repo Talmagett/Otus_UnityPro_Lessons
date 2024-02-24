@@ -4,7 +4,7 @@ namespace Data.Event
     {
         void Invoke();
     }
-    
+
     public interface IAtomicAction<in T>
     {
         void Invoke(T value);

@@ -1,13 +1,13 @@
 using Data.Variable;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.TransformMechanics
 {
     public class RotateMechanics
     {
+        private readonly IAtomicValue<bool> _canMove;
         private readonly IAtomicValue<Vector3> _moveDirection;
         private readonly Transform _target;
-        private readonly IAtomicValue<bool> _canMove;
 
         public RotateMechanics(IAtomicValue<Vector3> moveDirection, Transform target, IAtomicValue<bool> canMove)
         {
@@ -18,16 +18,10 @@ namespace Logic.Mechanics
 
         public void Update()
         {
-            if (!_canMove.Value)
-            {
-                return;
-            }
+            if (!_canMove.Value) return;
 
-            if (_moveDirection.Value == Vector3.zero)
-            {
-                return;
-            }
-            
+            if (_moveDirection.Value == Vector3.zero) return;
+
             var rotation = Quaternion.LookRotation(_moveDirection.Value);
             _target.rotation = Quaternion.Lerp(_target.rotation, rotation, Time.deltaTime * 50f);
         }

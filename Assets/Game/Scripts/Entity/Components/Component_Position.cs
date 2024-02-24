@@ -10,7 +10,7 @@ namespace Entity.Components
         {
             _transform = transform;
         }
-        
+
         public Vector3 GetPosition()
         {
             return _transform.position;

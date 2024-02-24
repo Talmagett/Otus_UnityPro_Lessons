@@ -2,12 +2,12 @@ using Data.Event;
 using Data.Variable;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.TransformMechanics
 {
     public class MovementMechanicsV2
     {
-        private readonly AtomicVariable<float> _speed;
         private readonly AtomicEvent<Vector3> _moved;
+        private readonly AtomicVariable<float> _speed;
         private readonly Transform _transform;
 
         public MovementMechanicsV2(AtomicVariable<float> speed, AtomicEvent<Vector3> moved, Transform transform)

@@ -1,7 +1,8 @@
 using Data.Event;
 using Data.Variable;
-using Logic;
 using Logic.Mechanics;
+using Logic.Mechanics.ShootMechanics;
+using Logic.Mechanics.TransformMechanics;
 using UnityEngine;
 
 namespace Model

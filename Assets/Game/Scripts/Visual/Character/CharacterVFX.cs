@@ -1,11 +1,10 @@
-using Model;
 using UnityEngine;
 
-namespace Visual
+namespace Visual.Character
 {
     public class CharacterVFX : MonoBehaviour
     {
-        [SerializeField] private Character character;
+        [SerializeField] private Model.Character character;
 
         [SerializeField] private ParticleSystem shootVfx;
         [SerializeField] private ParticleSystem damageVfx;

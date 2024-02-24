@@ -1,7 +1,6 @@
-using Data.Event;
 using Data.Variable;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.ShootMechanics
 {
     public class AmmoRefillMechanics
     {
@@ -20,7 +19,7 @@ namespace Logic.Mechanics
         public void Update()
         {
             if (_bulletsCount.Value >= _bulletsMaxCount.Value || !_onRefilled.Value) return;
-            
+
             _bulletsCount.Value++;
             _onRefilled.Value = false;
         }

@@ -1,6 +1,6 @@
 using Data.Variable;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.TransformMechanics
 {
     public class CanMoveMechanics
     {
@@ -15,7 +15,7 @@ namespace Logic.Mechanics
 
         public void Update()
         {
-            _canMove.Value = CanMove(); 
+            _canMove.Value = CanMove();
         }
 
         private bool CanMove()

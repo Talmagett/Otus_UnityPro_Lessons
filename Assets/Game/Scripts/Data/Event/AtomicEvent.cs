@@ -3,16 +3,15 @@ using Sirenix.OdinInspector;
 
 namespace Data.Event
 {
-    [Serializable, InlineProperty]
+    [Serializable]
+    [InlineProperty]
     public sealed class AtomicEvent : IAtomicEvent
     {
-        private event Action _event;
-
         public void Subscribe(Action action)
         {
             _event += action;
         }
-        
+
         public void Unsubscribe(Action action)
         {
             _event -= action;
@@ -23,18 +22,19 @@ namespace Data.Event
         {
             _event?.Invoke();
         }
+
+        private event Action _event;
     }
-    
-    [Serializable, InlineProperty]
+
+    [Serializable]
+    [InlineProperty]
     public sealed class AtomicEvent<T> : IAtomicEvent<T>
     {
-        private event Action<T> _event; 
-        
         public void Subscribe(Action<T> action)
         {
             _event += action;
         }
-        
+
         public void Unsubscribe(Action<T> action)
         {
             _event -= action;
@@ -45,5 +45,7 @@ namespace Data.Event
         {
             _event?.Invoke(value);
         }
+
+        private event Action<T> _event;
     }
 }

@@ -7,7 +7,7 @@ namespace Data.Function
         T GetResult();
     }
 
-    class AtomicFunction<T> : IAtomicFunction<T>
+    internal class AtomicFunction<T> : IAtomicFunction<T>
     {
         private readonly Func<T> _function;
 

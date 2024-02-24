@@ -1,11 +1,13 @@
 using Data.Variable;
+using Entity.Components;
+using UnityEngine;
 
 namespace Logic.Mechanics
 {
     public class MeleeAttackMechanics
     {
-        private readonly IAtomicValue<int> _damage;
         private readonly IAtomicVariable<bool> _canAttack;
+        private readonly IAtomicValue<int> _damage;
 
         public MeleeAttackMechanics(IAtomicValue<int> damage, IAtomicVariable<bool> canAttack)
         {
@@ -13,9 +15,14 @@ namespace Logic.Mechanics
             _canAttack = canAttack;
         }
 
-        public void OnTriggerEnter()
+        public void OnTriggerEnter(Collider collider)
         {
-            
+            if (!collider.TryGetComponent(out Entity.Entity entity)) return;
+
+            if (!entity.TryComponent(out IComponent_Damagable damagable)) return;
+
+            Debug.Log("Take Damage = " + _damage.Value);
+            damagable.TakeDamage(_damage.Value);
         }
     }
 }

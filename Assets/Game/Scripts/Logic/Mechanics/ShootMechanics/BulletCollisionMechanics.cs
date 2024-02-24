@@ -3,7 +3,7 @@ using Data.Variable;
 using Entity.Components;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.ShootMechanics
 {
     public class BulletCollisionMechanics
     {
@@ -21,7 +21,7 @@ namespace Logic.Mechanics
             if (!collider.TryGetComponent(out Entity.Entity entity)) return;
 
             if (!entity.TryComponent(out IComponent_Damagable damagable)) return;
-            
+
             Debug.Log("Take Damage = " + _damage.Value);
             damagable.TakeDamage(_damage.Value);
             _death.Invoke();

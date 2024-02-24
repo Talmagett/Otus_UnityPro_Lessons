@@ -1,13 +1,12 @@
-using Model;
 using UnityEngine;
 
-namespace Visual
+namespace Visual.Character
 {
     public class CharacterAudio : MonoBehaviour
     {
-        [SerializeField] private Character character;
+        [SerializeField] private Model.Character character;
         [SerializeField] private AudioSource audioSource;
-        
+
         [SerializeField] private AudioClip damageAudio;
 
         private void OnEnable()

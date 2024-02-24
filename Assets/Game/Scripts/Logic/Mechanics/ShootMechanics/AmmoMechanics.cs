@@ -1,14 +1,14 @@
 using Data.Event;
 using Data.Variable;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.ShootMechanics
 {
     public class AmmoMechanics
     {
-        private readonly IAtomicEvent _fireRequest;
         private readonly IAtomicVariable<int> _bulletsCount;
         private readonly IAtomicValue<bool> _canShoot;
         private readonly IAtomicEvent _fireEvent;
+        private readonly IAtomicEvent _fireRequest;
 
         public AmmoMechanics(IAtomicEvent fireRequest, IAtomicVariable<int> bulletsCount, IAtomicValue<bool> canShoot,
             IAtomicEvent fireEvent)
@@ -28,7 +28,7 @@ namespace Logic.Mechanics
         {
             _fireRequest.Unsubscribe(ReduceAmmo);
         }
-        
+
         private void ReduceAmmo()
         {
             if (_canShoot.Value)

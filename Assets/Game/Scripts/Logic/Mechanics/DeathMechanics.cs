@@ -6,8 +6,8 @@ namespace Logic.Mechanics
 {
     public class DeathMechanics
     {
-        private readonly IAtomicVariable<bool> _isDead;
         private readonly IAtomicEvent _death;
+        private readonly IAtomicVariable<bool> _isDead;
 
         public DeathMechanics(IAtomicVariable<bool> isDead, IAtomicEvent death)
         {
@@ -27,10 +27,7 @@ namespace Logic.Mechanics
 
         private void OnDeath()
         {
-            if (_isDead.Value)
-            {
-                return;    
-            }
+            if (_isDead.Value) return;
 
             _isDead.Value = true;
             Debug.Log("Death");

@@ -1,4 +1,3 @@
-using System;
 using Data.Variable;
 using Logic.Mechanics;
 using UnityEngine;
@@ -10,25 +9,26 @@ namespace Model
     {
         [SerializeField] private GameObject zombiePrefab;
         [SerializeField] private Transform zombieParent;
-        
+
         public AtomicVariable<float> SpawnCooldown;
         public AtomicVariable<float> SpawnTimer;
         public AtomicVariable<bool> CanSpawn;
-        
-        private TimerMechanics _timerMechanics;
-        private SpawnMechanics _spawnMechanics;
 
         private DiContainer _diContainer;
-        
-        [Inject]
-        public void Construct(DiContainer diContainer)
-        {
-            _diContainer = diContainer;
-        }
+        private SpawnMechanics _spawnMechanics;
+
+        private TimerMechanics _timerMechanics;
+
         private void Awake()
         {
-            _timerMechanics = new TimerMechanics(SpawnTimer,SpawnCooldown,CanSpawn);
-            _spawnMechanics = new SpawnMechanics(zombiePrefab,zombieParent,CanSpawn,_diContainer);
+            _timerMechanics = new TimerMechanics(SpawnTimer, SpawnCooldown, CanSpawn);
+            _spawnMechanics = new SpawnMechanics(zombiePrefab, zombieParent, CanSpawn, _diContainer);
+        }
+
+        private void Update()
+        {
+            _timerMechanics.Update();
+            _spawnMechanics.Update();
         }
 
         private void OnEnable()
@@ -41,10 +41,10 @@ namespace Model
             _timerMechanics.OnDisable();
         }
 
-        private void Update()
+        [Inject]
+        public void Construct(DiContainer diContainer)
         {
-            _timerMechanics.Update();
-            _spawnMechanics.Update();
+            _diContainer = diContainer;
         }
     }
 }

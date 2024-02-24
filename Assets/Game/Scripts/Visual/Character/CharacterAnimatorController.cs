@@ -2,28 +2,27 @@ using Data.Event;
 using Data.Variable;
 using UnityEngine;
 
-namespace Visual
+namespace Visual.Character
 {
     public class CharacterAnimatorController
     {
-        private static readonly int MainState = Animator.StringToHash("MainState");
-        private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
-
         private const int IDLE = 0;
         private const int Move = 1;
         private const int Death = 2;
-        
-        private readonly AtomicEvent<Vector3> _onMoved;
-        private readonly IAtomicValue<bool> _isDead;
+        private static readonly int MainState = Animator.StringToHash("MainState");
+        private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
         private readonly Animator _animator;
         private readonly AtomicEvent _fireRequest;
+        private readonly IAtomicValue<bool> _isDead;
+
+        private readonly AtomicEvent<Vector3> _onMoved;
 
         public CharacterAnimatorController(
             AtomicEvent<Vector3> onMoved,
             IAtomicValue<bool> isDead,
             Animator animator,
             AtomicEvent fireRequest
-            )
+        )
         {
             _onMoved = onMoved;
             _isDead = isDead;
@@ -54,10 +53,7 @@ namespace Visual
 
         private int GetAnimationValue()
         {
-            if (_isDead.Value)
-            {
-                return Death;
-            }
+            if (_isDead.Value) return Death;
 
             /*if (_onMoved != Vector3.zero)
             {

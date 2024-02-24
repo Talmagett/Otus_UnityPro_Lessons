@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Data.Variable
 {
-    [Serializable, InlineProperty]
+    [Serializable]
+    [InlineProperty]
     public class AtomicVariable<T> : IAtomicVariable<T>
     {
-        public event Action<T> ValueChanged;
-
-        [HideLabel, OnValueChanged("OnValueChangedInEditor")]
-        [SerializeField]
+        [HideLabel] [OnValueChanged("OnValueChangedInEditor")] [SerializeField]
         private T _value;
+
+        public event Action<T> ValueChanged;
 
         public T Value
         {

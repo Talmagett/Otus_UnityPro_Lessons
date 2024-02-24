@@ -1,11 +1,10 @@
-using Model;
 using UnityEngine;
 
-namespace Visual
+namespace Visual.Zombie
 {
     public class ZombieVFX : MonoBehaviour
     {
-        [SerializeField] private Zombie zombie;
+        [SerializeField] private Model.Zombie zombie;
 
         [SerializeField] private ParticleSystem attackVfx;
 
