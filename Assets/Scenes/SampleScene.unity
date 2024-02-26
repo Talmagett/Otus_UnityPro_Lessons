@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroView (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -536,10 +540,11 @@ GameObject:
   m_Component:
   - component: {fileID: 389887957}
   - component: {fileID: 389887959}
+  - component: {fileID: 389887962}
+  - component: {fileID: 389887963}
   - component: {fileID: 389887958}
   - component: {fileID: 389887960}
   - component: {fileID: 389887961}
-  - component: {fileID: 389887962}
   m_Layer: 5
   m_Name: Player (Red)
   m_TagString: Untagged
@@ -673,6 +678,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &389887963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389887956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1001 &459021462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1026,10 +1048,11 @@ GameObject:
   m_Component:
   - component: {fileID: 743752122}
   - component: {fileID: 743752125}
+  - component: {fileID: 743752127}
+  - component: {fileID: 743752128}
   - component: {fileID: 743752124}
   - component: {fileID: 743752123}
   - component: {fileID: 743752126}
-  - component: {fileID: 743752127}
   m_Layer: 5
   m_Name: Player (Blue)
   m_TagString: Untagged
@@ -1163,6 +1186,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &743752128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743752121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1 &968576902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968576903}
+  - component: {fileID: 968576904}
   m_Layer: 0
   m_Name: HeroesInstaller
   m_TagString: Untagged
@@ -1194,6 +1235,30 @@ Transform:
   m_Father: {fileID: 1961096145}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968576904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968576902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33bc2fa1c5242b6853e7a57f8249e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1Heroes:
+  - {fileID: 11400000, guid: 6b252b5218078764ebb1a53406ea5872, type: 2}
+  - {fileID: 11400000, guid: 4aaf28e6ad275f049b6e0a6c8f717fec, type: 2}
+  - {fileID: 11400000, guid: 03036492912e1254386af7da3ee5c527, type: 2}
+  - {fileID: 11400000, guid: 034cc76f75ed85a459ffc7fdc8819980, type: 2}
+  player2Heroes:
+  - {fileID: 11400000, guid: d56c7a50694411f4bb9d99eb53b9e466, type: 2}
+  - {fileID: 11400000, guid: b0455b8f36f10ad4ca3e50941b51a297, type: 2}
+  - {fileID: 11400000, guid: 1e2748274d9b1b44fb8d230e9888c27f, type: 2}
+  - {fileID: 11400000, guid: bde544b9665a8ea40baf62e8c8806160, type: 2}
+  player1HeroesView: {fileID: 389887961}
+  player2HeroesView: {fileID: 743752126}
 --- !u!224 &1141858329 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
@@ -1663,6 +1728,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1826790199}
+  - {fileID: 968576904}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

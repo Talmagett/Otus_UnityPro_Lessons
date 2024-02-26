@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be5ae819e9147648500f0b36cae7ff0, type: 3}
   m_Name: VampLord
   m_EditorClassIdentifier: 
+  <Name>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 778d4d7ee50594cd79059847cefca69a, type: 3}
   <Health>k__BackingField: 22
   <AttackDamage>k__BackingField: 6
   <Ability>k__BackingField: {fileID: 11400000, guid: 3b5faa886ce7a184ab7352fd88bef7b7, type: 2}

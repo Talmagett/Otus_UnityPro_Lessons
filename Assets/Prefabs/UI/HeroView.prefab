@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 383512545093365543}
   - component: {fileID: 383512545093365542}
   - component: {fileID: 383512545093365560}
+  - component: {fileID: 994792979011404191}
   m_Layer: 5
   m_Name: Portrait
   m_TagString: Untagged
@@ -275,6 +276,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &994792979011404191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545093365540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6812fdfbe04ee98d9870b57664e349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 885061484217053498}
 --- !u!1 &383512545514860528
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +299,8 @@ GameObject:
   m_Component:
   - component: {fileID: 383512545514860529}
   - component: {fileID: 8763992113062683896}
+  - component: {fileID: 885061484217053498}
+  - component: {fileID: 5492311700634919659}
   m_Layer: 5
   m_Name: HeroView
   m_TagString: Untagged
@@ -385,6 +401,31 @@ MonoBehaviour:
     m_RotationOrder: 4
   backDuration: 0.5
   punchSFX: {fileID: 8300000, guid: 2d88ba13b6e704829a737e409185d1ea, type: 3}
+--- !u!114 &885061484217053498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545514860528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844f0baebf1340829af8f38f5c342387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5492311700634919659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545514860528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6934520555a8477fbbd42cc0ee2d2a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HeroConfig>k__BackingField: {fileID: 11400000, guid: 6b252b5218078764ebb1a53406ea5872, type: 2}
 --- !u!1 &383512545822542975
 GameObject:
   m_ObjectHideFlags: 0
