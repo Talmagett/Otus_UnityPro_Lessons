@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Entities.Config;
-using UI;
+using Game.Entities.Config;
+using Game.UI;
 using UnityEngine;
 using Zenject;
 

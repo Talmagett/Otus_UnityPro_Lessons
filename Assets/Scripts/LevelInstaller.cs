@@ -1,11 +1,11 @@
 using Game;
-using Lessons.Game;
-using Turn;
-using TurnSystem;
-using TurnSystem.Handlers;
-using TurnSystem.Handlers.Effect;
-using TurnSystem.Handlers.Visual;
-using Visual;
+using Game.Input;
+using Game.Turn;
+using Game.TurnSystem;
+using Game.TurnSystem.Handlers;
+using Game.TurnSystem.Handlers.Effect;
+using Game.TurnSystem.Handlers.Visual;
+using Game.Visual;
 using Zenject;
 
 public class LevelInstaller : MonoInstaller
