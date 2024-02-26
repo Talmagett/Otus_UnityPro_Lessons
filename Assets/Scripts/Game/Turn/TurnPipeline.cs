@@ -7,18 +7,16 @@ namespace Game.Turn
 {
     public sealed class TurnPipeline
     {
-        public event Action Finished;
-
-        [ShowInInspector, ReadOnly]
-        private readonly List<Task> _tasks = new();
+        [ShowInInspector] [ReadOnly] private readonly List<Task> _tasks = new();
 
         private int _currentIndex = -1;
+        public event Action Finished;
 
         public void AddTask(Task task)
         {
             _tasks.Add(task);
         }
-        
+
         public void Run()
         {
             _currentIndex = 0;

@@ -5,15 +5,13 @@ namespace Game.UI
 {
     public sealed class TextWidgetHitPointsAdapter : MonoBehaviour
     {
-        [SerializeField]
-        private TextWidget textWidget;
+        [SerializeField] private TextWidget textWidget;
 
-        [SerializeField]
-        private MonoEntity entity;
+        [SerializeField] private MonoEntity entity;
 /*
         private HitPointsComponent _hitPoints;
         private DeathComponent _death;
-        
+
         private void Awake()
         {
             _hitPoints = entity.Get<HitPointsComponent>();
@@ -41,12 +39,12 @@ namespace Game.UI
         {
             textWidget.SetText($"{_hitPoints.Value} / {_hitPoints.MaxHitPoints}");
         }
-        
+
         private void OnHitPointsChanged(int _)
         {
             SetHitPoints();
         }
-        
+
         private void OnIsDeadChanged(bool value)
         {
             gameObject.SetActive(!value);

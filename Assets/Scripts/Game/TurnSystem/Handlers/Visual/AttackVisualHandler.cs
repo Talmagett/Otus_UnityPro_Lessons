@@ -19,7 +19,7 @@ namespace Game.TurnSystem.Handlers.Visual
             var sourcePosition = evt.Entity.Get<PositionComponent>();
             var targetPosition = evt.Target.Get<PositionComponent>();
             var offset = (targetPosition.Value - sourcePosition.Value) * 0.5f;
-            
+
             _visualPipeline.AddTask(new MoveVisualTask(evt.Entity, sourcePosition.Value + offset, 0.15f));
             _visualPipeline.AddTask(new MoveVisualTask(evt.Entity, sourcePosition.Value, 0.15f));
         }

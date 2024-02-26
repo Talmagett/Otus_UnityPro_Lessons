@@ -10,53 +10,43 @@ namespace Game.UI
         private const int FORWARD_LAYER = 10;
         private const int BACK_LAYER = 0;
 
-        public event Action<HeroView> OnHeroClicked;
-
-        [SerializeField]
-        private HeroView[] views;
+        [SerializeField] private HeroView[] views;
 
         private Canvas canvas;
 
         private void Awake()
         {
-            this.canvas = this.GetComponent<Canvas>();
+            canvas = GetComponent<Canvas>();
         }
 
         private void OnEnable()
         {
-            foreach (var view in this.views)
-            {
-                view.OnClicked += () => this.OnHeroClicked?.Invoke(view);
-            }
+            foreach (var view in views) view.OnClicked += () => OnHeroClicked?.Invoke(view);
         }
 
         private void OnDisable()
         {
-            Action<HeroView> @event = this.OnHeroClicked;
-            if (@event == null)
-            {
-                return;
-            }
+            var @event = OnHeroClicked;
+            if (@event == null) return;
 
-            foreach (var @delegate in @event.GetInvocationList())
-            {
-                this.OnHeroClicked -= (Action<HeroView>) @delegate;
-            }
+            foreach (var @delegate in @event.GetInvocationList()) OnHeroClicked -= (Action<HeroView>)@delegate;
         }
+
+        public event Action<HeroView> OnHeroClicked;
 
         public IReadOnlyList<HeroView> GetViews()
         {
-            return this.views;
+            return views;
         }
 
         public HeroView GetView(int index)
         {
-            return this.views[index];
+            return views[index];
         }
 
         public void SetActive(bool isActive)
         {
-            this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
+            canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
         }
     }
 }

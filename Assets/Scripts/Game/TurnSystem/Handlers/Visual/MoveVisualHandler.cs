@@ -6,7 +6,7 @@ namespace Game.TurnSystem.Handlers.Visual
     public sealed class MoveVisualHandler : BaseHandler<MoveEvent>
     {
         private readonly VisualPipeline _visualPipeline;
-        
+
         public MoveVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
         {
             _visualPipeline = visualPipeline;

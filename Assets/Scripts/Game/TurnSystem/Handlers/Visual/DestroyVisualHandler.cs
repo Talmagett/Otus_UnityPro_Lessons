@@ -7,7 +7,7 @@ namespace Game.TurnSystem.Handlers.Visual
     public sealed class DestroyVisualHandler : BaseHandler<DestroyEvent>
     {
         private readonly VisualPipeline _visualPipeline;
-        
+
         public DestroyVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
         {
             _visualPipeline = visualPipeline;

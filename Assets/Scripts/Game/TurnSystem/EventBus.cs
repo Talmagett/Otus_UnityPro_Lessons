@@ -7,20 +7,17 @@ namespace Game.TurnSystem
 {
     public class EventBus
     {
-        private readonly Dictionary<Type, IEventHandlerCollection> _handlers = new();
         private readonly Queue<object> _eventQueue = new();
+        private readonly Dictionary<Type, IEventHandlerCollection> _handlers = new();
 
         private bool _isRunning;
-        
+
         public void Subscribe<T>(Action<T> handler)
         {
             var eventType = typeof(T);
 
-            if (!_handlers.ContainsKey(eventType))
-            {
-                _handlers.Add(eventType, new EventHandlerCollection<T>());
-            }
-            
+            if (!_handlers.ContainsKey(eventType)) _handlers.Add(eventType, new EventHandlerCollection<T>());
+
             _handlers[eventType].Subscribe(handler);
         }
 
@@ -29,9 +26,7 @@ namespace Game.TurnSystem
             var eventType = typeof(T);
 
             if (_handlers.TryGetValue(eventType, out var eventHandlerCollection))
-            {
                 eventHandlerCollection.Unsubscribe(handler);
-            }
         }
 
         public void RaiseEvent<T>(T evt)
@@ -41,9 +36,9 @@ namespace Game.TurnSystem
                 _eventQueue.Enqueue(evt);
                 return;
             }
-            
+
             _isRunning = true;
-            
+
             var eventType = evt.GetType();
             Debug.Log(eventType);
 
@@ -57,10 +52,7 @@ namespace Game.TurnSystem
 
             _isRunning = false;
 
-            if (_eventQueue.Any())
-            {
-                RaiseEvent(_eventQueue.Dequeue());
-            }
+            if (_eventQueue.Any()) RaiseEvent(_eventQueue.Dequeue());
         }
 
         private interface IEventHandlerCollection
@@ -71,13 +63,13 @@ namespace Game.TurnSystem
 
             public void RaiseEvent<T>(T evt);
         }
-        
+
         private sealed class EventHandlerCollection<T> : IEventHandlerCollection
         {
             private readonly List<Delegate> _handers = new();
 
             private int _currentIndex = -1;
-            
+
             public void Subscribe(Delegate handler)
             {
                 _handers.Add(handler);
@@ -88,22 +80,16 @@ namespace Game.TurnSystem
                 var index = _handers.IndexOf(handler);
                 _handers.RemoveAt(index);
 
-                if (index <= _currentIndex)
-                {
-                    --_currentIndex;
-                }
+                if (index <= _currentIndex) --_currentIndex;
             }
 
             public void RaiseEvent<TEvent>(TEvent evt)
             {
-                if (evt is not T concreteEvent)
-                {
-                    return;
-                }
+                if (evt is not T concreteEvent) return;
 
                 for (_currentIndex = 0; _currentIndex < _handers.Count; ++_currentIndex)
                 {
-                    var handler = (Action<T>) _handers[_currentIndex];
+                    var handler = (Action<T>)_handers[_currentIndex];
                     handler.Invoke(concreteEvent);
                 }
 

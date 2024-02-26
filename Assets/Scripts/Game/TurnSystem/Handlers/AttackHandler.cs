@@ -7,15 +7,11 @@ namespace Game.TurnSystem.Handlers
     {
         public AttackHandler(EventBus eventBus) : base(eventBus)
         {
-            
         }
-        
+
         protected override void HandleEvent(AttackEvent evt)
         {
-            if (!evt.Entity.TryGet(out AttackDamage weapon))
-            {
-                return;
-            }
+            if (!evt.Entity.TryGet(out AttackDamage weapon)) return;
             /*TODO:??
             foreach (var effect in weapon.Value.Effects)
             {

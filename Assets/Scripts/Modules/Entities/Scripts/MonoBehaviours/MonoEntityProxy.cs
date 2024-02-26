@@ -5,22 +5,21 @@ namespace Modules.Entities.Scripts.MonoBehaviours
     [AddComponentMenu("Entities/Entity Proxy")]
     public sealed class MonoEntityProxy : MonoEntity
     {
-        [SerializeField]
-        public MonoEntity entity;
+        [SerializeField] public MonoEntity entity;
 
         public override T Get<T>()
         {
-            return this.entity.Get<T>();
+            return entity.Get<T>();
         }
 
         public override object[] GetAll()
         {
-            return this.entity.GetAll();
+            return entity.GetAll();
         }
 
         public override bool TryGet<T>(out T element)
         {
-            return this.entity.TryGet(out element);
+            return entity.TryGet(out element);
         }
     }
 }

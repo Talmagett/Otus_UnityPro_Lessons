@@ -5,11 +5,10 @@ namespace Audio
 {
     public sealed class AudioPlayer : MonoBehaviour
     {
+        [SerializeField] private AudioSource soundSource;
+
         public static AudioPlayer Instance { get; private set; }
 
-        [SerializeField]
-        private AudioSource soundSource;
-    
         private void Awake()
         {
             Instance = this;
@@ -17,7 +16,7 @@ namespace Audio
 
         public void PlaySound(AudioClip sound)
         {
-            this.soundSource.PlayOneShot(sound);
+            soundSource.PlayOneShot(sound);
         }
     }
 }

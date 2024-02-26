@@ -6,13 +6,13 @@ namespace Game.Turn
     {
         /*private readonly TurnPipeline _turnPipeline;
         private readonly IObjectResolver _objectResolver;
-        
+
         public TurnPipelineInstaller(TurnPipeline turnPipeline, IObjectResolver objectResolver)
         {
             _turnPipeline = turnPipeline;
             _objectResolver = objectResolver;
         }
-        
+
         void IInitializable.Initialize()
         {
             _turnPipeline.AddTask(new StartTurnTask());
@@ -22,7 +22,6 @@ namespace Game.Turn
         }*/
         public void Initialize()
         {
-            
         }
     }
 }

@@ -18,18 +18,17 @@ namespace Game.Tasks
             {
                 var callback = _callback;
                 _callback = null;
-                
+
                 callback?.Invoke(this);
             }
-            
+
             OnFinish();
         }
-        
+
         protected abstract void OnRun();
 
         protected virtual void OnFinish()
         {
-            
         }
     }
 }

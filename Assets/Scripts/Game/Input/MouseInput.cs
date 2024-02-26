@@ -8,26 +8,22 @@ namespace Game.Input
 {
     public class MouseInput : ITickable
     {
-        public event Action<MonoEntity> HeroClickPerformed;
-        
         public void Tick()
         {
             if (!UnityEngine.Input.GetMouseButtonDown(0)) return;
-            
+
             var eventData = new PointerEventData(EventSystem.current)
             {
                 position = UnityEngine.Input.mousePosition
             };
-            
+
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);
             foreach (var result in results)
-            {
                 if (result.gameObject.TryGetComponent(out MonoEntity proxy))
-                {
                     HeroClickPerformed?.Invoke(proxy);
-                }
-            }
         }
+
+        public event Action<MonoEntity> HeroClickPerformed;
     }
 }

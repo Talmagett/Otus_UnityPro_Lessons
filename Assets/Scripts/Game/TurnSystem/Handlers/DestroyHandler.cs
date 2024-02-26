@@ -7,7 +7,7 @@ namespace Game.TurnSystem.Handlers
         public DestroyHandler(EventBus eventBus) : base(eventBus)
         {
         }
-        
+
         protected override void HandleEvent(DestroyEvent evt)
         {
             /*if (evt.Entity.TryGet(out DeathComponent deathComponent))

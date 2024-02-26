@@ -7,14 +7,11 @@ namespace Game.Tasks.Turn
 {
     public sealed class PlayerTurnTask : Task
     {
+        private readonly EventBus _eventBus;
+
         //private readonly KeyboardInput _input;
         private readonly IEntity _player;
-        private readonly EventBus _eventBus;
-        
-        public PlayerTurnTask()
-        {
-        }
-        
+
         protected override void OnRun()
         {
             //_input.MovePerformed += OnMovePreformed;

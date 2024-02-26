@@ -8,18 +8,14 @@ namespace Game.TurnSystem.Handlers.Effect
     {
         public DealDamageEffectHandler(EventBus eventBus) : base(eventBus)
         {
-            
         }
-        
+
         protected override void HandleEvent(DealDamageEffectEvent evt)
         {
             var damage = evt.extraDamage;
 
-            if (evt.Source.TryGet(out AttackDamage attackDamage))
-            {
-                damage += attackDamage.Value;
-            }
-            
+            if (evt.Source.TryGet(out AttackDamage attackDamage)) damage += attackDamage.Value;
+
             EventBus.RaiseEvent(new DealDamageEvent(evt.Target, damage));
         }
     }

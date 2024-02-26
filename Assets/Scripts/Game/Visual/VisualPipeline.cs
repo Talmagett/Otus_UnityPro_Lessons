@@ -9,32 +9,26 @@ namespace Game.Visual
 {
     public sealed class VisualPipeline
     {
-        public event Action Finished;
-
-        [ShowInInspector, ReadOnly]
-        private readonly List<VisualTask> _tasks = new();
+        [ShowInInspector] [ReadOnly] private readonly List<VisualTask> _tasks = new();
 
         private int _currentIndex = -1;
+        public event Action Finished;
 
         public void AddTask(VisualTask task)
         {
             var lastLast = _tasks.LastOrDefault();
 
-            if (lastLast is null || !lastLast.Sticky && !task.Sticky)
-            {
+            if (lastLast is null || (!lastLast.Sticky && !task.Sticky))
                 _tasks.Add(task);
-            }
             else
-            {
                 _tasks[^1] = VisualTask.Combine(lastLast, task);
-            }
         }
 
         public void Clear()
         {
             _tasks.Clear();
         }
-        
+
         public void Run()
         {
             _currentIndex = 0;

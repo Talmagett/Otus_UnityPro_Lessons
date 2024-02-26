@@ -6,20 +6,17 @@ namespace Game.Turn
 {
     public sealed class TurnRunner : MonoBehaviour
     {
-        [SerializeField]
-        private bool runOnStart = true;
+        [SerializeField] private bool runOnStart = true;
 
-        [SerializeField]
-        private bool runOnFinish = true;
-        
+        [SerializeField] private bool runOnFinish = true;
+
         private TurnPipeline _turnPipeline;
 
-        [Inject]
-        private void Construct(TurnPipeline turnPipeline)
+        private void Start()
         {
-            _turnPipeline = turnPipeline;
+            if (runOnStart) Run();
         }
-        
+
         private void OnEnable()
         {
             _turnPipeline.Finished += OnTurnPipelineFinished;
@@ -30,12 +27,10 @@ namespace Game.Turn
             _turnPipeline.Finished -= OnTurnPipelineFinished;
         }
 
-        private void Start()
+        [Inject]
+        private void Construct(TurnPipeline turnPipeline)
         {
-            if (runOnStart)
-            {
-                Run();
-            }
+            _turnPipeline = turnPipeline;
         }
 
         [Button]
@@ -46,10 +41,7 @@ namespace Game.Turn
 
         private void OnTurnPipelineFinished()
         {
-            if (runOnFinish)
-            {
-                Run();
-            }
+            if (runOnFinish) Run();
         }
     }
 }

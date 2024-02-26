@@ -7,12 +7,11 @@ namespace Game.Tasks.Visual
 {
     public sealed class MoveVisualTask : VisualTask
     {
-        public override bool Sticky { get; protected set; }
+        private readonly float _duration;
+        private readonly Vector3 _position;
 
         private readonly TransformComponent _transform;
-        private readonly Vector3 _position;
-        private readonly float _duration;
-        
+
         public MoveVisualTask(IEntity entity, Vector3 position, float duration, bool sticky = false)
         {
             _transform = entity.Get<TransformComponent>();
@@ -21,7 +20,9 @@ namespace Game.Tasks.Visual
 
             Sticky = sticky;
         }
-        
+
+        public override bool Sticky { get; protected set; }
+
         protected override void OnRun()
         {
             _transform.Value.DOMove(_position, _duration).OnComplete(Finish);

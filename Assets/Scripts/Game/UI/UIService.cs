@@ -4,20 +4,18 @@ namespace Game.UI
 {
     public sealed class UIService : MonoBehaviour
     {
-        [SerializeField]
-        private HeroListView bluePlayer;
+        [SerializeField] private HeroListView redPlayer;
 
-        [SerializeField]
-        private HeroListView redPlayer;
-
-        public HeroListView GetBluePlayer()
-        {
-            return this.bluePlayer;
-        }
+        [SerializeField] private HeroListView bluePlayer;
 
         public HeroListView GetRedPlayer()
         {
-            return this.redPlayer;
+            return redPlayer;
+        }
+
+        public HeroListView GetBluePlayer()
+        {
+            return bluePlayer;
         }
     }
 }

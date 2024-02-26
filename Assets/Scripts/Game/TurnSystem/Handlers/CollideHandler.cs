@@ -6,7 +6,6 @@ namespace Game.TurnSystem.Handlers
     {
         public CollideHandler(EventBus eventBus) : base(eventBus)
         {
-            
         }
 
         protected override void HandleEvent(CollideEvent evt)

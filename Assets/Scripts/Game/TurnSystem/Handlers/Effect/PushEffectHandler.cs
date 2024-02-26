@@ -6,9 +6,8 @@ namespace Game.TurnSystem.Handlers.Effect
     {
         public PushEffectHandler(EventBus eventBus) : base(eventBus)
         {
-            
         }
-        
+
         protected override void HandleEvent(PushEffectEvent evt)
         {
             //var coordinates = evt.Source.Get<CoordinatesComponent>();
