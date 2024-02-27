@@ -1,7 +1,9 @@
+using System;
+using Game.Entities.Common.Components;
+using Game.Installers;
 using Game.TurnSystem;
 using Game.TurnSystem.Events;
 using Modules.Entities.Scripts;
-using UnityEngine;
 
 namespace Game.Tasks.Turn
 {
@@ -9,20 +11,35 @@ namespace Game.Tasks.Turn
     {
         private readonly EventBus _eventBus;
 
-        //private readonly KeyboardInput _input;
-        private readonly IEntity _player;
+        private readonly HeroTurnController _heroTurnController;
 
+        public PlayerTurnTask(EventBus eventBus, HeroTurnController heroTurnController)
+        {
+            _eventBus = eventBus;
+            _heroTurnController = heroTurnController;
+        }
+        
         protected override void OnRun()
         {
-            //_input.MovePerformed += OnMovePreformed;
+            _heroTurnController.HeroClickPerformed += OnHeroClicked;
         }
 
-        private void OnMovePreformed(Vector2Int direction)
+        private void OnHeroClicked(IEntity entity)
         {
-            //_input.MovePerformed -= OnMovePreformed;
+            var currentHero = _heroTurnController.CurrentHero;
+            
+            if (entity.TryGet(out PlayerColor color)&&currentHero.TryGet(out PlayerColor movingColor))
+            {
+                    if (color.Value == movingColor.Value)
+                        return;
+            }
 
-            _eventBus.RaiseEvent(new ApplyDirectionEvent(_player, direction));
+            var damage = currentHero.Get<AttackDamage>();
+
+            _heroTurnController.HeroClickPerformed -= OnHeroClicked;
+            _eventBus.RaiseEvent(new DealDamageEvent(entity, damage.Value));
             Finish();
+            _heroTurnController.NextHero();
         }
     }
 }

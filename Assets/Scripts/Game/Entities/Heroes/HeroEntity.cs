@@ -1,25 +1,30 @@
 using System;
 using Game.Entities.Common.Components;
+using Game.Entities.Config;
+using Game.UI;
 using Modules.Entities.Scripts.MonoBehaviours;
+using UnityEngine;
 
 namespace Game.Entities.Heroes
 {
+    [RequireComponent(typeof(HeroView))]
     public class HeroEntity : MonoEntityBase
     {
-        private void Awake()
+        private HeroView _heroView;
+        public void SetEntity(Hero heroConfig, PlayerColor.Color playerColor)
         {
-            var model = GetComponent<HeroModel>();
-            Add(new AttackDamage { Value = model.HeroConfig.AttackDamage });
-            Add(new Health { Value = model.HeroConfig.Health });
-            //Add(new AttackDamage{Value = model.HeroConfig.Ability});
+            Add(new AttackDamage { Value = heroConfig.AttackDamage });
+            Add(new Health { Value = heroConfig.Health });
+            Add(new PlayerColor{Value = playerColor});
+
+            _heroView = GetComponent<HeroView>();
+            SetView(heroConfig);
         }
 
-        private void OnMouseDown()
+        private void SetView(Hero heroConfig)
         {
-            CardClickPerformed?.Invoke(this);
-            print("lll");
+            _heroView.SetIcon(heroConfig.Icon);
+            _heroView.SetStats($"{heroConfig.AttackDamage}/{heroConfig.Health}");
         }
-
-        public static event Action<HeroEntity> CardClickPerformed;
     }
 }
