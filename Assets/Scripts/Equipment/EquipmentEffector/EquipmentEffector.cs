@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Sample
 {
@@ -24,24 +25,28 @@ namespace Sample
 
         private void AddEffectToCharacter(Item obj)
         {
-            var stat = obj.GetComponent<Stats>();
-            if (stat is null)
+            var stats = obj.GetComponents<Stats>();
+            if (stats.Length==0)
                 return;
-
-            var statValue = _character.GetStat(stat.Name);
-
-            _character.SetStat(stat.Name, statValue + stat.Value);
+            
+            foreach (var stat in stats)
+            {
+                var statValue = _character.GetStat(stat.Name);
+                _character.SetStat(stat.Name, statValue + stat.Value);
+            }
         }
 
         private void RemoveEffectFromCharacter(Item obj)
         {
-            var stat = obj.GetComponent<Stats>();
-            if (stat is null)
+            var stats = obj.GetComponents<Stats>();
+            if (stats.Length==0)
                 return;
 
-            var statValue = _character.GetStat(stat.Name);
-
-            _character.SetStat(stat.Name, statValue - stat.Value);
+            foreach (var stat in stats)
+            {
+                var statValue = _character.GetStat(stat.Name);
+                _character.SetStat(stat.Name, statValue - stat.Value);
+            }
         }
     }
 }

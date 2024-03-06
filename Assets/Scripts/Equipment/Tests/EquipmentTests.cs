@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -11,90 +12,85 @@ namespace Sample
         private Inventory _inventory;
         private Equipment _equipment;
         private EquipmentEffector _equipmentEffector;
+
+        private const string WindBoots = "windBoots";
+        
+        private const string SpeedStat = "speed";
+        private const string DamageStat = "damage";
+        private const string HealthStat = "health";
         
         [SetUp]
         public void Init()
         {
             _character = new Character(
-                new KeyValuePair<string, int>("damage", 5),
-                new KeyValuePair<string, int>("health", 20),
-                new KeyValuePair<string, int>("speed", 10));
+                new KeyValuePair<string, int>(DamageStat, 5),
+                new KeyValuePair<string, int>(HealthStat, 20),
+                new KeyValuePair<string, int>(SpeedStat, 10));
             _inventory = new Inventory();
             _equipment = new Equipment();
             _equipmentEffector = new EquipmentEffector(_character, _equipment);
+            
+            var windBoots = new Item(WindBoots, ItemFlags.EQUPPABLE | ItemFlags.EFFECTIBLE,
+                new Stats(DamageStat,10),
+                new Stats(SpeedStat, 5),
+                new EquipmentTypeComponent(EquipmentType.LEGS)
+            );
+            _inventory.AddItem(windBoots);
         }
-
-        [Test]
-        public void CheckCharacter()
-        {
-            foreach (var (key, value) in _character.GetStats()) Debug.Log($"{key}:{value}");
-            Assert.AreEqual(3, _character.GetStats().Length);
-        }
-
+        
         [Test]
         public void WhenBootsAdded_CheckInventory()
         {
-            var windBoots = new Item("windBoots", ItemFlags.EQUPPABLE | ItemFlags.EFFECTIBLE,
-                new Stats("speed", 5),
-                    new EquipmentTypeComponent(EquipmentType.LEGS)
-                );
-            _inventory.AddItem(windBoots);
-            Assert.AreEqual(1, _inventory.GetCount("windBoots"));
-        }
-
-        [Test]
-        public void WhenBootsEquipped_CheckEquipment()
-        {
-            if (!_inventory.FindItem("windBoots", out var item)) return;
-
-            _equipment.EquipItem(item);
-            Assert.AreEqual(1, _equipment.HasItem(EquipmentType.LEGS));
-        }
-
-        [Test]
-        public void WhenBootsUnequipped_CheckCount()
-        {
-            if (!_inventory.FindItem("windBoots", out var item)) return;
-
-            _equipment.UnequipItem(item);
-            Assert.AreEqual(0, _equipment.HasItem(EquipmentType.LEGS));
+            Assert.AreEqual(1, _inventory.GetCount(WindBoots));
         }
 
         [Test]
         public void WhenBootsEquippedAndUnequipped_CheckEquipment()
         {
-            if (!_inventory.FindItem("windBoots", out var item)) return;
+            _inventory.FindItem(WindBoots, out var item);
 
             _equipment.EquipItem(item);
-            Assert.AreEqual(1, _equipment.HasItem(EquipmentType.LEGS));
+            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.LEGS));
 
             _equipment.UnequipItem(item);
-            Assert.AreEqual(0, _equipment.HasItem(EquipmentType.LEGS));
+            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.LEGS));
         }
 
         [Test]
-        public void WhenBootsEquippedTwice_CheckEquipment()
+        public void WhenBootsEquippedAndUnequippedTwice_CheckEquipment()
         {
-            if (!_inventory.FindItem("windBoots", out var item)) return;
+            _inventory.FindItem(WindBoots, out var item);
 
             _equipment.EquipItem(item);
-
             _equipment.EquipItem(item);
-            Assert.AreEqual(1, _equipment.HasItem(EquipmentType.LEGS));
+            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.LEGS));
+            
+            _equipment.UnequipItem(item);
+            _equipment.UnequipItem(item);
+            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.LEGS));
         }
 
         [Test]
         public void CheckStats()
         {
-            if (!_inventory.FindItem("windBoots", out var item)) return;
-
-            Assert.AreEqual(10, _character.GetStat("speed"));
+            _inventory.FindItem(WindBoots, out var item);
+            var defaultSpeed =_character.GetStat(SpeedStat);
+            var statsArray = item.GetComponents<Stats>();
+            Stats itemSpeed = null;
+            foreach (var stat in statsArray)
+            {
+                if (stat.Name == SpeedStat)
+                    itemSpeed = stat;
+            }
 
             _equipment.EquipItem(item);
-            Assert.AreEqual(15, _character.GetStat("speed"));
+            var currentSpeed = _character.GetStat(SpeedStat);
+            Assert.AreEqual(currentSpeed-defaultSpeed, itemSpeed.Value);
 
             _equipment.UnequipItem(item);
-            Assert.AreEqual(10, _character.GetStat("speed"));
+            
+            currentSpeed = _character.GetStat(SpeedStat);
+            Assert.AreEqual(defaultSpeed, currentSpeed);
         }
     }
 }

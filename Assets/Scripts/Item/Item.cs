@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Sample
@@ -35,6 +36,17 @@ namespace Sample
             throw new Exception($"Component of type {typeof(T).Name} is not found!");
         }
 
+        public T[] GetComponents<T>()
+        {
+            List<T> getComponents = new();
+            
+            foreach (var component in components)
+                if (component is T tComponent)
+                    getComponents.Add(tComponent);
+            
+            return getComponents.ToArray();
+        }
+        
         public Item Clone()
         {
             var count = this.components.Length;
