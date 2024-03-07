@@ -9,9 +9,14 @@ namespace Model
     {
         [SerializeField] private Entity.Entity entity;
         private IComponent_Move _componentMove;
-
         private InputSystem _inputSystem;
 
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
+        }
+        
         private void Start()
         {
             entity.TryComponent(out _componentMove);
@@ -23,12 +28,6 @@ namespace Model
                 return;
 
             _componentMove.Move(_inputSystem.MoveDirection);
-        }
-
-        [Inject]
-        public void Construct(InputSystem inputSystem)
-        {
-            _inputSystem = inputSystem;
         }
     }
 }

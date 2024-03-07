@@ -1,18 +1,15 @@
 using Data.Event;
-using Data.Variable;
 using UnityEngine;
 
 namespace Logic.Mechanics.TransformMechanics
 {
-    public class MovementMechanicsV2
+    public class RotateMechanicsEvent
     {
         private readonly AtomicEvent<Vector3> _moved;
-        private readonly AtomicVariable<float> _speed;
         private readonly Transform _transform;
 
-        public MovementMechanicsV2(AtomicVariable<float> speed, AtomicEvent<Vector3> moved, Transform transform)
+        public RotateMechanicsEvent(AtomicEvent<Vector3> moved, Transform transform)
         {
-            _speed = speed;
             _moved = moved;
             _transform = transform;
         }
@@ -29,7 +26,7 @@ namespace Logic.Mechanics.TransformMechanics
 
         private void OnMoved(Vector3 moveDirection)
         {
-            _transform.position += moveDirection * _speed.Value * Time.deltaTime;
+            _transform.rotation = Quaternion.LookRotation(moveDirection);
         }
     }
 }

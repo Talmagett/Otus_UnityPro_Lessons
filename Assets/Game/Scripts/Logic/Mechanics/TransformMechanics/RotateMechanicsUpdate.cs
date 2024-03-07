@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Logic.Mechanics.TransformMechanics
 {
-    public class RotateMechanics
+    public class RotateMechanicsUpdate
     {
         private readonly IAtomicValue<bool> _canMove;
         private readonly IAtomicValue<Vector3> _moveDirection;
         private readonly Transform _target;
 
-        public RotateMechanics(IAtomicValue<Vector3> moveDirection, Transform target, IAtomicValue<bool> canMove)
+        public RotateMechanicsUpdate(IAtomicValue<Vector3> moveDirection, Transform target, IAtomicValue<bool> canMove)
         {
             _moveDirection = moveDirection;
             _target = target;

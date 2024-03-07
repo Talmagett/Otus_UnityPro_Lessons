@@ -27,19 +27,16 @@ namespace Model
 
         [Header("Shoot")] public AtomicEvent AttackEvent;
 
-        private TimerMechanics _attackTimerMechanics;
-
-
+        //Logic:
         private CanMoveMechanics _canMoveMechanics;
-
-        private CharacterEntity _characterEntity;
         private DeathMechanics _deathMechanics;
         private DestroyMechanics _destroyMechanics;
         private MoveToTargetMechanics _moveToTargetMechanics;
         private RotateToMechanics _rotateMechanics;
-
-        //Logic:
+        private TimerMechanics _attackTimerMechanics;
         private TakeDamageMechanics _takeDamageMechanics;
+        
+        private CharacterEntity _characterEntity;
 
         private void Awake()
         {

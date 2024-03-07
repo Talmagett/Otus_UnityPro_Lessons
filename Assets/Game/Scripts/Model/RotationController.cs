@@ -13,6 +13,12 @@ namespace Model
 
         private InputSystem _inputSystem;
 
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
+        }
+        
         private void Start()
         {
             entity.TryComponent(out _componentRotation);
@@ -25,11 +31,5 @@ namespace Model
             _componentRotation.Rotate(direction);
         }
 
-
-        [Inject]
-        public void Construct(InputSystem inputSystem)
-        {
-            _inputSystem = inputSystem;
-        }
     }
 }

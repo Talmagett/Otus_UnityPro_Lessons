@@ -16,6 +16,7 @@ namespace Entity
             Add(new Component_Position(transform));
             Add(new Component_Rotation(character.Rotated));
             Add(new Component_Shoot(character.FireRequest));
+            Add(new Component_Ammo(character.BulletsCount,character.BulletsMaxCount));
         }
     }
 }

@@ -2,19 +2,19 @@ using Entity;
 using Entity.Components;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Visual.UI
 {
     public class CharacterHealthView : MonoBehaviour
     {
-        [SerializeField] private CharacterEntity character;
         [SerializeField] private string healthTextString;
-
         [SerializeField] private TMP_Text healthText;
+        [SerializeField] private CharacterEntity character;
 
         private IComponent_Health _health;
 
-        private void Start()
+        public void Start()
         {
             character.TryComponent(out _health);
             _health.OnHealthChanged += UpdateText;

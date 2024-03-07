@@ -7,22 +7,23 @@ namespace Model
 {
     public class ZombieSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject zombiePrefab;
-        [SerializeField] private Transform zombieParent;
-
+        //Data
+        public AtomicVariable<GameObject> zombiePrefab;
+        public AtomicVariable<Transform> zombieParent;
         public AtomicVariable<float> SpawnCooldown;
         public AtomicVariable<float> SpawnTimer;
         public AtomicVariable<bool> CanSpawn;
 
-        private DiContainer _diContainer;
+        //Logic
         private SpawnMechanics _spawnMechanics;
-
         private TimerMechanics _timerMechanics;
+
+        private DiContainer _diContainer;
 
         private void Awake()
         {
             _timerMechanics = new TimerMechanics(SpawnTimer, SpawnCooldown, CanSpawn);
-            _spawnMechanics = new SpawnMechanics(zombiePrefab, zombieParent, CanSpawn, _diContainer);
+            _spawnMechanics = new SpawnMechanics(zombiePrefab.Value, zombieParent.Value, CanSpawn, _diContainer);
         }
 
         private void Update()

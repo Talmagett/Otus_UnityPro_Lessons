@@ -12,22 +12,21 @@ namespace Model
         //Data:
         public AtomicVariable<float> Speed;
         public AtomicVariable<Vector3> MoveDirection;
-
         public AtomicVariable<bool> CanMove;
 
         public AtomicVariable<int> Damage;
         public AtomicVariable<float> LifeTime;
         public AtomicEvent Death;
+        
+        //Logic:
         private BulletCollisionMechanics _bulletCollisionMechanics;
         private DestroyMechanics _destroyMechanics;
         private LifeTimeMechanics _lifeTimeMechanics;
-
-        //Logic:
-        private MovementMechanics _movementMechanics;
+        private MovementMechanicsUpdate _movementMechanicsUpdate;
 
         private void Awake()
         {
-            _movementMechanics = new MovementMechanics(Speed, MoveDirection, transform, CanMove);
+            _movementMechanicsUpdate = new MovementMechanicsUpdate(Speed, MoveDirection, transform, CanMove);
             _bulletCollisionMechanics = new BulletCollisionMechanics(Damage, Death);
             _lifeTimeMechanics = new LifeTimeMechanics(LifeTime, Death);
             _destroyMechanics = new DestroyMechanics(Death, gameObject);
@@ -35,7 +34,7 @@ namespace Model
 
         private void Update()
         {
-            _movementMechanics.Update();
+            _movementMechanicsUpdate.Update();
             _lifeTimeMechanics.Update();
         }
 

@@ -34,27 +34,27 @@ namespace Model
         public AtomicEvent FireEvent;
         public Transform FirePoint;
         public Bullet BulletPrefab;
+        
+        //Logic:
         private AmmoMechanics _ammoMechanics;
         private AmmoRefillMechanics _ammoRefillMechanics;
         private CanMoveMechanics _canMoveMechanics;
         private CanShootMechanics _canShootMechanics;
         private DeathMechanics _deathMechanics;
-        private MovementMechanicsV2 _movementMechanicsV2;
+        private MovementMechanicsEvent _movementMechanicsEvent;
 
         private TimerMechanics _refillTimerMechanics;
-        private RotateMechanicsV2 _rotateMechanicsV2;
+        private RotateMechanicsEvent _rotateMechanicsEvent;
         private ShootMechanics _shootMechanics;
-
-        //Logic:
         private TakeDamageMechanics _takeDamageMechanics;
 
         private void Awake()
         {
             _takeDamageMechanics = new TakeDamageMechanics(HitPoints, TakeDamage, Death);
             _deathMechanics = new DeathMechanics(IsDead, Death);
-            _movementMechanicsV2 = new MovementMechanicsV2(Speed, Moved, transform);
+            _movementMechanicsEvent = new MovementMechanicsEvent(Speed, Moved, transform);
             _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
-            _rotateMechanicsV2 = new RotateMechanicsV2(Rotated, transform);
+            _rotateMechanicsEvent = new RotateMechanicsEvent(Rotated, transform);
 
             _refillTimerMechanics = new TimerMechanics(RefillTimer, RefillMaxTime, OnRefilled);
             _ammoRefillMechanics = new AmmoRefillMechanics(BulletsCount, BulletsMaxCount, OnRefilled);
@@ -76,16 +76,16 @@ namespace Model
             _takeDamageMechanics.OnEnable();
             _deathMechanics.OnEnable();
             _shootMechanics.OnEnable();
-            _movementMechanicsV2.OnEnable();
-            _rotateMechanicsV2.OnEnable();
+            _movementMechanicsEvent.OnEnable();
+            _rotateMechanicsEvent.OnEnable();
             _ammoMechanics.OnEnable();
             _refillTimerMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
-            _movementMechanicsV2.OnDisable();
-            _rotateMechanicsV2.OnDisable();
+            _movementMechanicsEvent.OnDisable();
+            _rotateMechanicsEvent.OnDisable();
             _takeDamageMechanics.OnDisable();
             _deathMechanics.OnDisable();
             _shootMechanics.OnDisable();

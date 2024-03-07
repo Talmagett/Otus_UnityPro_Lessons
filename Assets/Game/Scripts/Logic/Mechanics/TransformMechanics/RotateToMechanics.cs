@@ -8,7 +8,8 @@ namespace Logic.Mechanics.TransformMechanics
         private readonly IAtomicValue<bool> _canMove;
         private readonly Transform _rotatingTransform;
         private readonly Transform _target;
-
+        private float _rotationSpeed=100f;
+        
         public RotateToMechanics(Transform rotatingTransform, Transform target, IAtomicValue<bool> canMove)
         {
             _rotatingTransform = rotatingTransform;
@@ -19,8 +20,8 @@ namespace Logic.Mechanics.TransformMechanics
         public void Update()
         {
             if (!_canMove.Value) return;
-
-            _rotatingTransform.rotation = Quaternion.LookRotation(_target.position, Vector3.up);
+            //var targetRotation = Quaternion.LookRotation(_target.position, Vector3.up);
+            //_rotatingTransform.rotation = Quaternion.Lerp(_rotatingTransform.rotation, targetRotation, _rotationSpeed*Time.deltaTime);
         }
     }
 }

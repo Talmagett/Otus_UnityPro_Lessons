@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Logic.Mechanics.TransformMechanics
 {
-    public class MovementMechanics
+    public class MovementMechanicsUpdate
     {
         private readonly IAtomicValue<bool> _canMove;
         private readonly IAtomicValue<Vector3> _moveDirection;
         private readonly IAtomicValue<float> _speed;
         private readonly Transform _target;
 
-        public MovementMechanics(IAtomicValue<float> speed, IAtomicValue<Vector3> moveDirection, Transform target,
+        public MovementMechanicsUpdate(IAtomicValue<float> speed, IAtomicValue<Vector3> moveDirection, Transform target,
             IAtomicValue<bool> canMove)
         {
             _speed = speed;

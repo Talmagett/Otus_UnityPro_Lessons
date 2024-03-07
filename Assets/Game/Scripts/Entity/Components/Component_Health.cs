@@ -6,6 +6,7 @@ namespace Entity.Components
     public class Component_Health : IComponent_Health, IDisposable
     {
         private readonly IAtomicVariable<int> _health;
+        public event Action<int> OnHealthChanged;
 
         public Component_Health(IAtomicVariable<int> health)
         {
@@ -13,16 +14,14 @@ namespace Entity.Components
             _health.ValueChanged += OnHealthChangedInvoke;
         }
 
-        public event Action<int> OnHealthChanged;
+        public void Dispose()
+        {
+            _health.ValueChanged -= OnHealthChangedInvoke;
+        }
 
         public int GetHealth()
         {
             return _health.Value;
-        }
-
-        public void Dispose()
-        {
-            _health.ValueChanged -= OnHealthChangedInvoke;
         }
 
         private void OnHealthChangedInvoke(int health)
