@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace Sample
 {
-    public class DashStrikeUpgrade : Upgrade
+    public class DashStrikeUpgrade : Upgrade, IRequirableUpgrade
     {
         private Upgrade[] _requiredUpgrades;
         public DashStrikeUpgrade(UpgradeConfig config) : base(config)
@@ -16,6 +16,8 @@ namespace Sample
         
         public override bool CanUpgrade()
         {
+            if (_requiredUpgrades == null)
+                return base.CanUpgrade();
             return _requiredUpgrades.All(upgrade => Level < upgrade.Level);
         }
         

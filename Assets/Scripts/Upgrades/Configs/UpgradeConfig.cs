@@ -10,6 +10,8 @@ namespace Sample
 
         [SerializeField]
         public string id;
+
+        [SerializeField] public UpgradeConfig[] requiredUpgrades;
         
         [Range(2, 99)]
         [SerializeField]

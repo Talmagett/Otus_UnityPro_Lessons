@@ -12,7 +12,7 @@ namespace Sample
         [SerializeField]
         private UpgradeConfig[] configs;
         
-        public UpgradeConfig[] GetAllUpgrades()
+        public UpgradeConfig[] GetAllUpgradesConfig()
         {
             return this.configs;
         }
