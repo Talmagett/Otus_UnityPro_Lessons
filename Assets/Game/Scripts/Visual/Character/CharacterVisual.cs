@@ -14,7 +14,7 @@ namespace Visual.Character
         private void Awake()
         {
             _characterAnimatorController =
-                new CharacterAnimatorController(character.Moved, character.IsDead, animator, character.FireRequest);
+                new CharacterAnimatorController(character.Moved, character.IsDead,character.TakeDamage, animator, character.FireRequest);
         }
 
         public void Update()
