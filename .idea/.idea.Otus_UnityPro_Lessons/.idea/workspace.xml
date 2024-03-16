@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7caab1ae-47e8-4de3-a70f-8bb3074d5e2a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Otus_UnityPro_Lessons/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/Source/Zenject.csproj.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment/Tests/EquipmentTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Item/ItemFlags.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Item/ItemFlags.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +105,8 @@
       <workItem from="1707798930503" duration="343000" />
       <workItem from="1708586880542" duration="2451000" />
       <workItem from="1709700206377" duration="1638000" />
-      <workItem from="1710434429768" duration="1781000" />
+      <workItem from="1710434429768" duration="1856000" />
+      <workItem from="1710578313486" duration="1662000" />
     </task>
     <task id="LOCAL-00001" summary="add zenject">
       <option name="closed" value="true" />
@@ -149,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707798629620</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="updated, made some name refactoring">
+      <option name="closed" value="true" />
+      <created>1710436303892</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710436303892</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
@@ -162,6 +169,7 @@
     <MESSAGE value="added some tests, debug" />
     <MESSAGE value="added debugs, equipment, effector, tests" />
     <MESSAGE value="cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
+    <MESSAGE value="updated, made some name refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated, made some name refactoring" />
   </component>
 </project>

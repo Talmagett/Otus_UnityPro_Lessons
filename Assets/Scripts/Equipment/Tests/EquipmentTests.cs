@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Sample
 {
@@ -78,60 +79,86 @@ namespace Sample
             _inventory.AddItem(plateMail);
             _inventory.AddItem(divineHelmet);
         }
-
+        
+        
+        [TestCase(WindBoots,EquipmentType.LEGS)]
+        [TestCase(FireSword,EquipmentType.RIGHT_HAND)]
+        [TestCase(IceShield,EquipmentType.LEFT_HAND)]
+        [TestCase(PlateMail,EquipmentType.BODY)]
+        [TestCase(DivineHelmet,EquipmentType.HEAD)]
         [Test]
-        public void EquipItem()
+        public void EquipItem(string itemName, EquipmentType type)
         {
-            _inventory.FindItem(WindBoots, out var item);
+            _inventory.FindItem(itemName, out var item);
             _equipment.EquipItem(item);
-            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.LEGS));
-
-            _inventory.FindItem(FireSword, out item);
+            Assert.AreEqual(true, _equipment.HasItem(type));
+        }
+        
+        [TestCase(WindBoots,EquipmentType.LEGS)]
+        [TestCase(FireSword,EquipmentType.RIGHT_HAND)]
+        [TestCase(IceShield,EquipmentType.LEFT_HAND)]
+        [TestCase(PlateMail,EquipmentType.BODY)]
+        [TestCase(DivineHelmet,EquipmentType.HEAD)]
+        [Test]
+        public void UnequipItem(string itemName, EquipmentType type)
+        {
+            _inventory.FindItem(itemName, out var item);
             _equipment.EquipItem(item);
-            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.RIGHT_HAND));
-
-            _inventory.FindItem(IceShield, out item);
-            _equipment.EquipItem(item);
-            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.LEFT_HAND));
-
-            _inventory.FindItem(PlateMail, out item);
-            _equipment.EquipItem(item);
-            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.BODY));
-
-            _inventory.FindItem(DivineHelmet, out item);
-            _equipment.EquipItem(item);
-            Assert.AreEqual(true, _equipment.HasItem(EquipmentType.HEAD));
+            _equipment.UnequipItem(item);
+            Assert.AreEqual(false, _equipment.HasItem(type));
         }
 
+        [TestCase(WindBoots)]
+        [TestCase(FireSword)]
+        [TestCase(IceShield)]
+        [TestCase(PlateMail)]
+        [TestCase(DivineHelmet)]
         [Test]
-        public void UnequipItem()
+        public void WhenEquip_CheckStats(string itemName)
         {
-            _inventory.FindItem(WindBoots, out var item);
-            _equipment.EquipItem(item);
-            _equipment.UnequipItem(item);
-            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.LEGS));
+            var stats= _character.GetStats();
+            var cachedStats = new KeyValuePair<string,int>[stats.Length];
+            stats.CopyTo(cachedStats,0);
+            
+            _inventory.FindItem(itemName, out var item);
+            var itemStatsArray = item.GetComponents<Stats>();
 
-            _inventory.FindItem(FireSword, out item);
             _equipment.EquipItem(item);
-            _equipment.UnequipItem(item);
-            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.RIGHT_HAND));
-
-            _inventory.FindItem(IceShield, out item);
-            _equipment.EquipItem(item);
-            _equipment.UnequipItem(item);
-            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.LEFT_HAND));
-
-            _inventory.FindItem(PlateMail, out item);
-            _equipment.EquipItem(item);
-            _equipment.UnequipItem(item);
-            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.BODY));
-
-            _inventory.FindItem(DivineHelmet, out item);
-            _equipment.EquipItem(item);
-            _equipment.UnequipItem(item);
-            Assert.AreEqual(false, _equipment.HasItem(EquipmentType.HEAD));
+            var currentStats= _character.GetStats();
+            
+            for (var i = 0; i < stats.Length; i++)
+            {
+                var itemStat = itemStatsArray.FirstOrDefault(t => t.Name == stats[i].Key);
+                if (itemStat == null)
+                    continue;
+                Assert.AreEqual( currentStats[i].Value-cachedStats[i].Value, itemStat.Value);
+            }
         }
+        
+        [TestCase(WindBoots)]
+        [TestCase(FireSword)]
+        [TestCase(IceShield)]
+        [TestCase(PlateMail)]
+        [TestCase(DivineHelmet)]
+        [Test]
+        public void WhenUnequip_CheckStats(string itemName)
+        {
+            var stats= _character.GetStats();
+            var cachedStats = new KeyValuePair<string,int>[stats.Length];
+            stats.CopyTo(cachedStats,0);
+            
+            _inventory.FindItem(itemName, out var item);
+            _equipment.EquipItem(item);
+            _equipment.UnequipItem(item);
 
+            var currentStats= _character.GetStats();
+            
+            for (var i = 0; i < stats.Length; i++)
+            {
+                Assert.AreEqual( currentStats[i].Value, cachedStats[i].Value);
+            }
+        }
+        
         [Test]
         public void SwapItems()
         {
@@ -164,46 +191,13 @@ namespace Sample
             _equipment.UnequipItem(item);
             Assert.AreEqual(false, _equipment.HasItem(EquipmentType.LEGS));
         }
-
+        
         [Test]
         public void UnequipEmpty()
         {
             _inventory.FindItem(WindBoots, out var item);
             _equipment.UnequipItem(item);
             Assert.AreEqual(false, _equipment.HasItem(EquipmentType.LEGS));
-        }
-
-        [Test]
-        public void WhenEquip_CheckStats()
-        {
-            _inventory.FindItem(WindBoots, out var item);
-
-            var defaultSpeed = _character.GetStat(SpeedStat);
-            var itemStatsArray = item.GetComponents<Stats>();
-            var itemSpeedStat = itemStatsArray.FirstOrDefault(t => t.Name == SpeedStat);
-
-            _equipment.EquipItem(item);
-            var currentSpeed = _character.GetStat(SpeedStat);
-            Assert.AreEqual(currentSpeed - defaultSpeed, itemSpeedStat.Value);
-        }
-
-        [Test]
-        public void WhenUnequip_CheckStats()
-        {
-            _inventory.FindItem(WindBoots, out var item);
-
-            var defaultSpeed = _character.GetStat(SpeedStat);
-            var itemStatsArray = item.GetComponents<Stats>();
-            var itemSpeedStat = itemStatsArray.FirstOrDefault(t => t.Name == SpeedStat);
-
-            _equipment.EquipItem(item);
-            var currentSpeed = _character.GetStat(SpeedStat);
-            Assert.AreEqual(currentSpeed - defaultSpeed, itemSpeedStat.Value);
-
-            _equipment.UnequipItem(item);
-
-            currentSpeed = _character.GetStat(SpeedStat);
-            Assert.AreEqual(defaultSpeed, currentSpeed);
         }
     }
 }
