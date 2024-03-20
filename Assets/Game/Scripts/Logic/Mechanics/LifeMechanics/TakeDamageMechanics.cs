@@ -1,38 +1,35 @@
 using Data.Event;
 using Data.Variable;
+using Logic.Data;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.LifeMechanics
 {
     public class TakeDamageMechanics
     {
-        private readonly IAtomicAction _death;
-        private readonly IAtomicVariable<int> _hitPoints;
-        private readonly IAtomicEvent<int> _takeDamage;
+        private readonly LifeData _lifeData;
 
-        public TakeDamageMechanics(IAtomicVariable<int> hitPoints, IAtomicEvent<int> takeDamage, IAtomicAction death)
+        public TakeDamageMechanics(LifeData lifeData)
         {
-            _hitPoints = hitPoints;
-            _takeDamage = takeDamage;
-            _death = death;
+            _lifeData = lifeData;
         }
 
         public void OnEnable()
         {
-            _takeDamage.Subscribe(OnTakeDamage);
+            _lifeData.TakeDamage.Subscribe(OnTakeDamage);
         }
 
         public void OnDisable()
         {
-            _takeDamage.Unsubscribe(OnTakeDamage);
+            _lifeData.TakeDamage.Unsubscribe(OnTakeDamage);
         }
 
         private void OnTakeDamage(int damage)
         {
-            var hitPoint = _hitPoints.Value - damage;
-            _hitPoints.Value = Mathf.Max(0, hitPoint);
+            var hitPoint = _lifeData.HitPoints.Value - damage;
+            _lifeData.HitPoints.Value = Mathf.Max(0, hitPoint);
 
-            if (_hitPoints.Value == 0) _death?.Invoke();
+            if ( _lifeData.HitPoints.Value == 0) _lifeData.DeathEvent?.Invoke();
         }
     }
 }

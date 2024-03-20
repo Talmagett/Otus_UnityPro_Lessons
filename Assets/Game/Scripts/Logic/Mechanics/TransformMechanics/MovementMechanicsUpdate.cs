@@ -1,29 +1,25 @@
 using Data.Variable;
+using Logic.Data;
 using UnityEngine;
 
 namespace Logic.Mechanics.TransformMechanics
 {
     public class MovementMechanicsUpdate
     {
-        private readonly IAtomicValue<bool> _canMove;
-        private readonly IAtomicValue<Vector3> _moveDirection;
-        private readonly IAtomicValue<float> _speed;
-        private readonly Transform _target;
-
-        public MovementMechanicsUpdate(IAtomicValue<float> speed, IAtomicValue<Vector3> moveDirection, Transform target,
-            IAtomicValue<bool> canMove)
+        private readonly MovementData _movementDataData;
+        private readonly Transform _transform;
+        
+        public MovementMechanicsUpdate(MovementData movementData, Transform transform)
         {
-            _speed = speed;
-            _moveDirection = moveDirection;
-            _target = target;
-            _canMove = canMove;
+            _movementDataData = movementData;
+            _transform = transform;
         }
 
         public void Update()
         {
-            if (!_canMove.Value) return;
+            if (!_movementDataData.CanMove.Value) return;
 
-            _target.position += _moveDirection.Value * _speed.Value * Time.deltaTime;
+            _transform.position += _movementDataData.MoveDirection.Value * (_movementDataData.Speed.Value * Time.deltaTime);
         }
     }
 }

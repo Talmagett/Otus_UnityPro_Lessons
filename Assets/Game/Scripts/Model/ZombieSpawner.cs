@@ -1,6 +1,9 @@
 using Data.Variable;
 using Logic;
+using Logic.Data;
 using Logic.Mechanics;
+using Logic.Mechanics.LifeMechanics;
+using Logic.Mechanics.TimeMechanics;
 using UnityEngine;
 using Zenject;
 

@@ -1,5 +1,6 @@
 using Data.Event;
 using Data.Variable;
+using Logic.Data;
 
 namespace Logic.Mechanics.ShootMechanics
 {

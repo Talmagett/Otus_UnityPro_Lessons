@@ -10,8 +10,8 @@ namespace Entity
 
         private void Awake()
         {
-            Add(new Component_Health(zombie.HitPoints));
-            Add(new Component_Damagable(zombie.TakeDamage));
+            Add(new Component_Health(zombie.Life.HitPoints));
+            Add(new Component_Damagable(zombie.Life.TakeDamage));
             Add(new Component_Position(transform));
         }
     }

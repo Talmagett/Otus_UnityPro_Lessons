@@ -10,12 +10,12 @@ namespace Visual.Zombie
 
         private void OnEnable()
         {
-            zombie.Death.Subscribe(OnAttack);
+            zombie.Life.DeathEvent.Subscribe(OnAttack);
         }
 
         private void OnDisable()
         {
-            zombie.Death.Unsubscribe(OnAttack);
+            zombie.Life.DeathEvent.Unsubscribe(OnAttack);
         }
 
         private void OnAttack()

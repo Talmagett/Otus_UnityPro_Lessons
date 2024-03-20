@@ -1,14 +1,14 @@
 using Data.Event;
 using UnityEngine;
 
-namespace Logic.Mechanics.LifeMechanics
+namespace Logic.Mechanics
 {
-    public class DestroyMechanics
+    public class HideGameObjectMechanics
     {
         private readonly IAtomicEvent _death;
         private readonly GameObject _gameObject;
 
-        public DestroyMechanics(IAtomicEvent death, GameObject gameObject)
+        public HideGameObjectMechanics(IAtomicEvent death, GameObject gameObject)
         {
             _death = death;
             _gameObject = gameObject;
@@ -26,7 +26,7 @@ namespace Logic.Mechanics.LifeMechanics
 
         private void OnDeath()
         {
-            Object.Destroy(_gameObject);
+            _gameObject.gameObject.SetActive(false);
         }
     }
 }

@@ -11,14 +11,14 @@ namespace Visual.Character
 
         private void OnEnable()
         {
-            character.FireEvent.Subscribe(OnFire);
-            character.TakeDamage.Subscribe(OnTakeDamage);
+            character.Attack.AttackEvent.Subscribe(OnFire);
+            character.Life.TakeDamage.Subscribe(OnTakeDamage);
         }
 
         private void OnDisable()
         {
-            character.FireEvent.Unsubscribe(OnFire);
-            character.TakeDamage.Unsubscribe(OnTakeDamage);
+            character.Attack.AttackEvent.Unsubscribe(OnFire);
+            character.Life.TakeDamage.Unsubscribe(OnTakeDamage);
         }
 
         private void OnTakeDamage(int value)

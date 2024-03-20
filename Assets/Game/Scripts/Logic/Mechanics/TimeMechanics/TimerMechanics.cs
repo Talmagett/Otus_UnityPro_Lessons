@@ -1,7 +1,7 @@
-using Data.Variable;
+using Logic.Data;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.TimeMechanics
 {
     public class TimerMechanics
     {

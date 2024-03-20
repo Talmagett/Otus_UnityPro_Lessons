@@ -24,9 +24,6 @@ namespace Model
 
         private void Update()
         {
-            if (_inputSystem.MoveDirection == Vector3.zero)
-                return;
-
             _componentMove.Move(_inputSystem.MoveDirection);
         }
     }

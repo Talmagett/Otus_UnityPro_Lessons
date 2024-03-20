@@ -34,14 +34,9 @@ namespace Systems
 
         private void Movement()
         {
-            MoveDirection = Vector3.zero;
-            if (Input.GetKey(KeyCode.W)) MoveDirection = Vector3.forward;
-
-            if (Input.GetKey(KeyCode.S)) MoveDirection = Vector3.back;
-
-            if (Input.GetKey(KeyCode.A)) MoveDirection = Vector3.left;
-
-            if (Input.GetKey(KeyCode.D)) MoveDirection = Vector3.right;
+            var horDir = Input.GetAxis("Horizontal");
+            var verDir = Input.GetAxis("Vertical");
+            MoveDirection = new Vector3(horDir, 0, verDir).normalized;
         }
 
         private void Shoot()

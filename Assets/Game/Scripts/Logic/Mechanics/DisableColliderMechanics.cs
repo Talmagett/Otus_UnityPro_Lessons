@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Logic.Mechanics
 {
-    public class HideMechanics
+    public class DisableColliderMechanics
     {
         private readonly IAtomicEvent _death;
-        private readonly GameObject _gameObject;
+        private readonly Collider _collider;
 
-        public HideMechanics(IAtomicEvent death, GameObject gameObject)
+        public DisableColliderMechanics(IAtomicEvent death, Collider collider)
         {
             _death = death;
-            _gameObject = gameObject;
+            _collider = collider;
         }
 
         public void OnEnable()
@@ -26,7 +26,7 @@ namespace Logic.Mechanics
 
         private void OnDeath()
         {
-            _gameObject.gameObject.SetActive(false);
+            _collider.enabled=false;
         }
     }
 }

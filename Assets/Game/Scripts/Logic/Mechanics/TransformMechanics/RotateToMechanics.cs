@@ -6,22 +6,22 @@ namespace Logic.Mechanics.TransformMechanics
     public class RotateToMechanics
     {
         private readonly IAtomicValue<bool> _canMove;
-        private readonly Transform _rotatingTransform;
+        private readonly IAtomicValue<float> _rotationSpeed;
+        private readonly Transform _transform;
         private readonly Transform _target;
-        private float _rotationSpeed=100f;
         
-        public RotateToMechanics(Transform rotatingTransform, Transform target, IAtomicValue<bool> canMove)
+        public RotateToMechanics(Transform transform, Transform target, IAtomicValue<bool> canMove,IAtomicValue<float> rotationSpeed)
         {
-            _rotatingTransform = rotatingTransform;
+            _transform = transform;
             _target = target;
             _canMove = canMove;
+            _rotationSpeed=rotationSpeed;
         }
 
         public void Update()
         {
             if (!_canMove.Value) return;
-            //var targetRotation = Quaternion.LookRotation(_target.position, Vector3.up);
-            //_rotatingTransform.rotation = Quaternion.Lerp(_rotatingTransform.rotation, targetRotation, _rotationSpeed*Time.deltaTime);
+            _transform.LookAt(_target,Vector3.up);
         }
     }
 }

@@ -1,35 +1,34 @@
 using Data.Event;
 using Data.Variable;
+using Logic.Data;
 using UnityEngine;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.LifeMechanics
 {
     public class DeathMechanics
     {
-        private readonly IAtomicEvent _death;
-        private readonly IAtomicVariable<bool> _isDead;
+        private readonly LifeData _lifeData;
 
-        public DeathMechanics(IAtomicVariable<bool> isDead, IAtomicEvent death)
+        public DeathMechanics(LifeData lifeData)
         {
-            _isDead = isDead;
-            _death = death;
+            _lifeData = lifeData;
         }
 
         public void OnEnable()
         {
-            _death.Subscribe(OnDeath);
+            _lifeData.DeathEvent.Subscribe(OnDeath);
         }
 
         public void OnDisable()
         {
-            _death.Unsubscribe(OnDeath);
+            _lifeData.DeathEvent.Unsubscribe(OnDeath);
         }
 
         private void OnDeath()
         {
-            if (_isDead.Value) return;
+            if (_lifeData.IsDead.Value) return;
 
-            _isDead.Value = true;
+            _lifeData.IsDead.Value = true;
             Debug.Log("Death");
         }
     }

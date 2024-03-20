@@ -31,8 +31,8 @@ namespace Logic.Mechanics.ShootMechanics
 
         private void OnFire()
         {
-            var bullet = Object.Instantiate(_bullet, _firePoint.position, _firePoint.rotation);
-            bullet.MoveDirection.Value = _transform.forward;
+            var bullet = Object.Instantiate(_bullet, _firePoint.position, _transform.rotation);
+            bullet.Movement.MoveDirection.Value = _transform.forward;
         }
     }
 }

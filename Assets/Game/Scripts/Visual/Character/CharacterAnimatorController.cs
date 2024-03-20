@@ -18,18 +18,17 @@ namespace Visual.Character
         private readonly AtomicEvent _fireRequest;
         private readonly IAtomicValue<bool> _isDead;
         private readonly IAtomicEvent<int> _hit;
-        private readonly AtomicEvent<Vector3> _onMoved;
-        private Vector3 _moveDirection;
+        private readonly IAtomicValue<Vector3> _moveDirection;
 
         public CharacterAnimatorController(
-            AtomicEvent<Vector3> onMoved,
+            IAtomicValue<Vector3> moveDirection,
             IAtomicValue<bool> isDead,
             AtomicEvent<int> hit,
             Animator animator,
             AtomicEvent fireRequest
         )
         {
-            _onMoved = onMoved;
+            _moveDirection = moveDirection;
             _isDead = isDead;
             _hit = hit;
             _animator = animator;
@@ -39,26 +38,18 @@ namespace Visual.Character
         public void OnEnable()
         {
             _fireRequest.Subscribe(OnFireRequested);
-            _onMoved.Subscribe(OnMoved);
             _hit.Subscribe(OnHit);
         }
-
 
         public void OnDisable()
         {
             _fireRequest.Unsubscribe(OnFireRequested);
-            _onMoved.Unsubscribe(OnMoved);
             _hit.Unsubscribe(OnHit);
         }
 
         private void OnHit(int damage)
         {
             _animator.SetTrigger(HitTrigger);
-        }
-        
-        private void OnMoved(Vector3 direction)
-        {
-            _moveDirection = direction;
         }
         
         private void OnFireRequested()
@@ -75,7 +66,7 @@ namespace Visual.Character
         {
             if (_isDead.Value) return Death;
             
-            if (_moveDirection != Vector3.zero)
+            if (_moveDirection.Value != Vector3.zero)
             {
                 return Move;
             }

@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Entity.Components
 {
-    public class Component_Move : IComponent_Move
+    public class Component_MoveEvent : IComponent_Move
     {
         private readonly IAtomicAction<Vector3> _moved;
 
-        public Component_Move(IAtomicAction<Vector3> moved)
+        public Component_MoveEvent(IAtomicAction<Vector3> moved)
         {
             _moved = moved;
         }

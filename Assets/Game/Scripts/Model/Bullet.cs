@@ -1,6 +1,9 @@
 using Data.Event;
 using Data.Variable;
+using Logic;
+using Logic.Data;
 using Logic.Mechanics;
+using Logic.Mechanics.LifeMechanics;
 using Logic.Mechanics.ShootMechanics;
 using Logic.Mechanics.TransformMechanics;
 using UnityEngine;
@@ -10,10 +13,8 @@ namespace Model
     public class Bullet : MonoBehaviour
     {
         //Data:
-        public AtomicVariable<float> Speed;
-        public AtomicVariable<Vector3> MoveDirection;
-        public AtomicVariable<bool> CanMove;
-
+        public MovementData Movement;
+        
         public AtomicVariable<int> Damage;
         public AtomicVariable<float> LifeTime;
         public AtomicEvent Death;
@@ -26,7 +27,7 @@ namespace Model
 
         private void Awake()
         {
-            _movementMechanicsUpdate = new MovementMechanicsUpdate(Speed, MoveDirection, transform, CanMove);
+            _movementMechanicsUpdate = new MovementMechanicsUpdate(Movement, transform);
             _bulletCollisionMechanics = new BulletCollisionMechanics(Damage, Death);
             _lifeTimeMechanics = new LifeTimeMechanics(LifeTime, Death);
             _destroyMechanics = new DestroyMechanics(Death, gameObject);
@@ -50,7 +51,6 @@ namespace Model
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("on trigger enter");
             _bulletCollisionMechanics.OnTriggerEnter(other);
         }
     }

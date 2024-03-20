@@ -11,12 +11,12 @@ namespace Visual.Character
 
         private void OnEnable()
         {
-            character.TakeDamage.Subscribe(OnTakeDamage);
+            character.Life.TakeDamage.Subscribe(OnTakeDamage);
         }
 
         private void OnDisable()
         {
-            character.TakeDamage.Unsubscribe(OnTakeDamage);
+            character.Life.TakeDamage.Unsubscribe(OnTakeDamage);
         }
 
         private void OnTakeDamage(int obj)

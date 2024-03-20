@@ -1,9 +1,8 @@
 using Data.Event;
-using Data.Variable;
 using UnityEngine;
 using Zenject;
 
-namespace Logic.Mechanics
+namespace Logic.Mechanics.LifeMechanics
 {
     public class SpawnMechanics
     {

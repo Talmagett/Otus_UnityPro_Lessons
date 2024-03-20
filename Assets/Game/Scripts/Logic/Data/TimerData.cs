@@ -1,7 +1,7 @@
 using Data.Event;
 using Data.Variable;
 
-namespace Logic
+namespace Logic.Data
 {
     [System.Serializable]
     public class TimerData

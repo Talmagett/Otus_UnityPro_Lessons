@@ -1,8 +1,11 @@
 using Data.Event;
 using Data.Variable;
 using Logic;
+using Logic.Data;
 using Logic.Mechanics;
+using Logic.Mechanics.LifeMechanics;
 using Logic.Mechanics.ShootMechanics;
+using Logic.Mechanics.TimeMechanics;
 using Logic.Mechanics.TransformMechanics;
 using UnityEngine;
 
@@ -11,28 +14,18 @@ namespace Model
     public class Character : MonoBehaviour
     {
         //Data:
-        public AtomicVariable<int> HitPoints;
-        public AtomicEvent<int> TakeDamage;
-
-        public AtomicVariable<bool> IsDead;
-        public AtomicEvent Death;
-
-        public AtomicEvent<Vector3> Moved;
-        public AtomicVariable<float> Speed;
-        public AtomicVariable<bool> CanMove;
-        public AtomicEvent<Vector3> Rotated;
-
-        [Header("Shoot")] public AtomicEvent FireRequest;
-
+        public LifeData Life;
+        public MovementData Movement;
+        public AtomicEvent<Vector3> RotatedEvent;
+        
         public ResourceData BulletsData;
         public TimerData AmmoRefillTimer;
         public TimerData AttackCooldownTimer;
-        public AtomicVariable<bool> CanShoot;
         
-        public AtomicEvent FireEvent;
+        public AttackData Attack;
         public Transform FirePoint;
         public Bullet BulletPrefab;
-        
+
         //Logic:
         private AmmoMechanics _ammoMechanics;
         private AmmoRefillMechanics _ammoRefillMechanics;
@@ -49,18 +42,19 @@ namespace Model
 
         private void Awake()
         {
-            _takeDamageMechanics = new TakeDamageMechanics(HitPoints, TakeDamage, Death);
-            _deathMechanics = new DeathMechanics(IsDead, Death);
-            _movementMechanicsEvent = new MovementMechanicsEvent(Speed, Moved, transform);
-            _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
-            _rotateMechanicsEvent = new RotateMechanicsEvent(Rotated, transform);
+            _takeDamageMechanics = new TakeDamageMechanics(Life);
+            _deathMechanics = new DeathMechanics(Life);
+            
+            _movementMechanicsEvent = new MovementMechanicsEvent(Movement, transform);
+            _canMoveMechanics = new CanMoveMechanics(Movement.CanMove, Life.IsDead);
+            _rotateMechanicsEvent = new RotateMechanicsEvent(RotatedEvent, transform);
 
             _refillTimerMechanics = new TimerMechanics(AmmoRefillTimer);
             _ammoRefillMechanics = new AmmoRefillMechanics(BulletsData, AmmoRefillTimer);
-            _canShootMechanics = new CanShootMechanics(CanShoot,BulletsData.Count,AttackCooldownTimer.Finished);
-            _ammoMechanics = new AmmoMechanics(FireRequest, BulletsData.Count, CanShoot, FireEvent);
+            _canShootMechanics = new CanShootMechanics(Attack.CanAttack,BulletsData.Count,AttackCooldownTimer.Finished);
+            _ammoMechanics = new AmmoMechanics(Attack, BulletsData.Count, AttackCooldownTimer.Finished);
             _attackCooldownTimerMechanics = new TimerMechanics(AttackCooldownTimer);
-            _shootMechanics = new ShootMechanics(FireEvent, FirePoint, BulletPrefab, transform);
+            _shootMechanics = new ShootMechanics(Attack.AttackEvent, FirePoint, BulletPrefab, transform);
         }
 
         private void Update()
