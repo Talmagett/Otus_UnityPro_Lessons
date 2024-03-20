@@ -2,7 +2,7 @@ using Data.Event;
 
 namespace Entity.Components
 {
-    public class Component_AttackEvent:IComponent_AttackEvent
+    public class Component_AttackEvent : IComponent_AttackEvent
     {
         private readonly IAtomicAction _attackEvent;
 

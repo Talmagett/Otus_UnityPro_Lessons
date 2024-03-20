@@ -7,13 +7,24 @@ namespace Entity.Components
     {
         private readonly IAtomicVariable<int> _bulletsCount;
         private readonly IAtomicVariable<int> _bulletsMaxCount;
-        public event Action<int> OnCountChanged;
 
         public Component_Ammo(IAtomicVariable<int> characterBulletsCount, AtomicVariable<int> characterBulletsMaxCount)
         {
             _bulletsCount = characterBulletsCount;
             _bulletsMaxCount = characterBulletsMaxCount;
             _bulletsCount.ValueChanged += OnCountChangedInvoke;
+        }
+
+        public event Action<int> OnCountChanged;
+
+        public int GetBulletsCount()
+        {
+            return _bulletsCount.Value;
+        }
+
+        public int GetBulletsMaxCount()
+        {
+            return _bulletsMaxCount.Value;
         }
 
         public void Dispose()
@@ -24,16 +35,6 @@ namespace Entity.Components
         private void OnCountChangedInvoke(int count)
         {
             OnCountChanged?.Invoke(count);
-        }
-
-        public int GetBulletsCount()
-        {
-            return _bulletsCount.Value;
-        }
-
-        public int GetBulletsMaxCount()
-        {
-            return _bulletsMaxCount.Value;
         }
     }
 }

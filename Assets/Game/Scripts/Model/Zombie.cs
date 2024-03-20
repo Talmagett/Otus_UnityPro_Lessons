@@ -1,8 +1,5 @@
-using System;
-using Data.Event;
 using Data.Variable;
 using Entity;
-using Logic;
 using Logic.Data;
 using Logic.Mechanics;
 using Logic.Mechanics.LifeMechanics;
@@ -24,38 +21,33 @@ namespace Model
 
         public TimerData AttackCooldownTimer;
         public AttackData Attack;
-        private CharacterEntity _characterEntity;
+
+        private TimerMechanics _attackTimerMechanics;
 
         //Logic:
         private CanMoveMechanics _canMoveMechanics;
+        private CharacterEntity _characterEntity;
         private DeathMechanics _deathMechanics;
-        private HideGameObjectMechanics _hideGameObjectMechanics;
-        private DisableColliderMechanics _disableColliderMechanics;
         private DestroyMechanics _destroyMechanics;
+        private DisableColliderMechanics _disableColliderMechanics;
+        private HideGameObjectMechanics _hideGameObjectMechanics;
+        private MeleeAttackMechanics _meleeAttackMechanics;
         private MoveToTargetMechanics _moveToTargetMechanics;
         private RotateToMechanics _rotateMechanics;
-
-        private TimerMechanics _attackTimerMechanics;
-        private MeleeAttackMechanics _meleeAttackMechanics;
         private TakeDamageMechanics _takeDamageMechanics;
-        
-        [Inject]
-        public void Construct(CharacterEntity characterEntity)
-        {
-            _characterEntity = characterEntity;
-        }
-        
+
         private void Awake()
         {
             _takeDamageMechanics = new TakeDamageMechanics(Life);
             _deathMechanics = new DeathMechanics(Life);
             _hideGameObjectMechanics = new HideGameObjectMechanics(Life.DeathEvent, GameObjectToHide.Value);
-            _disableColliderMechanics = new DisableColliderMechanics(Life.DeathEvent,ColliderToDisable.Value);
+            _disableColliderMechanics = new DisableColliderMechanics(Life.DeathEvent, ColliderToDisable.Value);
             //_destroyMechanics = new DestroyMechanics(Death, gameObject);
-            _moveToTargetMechanics = new MoveToTargetMechanics(Movement,transform, _characterEntity.transform);
-            _rotateMechanics = new RotateToMechanics(transform, _characterEntity.transform, Movement.CanMove,rotationSpeed);
+            _moveToTargetMechanics = new MoveToTargetMechanics(Movement, transform, _characterEntity.transform);
+            _rotateMechanics =
+                new RotateToMechanics(transform, _characterEntity.transform, Movement.CanMove, rotationSpeed);
             _canMoveMechanics = new CanMoveMechanics(Movement.CanMove, Life.IsDead);
-            _meleeAttackMechanics = new MeleeAttackMechanics(Attack,GetComponent<Entity.Entity>());
+            _meleeAttackMechanics = new MeleeAttackMechanics(Attack, GetComponent<Entity.Entity>());
             _attackTimerMechanics = new TimerMechanics(AttackCooldownTimer);
         }
 
@@ -86,8 +78,14 @@ namespace Model
         }
 
         private void OnCollisionEnter(Collision other)
-        {            
+        {
             _meleeAttackMechanics.OnTriggerEnter(other.collider);
+        }
+
+        [Inject]
+        public void Construct(CharacterEntity characterEntity)
+        {
+            _characterEntity = characterEntity;
         }
     }
 }

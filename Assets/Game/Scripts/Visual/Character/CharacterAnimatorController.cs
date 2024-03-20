@@ -9,15 +9,15 @@ namespace Visual.Character
         private const int Idle = 0;
         private const int Move = 1;
         private const int Death = 2;
-        
+
         private static readonly int MainState = Animator.StringToHash("MainState");
         private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
         private static readonly int HitTrigger = Animator.StringToHash("Hit");
-        
+
         private readonly Animator _animator;
         private readonly AtomicEvent _fireRequest;
-        private readonly IAtomicValue<bool> _isDead;
         private readonly IAtomicEvent<int> _hit;
+        private readonly IAtomicValue<bool> _isDead;
         private readonly IAtomicValue<Vector3> _moveDirection;
 
         public CharacterAnimatorController(
@@ -51,7 +51,7 @@ namespace Visual.Character
         {
             _animator.SetTrigger(HitTrigger);
         }
-        
+
         private void OnFireRequested()
         {
             _animator.SetTrigger(ShootTrigger);
@@ -65,11 +65,8 @@ namespace Visual.Character
         private int GetAnimationValue()
         {
             if (_isDead.Value) return Death;
-            
-            if (_moveDirection.Value != Vector3.zero)
-            {
-                return Move;
-            }
+
+            if (_moveDirection.Value != Vector3.zero) return Move;
 
             return Idle;
         }

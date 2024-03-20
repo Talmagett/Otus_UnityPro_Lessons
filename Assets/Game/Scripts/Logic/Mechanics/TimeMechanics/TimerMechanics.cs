@@ -6,6 +6,7 @@ namespace Logic.Mechanics.TimeMechanics
     public class TimerMechanics
     {
         private readonly TimerData _timer;
+
         public TimerMechanics(TimerData timer)
         {
             _timer = timer;
@@ -24,7 +25,9 @@ namespace Logic.Mechanics.TimeMechanics
         private void RefreshTimer()
         {
             _timer.TimerCounter.Value = _timer.MaxTime.Value;
-            _timer.Finished.Value = false;
+
+            if (_timer.AutoStart.Value)
+                _timer.Finished.Value = false;
         }
 
         public void Update()
@@ -32,11 +35,19 @@ namespace Logic.Mechanics.TimeMechanics
             if (!_timer.CanCount.Value)
                 return;
 
-            _timer.TimerCounter.Value -= Time.deltaTime;
-            
-            if (!(_timer.TimerCounter.Value <= 0)) 
+            if (_timer.AutoStart.Value)
+            {
+                _timer.TimerCounter.Value -= Time.deltaTime;
+            }
+            else
+            {
+                if (!_timer.Finished.Value)
+                    _timer.TimerCounter.Value -= Time.deltaTime;
+            }
+
+            if (!(_timer.TimerCounter.Value <= 0))
                 return;
-            
+
             _timer.Finished.Value = true;
             _timer.FinishEvent.Invoke();
         }

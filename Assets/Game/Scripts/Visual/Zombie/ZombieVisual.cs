@@ -13,7 +13,8 @@ namespace Visual.Zombie
 
         private void Awake()
         {
-            _zombieAnimatorController = new ZombieAnimatorController(character.Life.IsDead, animator, character.Attack.AttackEvent);
+            _zombieAnimatorController =
+                new ZombieAnimatorController(character.Life.IsDead, animator, character.Attack.AttackEvent);
         }
 
         public void Update()

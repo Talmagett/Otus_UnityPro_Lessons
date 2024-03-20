@@ -1,8 +1,9 @@
+using System;
 using Data.Variable;
 
 namespace Logic.Data
 {
-    [System.Serializable]
+    [Serializable]
     public class ResourceData
     {
         public AtomicVariable<int> Count;

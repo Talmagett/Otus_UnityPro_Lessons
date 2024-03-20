@@ -7,21 +7,22 @@ namespace Logic.Mechanics.TransformMechanics
     {
         private readonly IAtomicValue<bool> _canMove;
         private readonly IAtomicValue<float> _rotationSpeed;
-        private readonly Transform _transform;
         private readonly Transform _target;
-        
-        public RotateToMechanics(Transform transform, Transform target, IAtomicValue<bool> canMove,IAtomicValue<float> rotationSpeed)
+        private readonly Transform _transform;
+
+        public RotateToMechanics(Transform transform, Transform target, IAtomicValue<bool> canMove,
+            IAtomicValue<float> rotationSpeed)
         {
             _transform = transform;
             _target = target;
             _canMove = canMove;
-            _rotationSpeed=rotationSpeed;
+            _rotationSpeed = rotationSpeed;
         }
 
         public void Update()
         {
             if (!_canMove.Value) return;
-            _transform.LookAt(_target,Vector3.up);
+            _transform.LookAt(_target, Vector3.up);
         }
     }
 }

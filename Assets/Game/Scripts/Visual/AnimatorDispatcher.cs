@@ -10,10 +10,8 @@ namespace Visual
         public void ReceiveEvent(string value)
         {
             if (value is "shoot" or "attack")
-            {
                 if (entity.TryComponent(out IComponent_AttackEvent attackEvent))
                     attackEvent.Attack();
-            }
         }
     }
 }

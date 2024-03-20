@@ -1,9 +1,10 @@
+using System;
 using Data.Event;
 using Data.Variable;
 
 namespace Logic.Data
 {
-    [System.Serializable]
+    [Serializable]
     public class AttackData
     {
         public AtomicVariable<bool> CanAttack;

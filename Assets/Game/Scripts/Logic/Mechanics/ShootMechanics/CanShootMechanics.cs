@@ -4,8 +4,8 @@ namespace Logic.Mechanics.ShootMechanics
 {
     public class CanShootMechanics
     {
-        private readonly IAtomicVariable<bool> _canShoot;
         private readonly IAtomicVariable<int> _bulletsCount;
+        private readonly IAtomicVariable<bool> _canShoot;
         private readonly IAtomicVariable<bool> _isCooldownFinished;
 
         public CanShootMechanics(IAtomicVariable<bool> canShoot, IAtomicVariable<int> bulletsCount,
@@ -27,7 +27,7 @@ namespace Logic.Mechanics.ShootMechanics
             _bulletsCount.ValueChanged -= OnBulletsCountChanged;
             _isCooldownFinished.ValueChanged -= OnIsCooldownFinishedChanged;
         }
-        
+
         private void OnBulletsCountChanged(int count)
         {
             CheckCanShoot();

@@ -6,8 +6,8 @@ namespace Logic.Mechanics.LifeMechanics
 {
     public class SpawnMechanics
     {
-        private readonly IAtomicEvent _onSpawn;
         private readonly DiContainer _diContainer;
+        private readonly IAtomicEvent _onSpawn;
         private readonly Transform _parent;
         private readonly GameObject _spawningObject;
 
@@ -29,7 +29,7 @@ namespace Logic.Mechanics.LifeMechanics
         {
             _onSpawn.Unsubscribe(Spawn);
         }
-        
+
         private void Spawn()
         {
             var randPos = Random.insideUnitSphere * 10;

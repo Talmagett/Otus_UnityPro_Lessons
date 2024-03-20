@@ -2,7 +2,6 @@ using Entity;
 using Entity.Components;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace Visual.UI
 {

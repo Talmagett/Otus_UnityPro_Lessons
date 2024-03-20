@@ -5,7 +5,7 @@ namespace Logic.Mechanics.TransformMechanics
 {
     public class MoveToTargetMechanics
     {
-        private readonly MovementData _movementData; 
+        private readonly MovementData _movementData;
         private readonly Transform _movingTransform;
         private readonly Transform _target;
 

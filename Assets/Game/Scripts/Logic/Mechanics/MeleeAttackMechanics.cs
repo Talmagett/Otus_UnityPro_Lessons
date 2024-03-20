@@ -1,4 +1,3 @@
-using Data.Variable;
 using Entity.Components;
 using Logic.Data;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Logic.Mechanics
         private readonly AttackData _attack;
         private readonly Entity.Entity _attacker;
 
-        public MeleeAttackMechanics(AttackData attack,Entity.Entity attacker)
+        public MeleeAttackMechanics(AttackData attack, Entity.Entity attacker)
         {
             _attack = attack;
             _attacker = attacker;

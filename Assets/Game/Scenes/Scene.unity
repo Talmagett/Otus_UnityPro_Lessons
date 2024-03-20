@@ -703,8 +703,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6999956626092580106, guid: 3b5b2ae0f895574449961910366cbf8a,
         type: 3}
+      propertyPath: AmmoRefillTimer.Finished._value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999956626092580106, guid: 3b5b2ae0f895574449961910366cbf8a,
+        type: 3}
       propertyPath: AttackCooldownTimer.MaxTime._value
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999956626092580106, guid: 3b5b2ae0f895574449961910366cbf8a,
+        type: 3}
+      propertyPath: AttackCooldownTimer.Finished._value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b5b2ae0f895574449961910366cbf8a, type: 3}
@@ -1622,6 +1632,8 @@ MonoBehaviour:
     _value: {fileID: 1902157811}
   SpawnTimer:
     CanCount:
+      _value: 1
+    AutoStart:
       _value: 1
     MaxTime:
       _value: 1

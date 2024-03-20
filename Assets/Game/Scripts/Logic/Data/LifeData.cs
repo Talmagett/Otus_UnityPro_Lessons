@@ -1,9 +1,10 @@
+using System;
 using Data.Event;
 using Data.Variable;
 
 namespace Logic.Data
 {
-    [System.Serializable]
+    [Serializable]
     public class LifeData
     {
         public AtomicVariable<int> HitPoints;

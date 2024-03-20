@@ -1,8 +1,6 @@
 using Data.Event;
 using Data.Variable;
-using Logic;
 using Logic.Data;
-using Logic.Mechanics;
 using Logic.Mechanics.LifeMechanics;
 using Logic.Mechanics.ShootMechanics;
 using Logic.Mechanics.TransformMechanics;
@@ -14,11 +12,11 @@ namespace Model
     {
         //Data:
         public MovementData Movement;
-        
+
         public AtomicVariable<int> Damage;
         public AtomicVariable<float> LifeTime;
         public AtomicEvent Death;
-        
+
         //Logic:
         private BulletCollisionMechanics _bulletCollisionMechanics;
         private DestroyMechanics _destroyMechanics;

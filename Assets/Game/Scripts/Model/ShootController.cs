@@ -12,12 +12,6 @@ namespace Model
 
         private InputSystem _inputSystem;
 
-        [Inject]
-        public void Construct(InputSystem inputSystem)
-        {
-            _inputSystem = inputSystem;
-        }
-        
         private void Start()
         {
             entity.TryComponent(out _componentShoot);
@@ -31,6 +25,12 @@ namespace Model
         private void OnDisable()
         {
             _inputSystem.OnShootRequest -= ShootRequest;
+        }
+
+        [Inject]
+        public void Construct(InputSystem inputSystem)
+        {
+            _inputSystem = inputSystem;
         }
 
         private void ShootRequest()

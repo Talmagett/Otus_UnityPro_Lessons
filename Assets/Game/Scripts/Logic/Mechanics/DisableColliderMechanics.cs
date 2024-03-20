@@ -5,8 +5,8 @@ namespace Logic.Mechanics
 {
     public class DisableColliderMechanics
     {
-        private readonly IAtomicEvent _death;
         private readonly Collider _collider;
+        private readonly IAtomicEvent _death;
 
         public DisableColliderMechanics(IAtomicEvent death, Collider collider)
         {
@@ -26,7 +26,7 @@ namespace Logic.Mechanics
 
         private void OnDeath()
         {
-            _collider.enabled=false;
+            _collider.enabled = false;
         }
     }
 }

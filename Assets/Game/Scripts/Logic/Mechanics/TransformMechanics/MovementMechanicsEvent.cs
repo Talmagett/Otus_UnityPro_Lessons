@@ -7,7 +7,7 @@ namespace Logic.Mechanics.TransformMechanics
     {
         private readonly MovementData _movementDataData;
         private readonly Transform _transform;
-        
+
         public MovementMechanicsEvent(MovementData movementData, Transform transform)
         {
             _movementDataData = movementData;
@@ -23,7 +23,7 @@ namespace Logic.Mechanics.TransformMechanics
         {
             _movementDataData.MovedEvent.Unsubscribe(OnMoved);
         }
-        
+
         private void OnMoved(Vector3 moveDirection)
         {
             _movementDataData.MoveDirection.Value = moveDirection;

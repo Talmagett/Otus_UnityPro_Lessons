@@ -8,6 +8,7 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     [SerializeField] private CharacterEntity player; // ReSharper disable Unity.PerformanceAnalysis
+
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<InputSystem>().AsSingle().NonLazy();

@@ -1,4 +1,3 @@
-using System;
 using Data.Variable;
 using Systems;
 using UnityEngine;
@@ -9,7 +8,7 @@ namespace Visual.UI
     {
         public AtomicVariable<GameRules> gameRules;
         public AtomicVariable<GameObject> gameOverPanel;
-            
+
         private void OnEnable()
         {
             gameRules.Value.isGameOver.ValueChanged += SetVisible;

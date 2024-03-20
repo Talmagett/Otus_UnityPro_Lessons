@@ -1,5 +1,3 @@
-using Data.Event;
-using Data.Variable;
 using Logic.Data;
 using UnityEngine;
 
@@ -29,7 +27,7 @@ namespace Logic.Mechanics.LifeMechanics
             var hitPoint = _lifeData.HitPoints.Value - damage;
             _lifeData.HitPoints.Value = Mathf.Max(0, hitPoint);
 
-            if ( _lifeData.HitPoints.Value == 0) _lifeData.DeathEvent?.Invoke();
+            if (_lifeData.HitPoints.Value == 0) _lifeData.DeathEvent?.Invoke();
         }
     }
 }

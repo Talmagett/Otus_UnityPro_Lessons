@@ -195,7 +195,7 @@ MonoBehaviour:
     CanCount:
       _value: 0
     MaxTime:
-      _value: 0
+      _value: 1
     TimerCounter:
       _value: 0
     Finished:
