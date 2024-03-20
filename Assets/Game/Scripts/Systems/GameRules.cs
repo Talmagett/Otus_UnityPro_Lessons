@@ -1,25 +1,35 @@
+using Data.Variable;
 using Entity;
 using Entity.Components;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace Systems
 {
     public class GameRules : MonoBehaviour
     {
-        [SerializeField] private CharacterEntity characterEntity;
+        public AtomicVariable<bool> isGameOver;
+        
         private IComponent_Health _componentHealth;
-        private bool _isGameOver;
+        private CharacterEntity _characterEntity;
 
+        [Inject]
+        public void Construct(CharacterEntity characterEntity)
+        {
+            _characterEntity = characterEntity;
+        }
+        
         private void Start()
         {
-            characterEntity.TryComponent(out _componentHealth);
+            _characterEntity.TryComponent(out _componentHealth);
         }
 
         public void Update()
         {
-            if (_isGameOver || _componentHealth.GetHealth() > 0) return;
+            if (isGameOver.Value || _componentHealth.GetHealth() > 0) return;
 
-            _isGameOver = true;
+            isGameOver.Value = true;
             Debug.Log("GameOver");
             Time.timeScale = 0;
         }

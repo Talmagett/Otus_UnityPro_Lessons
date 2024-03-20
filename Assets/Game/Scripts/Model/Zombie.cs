@@ -16,9 +16,9 @@ namespace Model
 
         public AtomicVariable<bool> IsDead;
         public AtomicEvent Death;
-
+        public AtomicVariable<GameObject> GameObjectToHide;
+        
         public AtomicVariable<float> Speed;
-
         public AtomicVariable<bool> CanMove;
 
         public AtomicVariable<float> AttackSpeedMaxSpeed;
@@ -30,10 +30,11 @@ namespace Model
         //Logic:
         private CanMoveMechanics _canMoveMechanics;
         private DeathMechanics _deathMechanics;
+        private HideMechanics _hideMechanics;
         private DestroyMechanics _destroyMechanics;
         private MoveToTargetMechanics _moveToTargetMechanics;
         private RotateToMechanics _rotateMechanics;
-        private TimerMechanics _attackTimerMechanics;
+        //private TimerMechanics _attackTimerMechanics;
         private TakeDamageMechanics _takeDamageMechanics;
         
         private CharacterEntity _characterEntity;
@@ -42,11 +43,12 @@ namespace Model
         {
             _takeDamageMechanics = new TakeDamageMechanics(HitPoints, TakeDamage, Death);
             _deathMechanics = new DeathMechanics(IsDead, Death);
-            _destroyMechanics = new DestroyMechanics(Death, gameObject);
+            _hideMechanics = new HideMechanics(Death, GameObjectToHide.Value);
+            //_destroyMechanics = new DestroyMechanics(Death, gameObject);
             _moveToTargetMechanics = new MoveToTargetMechanics(Speed, transform, _characterEntity.transform, CanMove);
             _rotateMechanics = new RotateToMechanics(transform, _characterEntity.transform, CanMove);
             _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
-            _attackTimerMechanics = new TimerMechanics(AttackSpeedTimer, AttackSpeedMaxSpeed, AttackSpeedTimerFinished);
+            //_attackTimerMechanics = new TimerMechanics(AttackSpeedTimer, AttackSpeedMaxSpeed, AttackSpeedTimerFinished);
         }
 
         private void Update()
@@ -54,23 +56,23 @@ namespace Model
             _canMoveMechanics.Update();
             _moveToTargetMechanics.Update();
             _rotateMechanics.Update();
-            _attackTimerMechanics.Update();
+            //_attackTimerMechanics.Update();
         }
 
         private void OnEnable()
         {
             _takeDamageMechanics.OnEnable();
             _deathMechanics.OnEnable();
-            _destroyMechanics.OnEnable();
-            _attackTimerMechanics.OnEnable();
+            _hideMechanics.OnEnable();
+            //_attackTimerMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _takeDamageMechanics.OnDisable();
             _deathMechanics.OnDisable();
-            _destroyMechanics.OnDisable();
-            _attackTimerMechanics.OnDisable();
+            _hideMechanics.OnDisable();
+            //_attackTimerMechanics.OnDisable();
         }
 
         [Inject]

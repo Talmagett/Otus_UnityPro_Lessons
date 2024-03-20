@@ -1,5 +1,6 @@
 using Data.Event;
 using Data.Variable;
+using Logic;
 using Logic.Mechanics;
 using Logic.Mechanics.ShootMechanics;
 using Logic.Mechanics.TransformMechanics;
@@ -23,14 +24,11 @@ namespace Model
 
         [Header("Shoot")] public AtomicEvent FireRequest;
 
-        public AtomicVariable<int> BulletsCount;
-        public AtomicVariable<int> BulletsMaxCount;
+        public ResourceData BulletsData;
+        public TimerData AmmoRefillTimer;
+        public TimerData AttackCooldownTimer;
         public AtomicVariable<bool> CanShoot;
-
-        public AtomicVariable<float> RefillTimer;
-        public AtomicVariable<float> RefillMaxTime;
-        public AtomicVariable<bool> OnRefilled;
-
+        
         public AtomicEvent FireEvent;
         public Transform FirePoint;
         public Bullet BulletPrefab;
@@ -44,6 +42,7 @@ namespace Model
         private MovementMechanicsEvent _movementMechanicsEvent;
 
         private TimerMechanics _refillTimerMechanics;
+        private TimerMechanics _attackCooldownTimerMechanics;
         private RotateMechanicsEvent _rotateMechanicsEvent;
         private ShootMechanics _shootMechanics;
         private TakeDamageMechanics _takeDamageMechanics;
@@ -56,10 +55,11 @@ namespace Model
             _canMoveMechanics = new CanMoveMechanics(CanMove, IsDead);
             _rotateMechanicsEvent = new RotateMechanicsEvent(Rotated, transform);
 
-            _refillTimerMechanics = new TimerMechanics(RefillTimer, RefillMaxTime, OnRefilled);
-            _ammoRefillMechanics = new AmmoRefillMechanics(BulletsCount, BulletsMaxCount, OnRefilled);
-            _canShootMechanics = new CanShootMechanics(BulletsCount, CanShoot);
-            _ammoMechanics = new AmmoMechanics(FireRequest, BulletsCount, CanShoot, FireEvent);
+            _refillTimerMechanics = new TimerMechanics(AmmoRefillTimer);
+            _ammoRefillMechanics = new AmmoRefillMechanics(BulletsData, AmmoRefillTimer);
+            _canShootMechanics = new CanShootMechanics(CanShoot,BulletsData.Count,AttackCooldownTimer.Finished);
+            _ammoMechanics = new AmmoMechanics(FireRequest, BulletsData.Count, CanShoot, FireEvent);
+            _attackCooldownTimerMechanics = new TimerMechanics(AttackCooldownTimer);
             _shootMechanics = new ShootMechanics(FireEvent, FirePoint, BulletPrefab, transform);
         }
 
@@ -67,30 +67,35 @@ namespace Model
         {
             _canMoveMechanics.Update();
             _refillTimerMechanics.Update();
-            _ammoRefillMechanics.Update();
-            _canShootMechanics.Update();
+            _attackCooldownTimerMechanics.Update();
         }
 
         private void OnEnable()
         {
             _takeDamageMechanics.OnEnable();
             _deathMechanics.OnEnable();
+            _ammoRefillMechanics.OnEnable();
             _shootMechanics.OnEnable();
             _movementMechanicsEvent.OnEnable();
             _rotateMechanicsEvent.OnEnable();
             _ammoMechanics.OnEnable();
             _refillTimerMechanics.OnEnable();
+            _canShootMechanics.OnEnable();
+            _attackCooldownTimerMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _movementMechanicsEvent.OnDisable();
             _rotateMechanicsEvent.OnDisable();
+            _ammoRefillMechanics.OnDisable();
             _takeDamageMechanics.OnDisable();
             _deathMechanics.OnDisable();
             _shootMechanics.OnDisable();
             _ammoMechanics.OnDisable();
             _refillTimerMechanics.OnDisable();
+            _canShootMechanics.OnDisable();
+            _attackCooldownTimerMechanics.OnDisable();
         }
     }
 }

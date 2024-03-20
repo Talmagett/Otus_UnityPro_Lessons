@@ -1,27 +1,39 @@
+using Data.Event;
 using Data.Variable;
 
 namespace Logic.Mechanics.ShootMechanics
 {
     public class AmmoRefillMechanics
     {
-        private readonly IAtomicVariable<int> _bulletsCount;
-        private readonly IAtomicVariable<int> _bulletsMaxCount;
-        private readonly IAtomicVariable<bool> _onRefilled;
+        private readonly TimerData _onRefillTimer;
+        private readonly ResourceData _ammoResource;
 
-        public AmmoRefillMechanics(IAtomicVariable<int> bulletsCount, IAtomicVariable<int> bulletsMaxCount,
-            IAtomicVariable<bool> onRefilled)
+        public AmmoRefillMechanics(ResourceData ammoResource, TimerData onRefillTimer)
         {
-            _bulletsCount = bulletsCount;
-            _bulletsMaxCount = bulletsMaxCount;
-            _onRefilled = onRefilled;
+            _ammoResource = ammoResource;
+            _onRefillTimer = onRefillTimer;
         }
 
-        public void Update()
+        public void OnEnable()
         {
-            if (_bulletsCount.Value >= _bulletsMaxCount.Value || !_onRefilled.Value) return;
+            _onRefillTimer.FinishEvent.Subscribe(Refill);
+            _ammoResource.Count.ValueChanged += SetTimerOnOff;
+        }
 
-            _bulletsCount.Value++;
-            _onRefilled.Value = false;
+        public void OnDisable()
+        {
+            _onRefillTimer.FinishEvent.Unsubscribe(Refill);
+            _ammoResource.Count.ValueChanged -= SetTimerOnOff;
+        }
+        
+        private void SetTimerOnOff(int obj)
+        {
+            _onRefillTimer.CanCount.Value = !_ammoResource.IsFull;
+        }
+        
+        private void Refill()
+        {
+            _ammoResource.Count.Value++;
         }
     }
 }

@@ -162,10 +162,18 @@ MonoBehaviour:
     _value: 1
   IsDead:
     _value: 0
+  GameObjectToHide:
+    _value: {fileID: 4780442273041933957}
   Speed:
     _value: 3
   CanMove:
     _value: 1
+  AttackSpeedMaxSpeed:
+    _value: 0
+  AttackSpeedTimer:
+    _value: 0
+  AttackSpeedTimerFinished:
+    _value: 0
 --- !u!114 &9019755438928712382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Chr_ZombieBoss_Wretch_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1960997148460282, guid: a3029e28af10f4f458f5d25d6118a906, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4376485179048344, guid: a3029e28af10f4f458f5d25d6118a906, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -347,6 +359,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3310429949319040486, guid: a3029e28af10f4f458f5d25d6118a906, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a3029e28af10f4f458f5d25d6118a906, type: 3}
+--- !u!1 &4780442273041933957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1960997148460282, guid: a3029e28af10f4f458f5d25d6118a906,
+    type: 3}
+  m_PrefabInstance: {fileID: 4778738596848624255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4782524890436215783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4376485179048344, guid: a3029e28af10f4f458f5d25d6118a906,
