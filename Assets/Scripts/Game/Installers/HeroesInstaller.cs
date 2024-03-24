@@ -23,8 +23,8 @@ public class HeroesInstaller : MonoInstaller
     public class HeroesPack
     {
         [RequiredListLength(1,4)]
-        public Hero[] bluePlayerHeroes;
+        public HeroConfig[] bluePlayerHeroes;
         [RequiredListLength(1,4)]
-        public Hero[] redPlayerHeroes;
+        public HeroConfig[] redPlayerHeroes;
     }
 }

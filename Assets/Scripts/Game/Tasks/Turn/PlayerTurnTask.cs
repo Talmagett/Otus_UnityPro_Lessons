@@ -3,6 +3,7 @@ using Game.Entities.Common.Components;
 using Game.Installers;
 using Game.TurnSystem;
 using Game.TurnSystem.Events;
+using Game.UI;
 using Modules.Entities.Scripts;
 
 namespace Game.Tasks.Turn
@@ -10,7 +11,6 @@ namespace Game.Tasks.Turn
     public sealed class PlayerTurnTask : Task
     {
         private readonly EventBus _eventBus;
-
         private readonly HeroTurnController _heroTurnController;
 
         public PlayerTurnTask(EventBus eventBus, HeroTurnController heroTurnController)
@@ -21,23 +21,24 @@ namespace Game.Tasks.Turn
         
         protected override void OnRun()
         {
-            _heroTurnController.HeroClickPerformed += OnHeroClicked;
+            _heroTurnController.TargetHeroClickPerformed += OnTargetHeroClicked;
         }
 
-        private void OnHeroClicked(IEntity entity)
+        private void OnTargetHeroClicked(HeroPresenter target)
         {
             var currentHero = _heroTurnController.CurrentHero;
             
-            if (entity.TryGet(out PlayerColor color)&&currentHero.TryGet(out PlayerColor movingColor))
+            if (target.HeroModel.TryGet(out PlayerColor color)&&currentHero.HeroModel.TryGet(out PlayerColor movingColor))
             {
                     if (color.Value == movingColor.Value)
                         return;
             }
 
-            var damage = currentHero.Get<AttackDamage>();
+            currentHero.HeroView.AnimateAttack(target.HeroView);
+            var damage = currentHero.HeroModel.Get<AttackDamage>();
 
-            _heroTurnController.HeroClickPerformed -= OnHeroClicked;
-            _eventBus.RaiseEvent(new DealDamageEvent(entity, damage.Value));
+            _heroTurnController.TargetHeroClickPerformed -= OnTargetHeroClicked;
+            _eventBus.RaiseEvent(new DealDamageEvent(target.HeroModel, damage.Value));
             Finish();
             _heroTurnController.NextHero();
         }

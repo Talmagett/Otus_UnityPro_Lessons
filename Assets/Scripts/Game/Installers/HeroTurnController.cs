@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Entities.Common.Components;
 using Game.Entities.Heroes;
@@ -11,11 +12,11 @@ namespace Game.Installers
 {
     public class HeroTurnController : IInitializable
     {
-        public HeroEntity CurrentHero => _heroes[_index];
-        public event Action<IEntity> HeroClickPerformed;
-        private int _index=0;
-        private HeroEntity[] _heroes;
-        
+        public HeroPresenter CurrentHero;
+        public event Action<HeroPresenter> TargetHeroClickPerformed;
+        private List<HeroPresenter> _heroes = new List<HeroPresenter>();
+        private Queue<HeroPresenter> _queuedHeroes = new Queue<HeroPresenter>();
+        private bool _isRedTurn;
         private HeroesInstaller.HeroesPack _heroesPack;
         private UIService _uiService;
         private HeroView _heroView;
@@ -32,44 +33,58 @@ namespace Game.Installers
             foreach (var redHero in _heroesPack.redPlayerHeroes)
             {
                 var view =  GameObject.Instantiate(_heroView, _uiService.GetRedPlayer().transform);
+                view.SetIcon(redHero.Icon);
                 _uiService.GetRedPlayer().AddView(view);
-                var heroEntity = view.GetComponent<HeroEntity>();
-                heroEntity.SetEntity(redHero,PlayerColor.Color.Red);
+                var hero = new HeroModel(redHero, PlayerColor.Color.Red);
+                var heroPresenter = new HeroPresenter(hero,view);
+                _heroes.Add(heroPresenter);
             }
+            
             foreach (var blueHero in _heroesPack.bluePlayerHeroes)
             {
                 var view =  GameObject.Instantiate(_heroView, _uiService.GetBluePlayer().transform);
+                view.SetIcon(blueHero.Icon);
                 _uiService.GetBluePlayer().AddView(view);
-                var heroEntity = view.GetComponent<HeroEntity>();
-                heroEntity.SetEntity(blueHero,PlayerColor.Color.Blue);
+                var hero = new HeroModel(blueHero,PlayerColor.Color.Blue);
+                var heroPresenter = new HeroPresenter(hero,view);
+                _heroes.Add(heroPresenter);
             }
 
-            var redPlayers = _uiService.GetRedPlayer().GetViews().ToArray();
-            var bluePlayers = _uiService.GetBluePlayer().GetViews().ToArray();
-
-            HeroView[] views = new HeroView[redPlayers.Length+bluePlayers.Length];
-            
-            for (int i = 0; i < views.Length; i++)
+            for (var i = 0; i < _heroes.Count; i++)
             {
-                views[i] = (i % 2 == 0) ? redPlayers[i / 2] : bluePlayers[i / 2];
+                _queuedHeroes.Enqueue(i % 2 == 0
+                    ? _heroes[i / 2]
+                    : _heroes[i / 2 + _heroesPack.redPlayerHeroes.Length]);
             }
 
             _uiService.GetRedPlayer().OnHeroClicked += OnHeroClicked;
             _uiService.GetBluePlayer().OnHeroClicked += OnHeroClicked;
-            _heroes = views.Select(t => t.GetComponent<HeroEntity>()).ToArray();
+            
+            NextHero();
         }
 
+        
         private void OnHeroClicked(HeroView heroView)
         {
-            if(heroView.TryGetComponent(out IEntity entity))
-                HeroClickPerformed?.Invoke(entity);
+            var heroPresenter = _heroes.FirstOrDefault(t => t.HeroView == heroView);
+            TargetHeroClickPerformed?.Invoke(heroPresenter);
         }
 
         public void NextHero()
         {
-            _index++;
-            if (_index >= _heroes.Length)
-                _index = 0;
+            if (CurrentHero != null)
+            {
+                CurrentHero.HeroView.SetActive(false);
+                _queuedHeroes.Enqueue(CurrentHero);
+            }
+            CurrentHero = _queuedHeroes.Dequeue();
+            CurrentHero.HeroView.SetActive(true);
+        }
+
+        public void DestroyHero(HeroPresenter presenter)
+        {
+            GameObject.Destroy(presenter.HeroView.gameObject);
+            _heroes.Remove(presenter);
         }
     }
 }

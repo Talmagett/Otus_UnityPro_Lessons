@@ -1,6 +1,6 @@
 namespace Game.Entities.Common.Components
 {
-    public struct Health
+    public class Health
     {
         public int Value;
     }

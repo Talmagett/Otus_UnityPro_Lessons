@@ -1,10 +1,16 @@
+using Game.Entities.Common.Components;
 using Game.Entities.Config;
-using UnityEngine;
+using Modules.Entities.Scripts.Base;
 
 namespace Game.Entities.Heroes
 {
-    public class HeroModel : MonoBehaviour
+    public class HeroModel : ListEntity
     {
-        [field: SerializeField] public Hero HeroConfig { get; private set; }
+        public HeroModel(HeroConfig heroConfig, PlayerColor.Color playerColor)
+        {
+            Add(new AttackDamage { Value = heroConfig.AttackDamage });
+            Add(new Health { Value = heroConfig.Health });
+            Add(new PlayerColor{Value = playerColor});
+        }
     }
 }

@@ -8,7 +8,6 @@ namespace Game.TurnSystem.Handlers
     {
         public DealDamageHandler(EventBus eventBus) : base(eventBus)
         {
-            Debug.Log("inited");
         }
 
         protected override void HandleEvent(DealDamageEvent evt)
@@ -17,7 +16,6 @@ namespace Game.TurnSystem.Handlers
                 return;
             var prevHealth = health.Value;
             health.Value -= evt.Damage;
-            Debug.Log(prevHealth+"/"+health.Value);
             if (health.Value <= 0) EventBus.RaiseEvent(new DestroyEvent(evt.Entity));
         }
     }

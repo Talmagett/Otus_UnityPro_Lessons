@@ -1,26 +1,22 @@
+using Game.Entities.Common.Components;
+using Game.Installers;
 using Game.TurnSystem.Events;
+using Game.UI;
 
 namespace Game.TurnSystem.Handlers
 {
     public sealed class DestroyHandler : BaseHandler<DestroyEvent>
     {
-        public DestroyHandler(EventBus eventBus) : base(eventBus)
+        private readonly HeroTurnController _heroTurnController;
+
+        public DestroyHandler(EventBus eventBus,HeroTurnController heroTurnController) : base(eventBus)
         {
+            _heroTurnController = heroTurnController;
         }
 
         protected override void HandleEvent(DestroyEvent evt)
         {
-            /*if (evt.Entity.TryGet(out DeathComponent deathComponent))
-            {
-                deathComponent.Die();
-            }*/
-
-            //
-            // // Visual
-            // if (evt.Entity.TryGet(out DestroyComponent destroyComponent))
-            // {
-            //     destroyComponent.Destroy();
-            // }
+            _heroTurnController.DestroyHero(evt.Entity.Get<HeroPresenter>());
         }
     }
 }

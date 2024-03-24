@@ -1,6 +1,6 @@
 namespace Game.Entities.Common.Components
 {
-    public struct AttackDamage
+    public class AttackDamage
     {
         public int Value;
     }

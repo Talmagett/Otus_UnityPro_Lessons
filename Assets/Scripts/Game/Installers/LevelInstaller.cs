@@ -25,17 +25,10 @@ public class LevelInstaller : MonoInstaller
     private void ConfigureHandlers(DiContainer container)
     {
         container.Bind<EventBus>().AsSingle().NonLazy();
-
-        container.Bind<ApplyDirectionHandler>().AsSingle().NonLazy();
-        container.Bind<ForceDirectionHandler>().AsSingle().NonLazy();
-        container.Bind<AttackHandler>().AsSingle().NonLazy();
-        container.Bind<CollideHandler>().AsSingle().NonLazy();
-        container.Bind<DealDamageHandler>().AsSingle().NonLazy();
-        container.Bind<MoveHandler>().AsSingle().NonLazy();
-        container.Bind<DestroyHandler>().AsSingle().NonLazy();
-
-        container.Bind<DealDamageEffectHandler>().AsSingle().NonLazy();
-        container.Bind<PushEffectHandler>().AsSingle().NonLazy();
+        
+        container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle().NonLazy();
+        container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle().NonLazy();
+        container.BindInterfacesAndSelfTo<DestroyHandler>().AsSingle().NonLazy();
     }
 
     private void ConfigureTurn(DiContainer container)
@@ -48,11 +41,6 @@ public class LevelInstaller : MonoInstaller
     {
         container.Bind<VisualPipeline>().AsSingle().NonLazy();
 
-        container.Bind<MoveVisualHandler>().AsSingle().NonLazy();
-        container.Bind<DestroyVisualHandler>().AsSingle().NonLazy();
-        container.Bind<DealDamageVisualHandler>().AsSingle().NonLazy();
-        container.Bind<AttackVisualHandler>().AsSingle().NonLazy();
-
-        container.Bind<CollideVisualHandler>().AsSingle().NonLazy();
+        container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle().NonLazy();
     }
 }

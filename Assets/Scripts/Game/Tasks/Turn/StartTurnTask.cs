@@ -6,7 +6,6 @@ namespace Game.Tasks.Turn
     {
         protected override void OnRun()
         {
-            Debug.Log("Turn started!");
             Finish();
         }
     }

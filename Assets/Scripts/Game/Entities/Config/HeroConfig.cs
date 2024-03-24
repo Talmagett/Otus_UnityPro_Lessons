@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Game.Entities.Config
 {
-    [CreateAssetMenu(fileName = "New Hero", menuName = "Lesson19/Hero")]
-    public class Hero : ScriptableObject
+    [CreateAssetMenu(fileName = "New HeroConfig", menuName = "Lesson19/HeroConfig")]
+    public class HeroConfig : ScriptableObject
     {
         [field: SerializeField] public string Name { get; private set; }
 

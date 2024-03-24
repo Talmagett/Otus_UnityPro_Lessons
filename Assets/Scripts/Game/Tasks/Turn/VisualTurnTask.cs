@@ -14,16 +14,12 @@ namespace Game.Tasks.Turn
 
         protected override void OnRun()
         {
-            Debug.Log("Visual started!");
-
             _visualPipeline.Finished += OnVisualPipelineFinished;
             _visualPipeline.Run();
         }
 
         private void OnVisualPipelineFinished()
         {
-            Debug.Log("Visual finished!");
-
             _visualPipeline.Finished -= OnVisualPipelineFinished;
             _visualPipeline.Clear();
 

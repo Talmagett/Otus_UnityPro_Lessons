@@ -15,7 +15,7 @@ namespace Game.TurnSystem.Handlers.Visual
 
         protected override void HandleEvent(DealDamageEvent evt)
         {
-            _visualPipeline.AddTask(new DealDamageVisualTask(evt.Entity, 0.15f));
+            _visualPipeline.AddTask(new DealDamageVisualTask(evt.Entity));
         }
     }
 }

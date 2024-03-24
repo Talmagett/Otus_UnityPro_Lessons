@@ -15,7 +15,6 @@ namespace Game.TurnSystem
         public void Subscribe<T>(Action<T> handler)
         {
             var eventType = typeof(T);
-
             if (!_handlers.ContainsKey(eventType)) _handlers.Add(eventType, new EventHandlerCollection<T>());
 
             _handlers[eventType].Subscribe(handler);
