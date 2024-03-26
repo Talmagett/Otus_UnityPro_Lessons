@@ -4,7 +4,6 @@ using System.Linq;
 using Game.Entities.Common.Components;
 using Game.Entities.Heroes;
 using Game.UI;
-using Modules.Entities.Scripts;
 using UnityEngine;
 using Zenject;
 
@@ -60,7 +59,7 @@ namespace Game.Installers
             _uiService.GetRedPlayer().OnHeroClicked += OnHeroClicked;
             _uiService.GetBluePlayer().OnHeroClicked += OnHeroClicked;
             
-            NextHero();
+            NextHeroTurn();
         }
 
         
@@ -70,20 +69,30 @@ namespace Game.Installers
             TargetHeroClickPerformed?.Invoke(heroPresenter);
         }
 
-        public void NextHero()
+        public void NextHeroTurn()
         {
-            if (CurrentHero != null)
+            if (_heroes.Contains(CurrentHero))
             {
                 CurrentHero.HeroView.SetActive(false);
-                _queuedHeroes.Enqueue(CurrentHero);
             }
-            CurrentHero = _queuedHeroes.Dequeue();
+            _queuedHeroes.Enqueue(CurrentHero);
+            
+            do
+            {
+                CurrentHero = _queuedHeroes.Dequeue();
+            }
+            while (_heroes.Contains(CurrentHero));
+            
             CurrentHero.HeroView.SetActive(true);
         }
 
         public void DestroyHero(HeroPresenter presenter)
         {
-            GameObject.Destroy(presenter.HeroView.gameObject);
+            if (_uiService.GetBluePlayer().HasView(presenter.HeroView))
+                _uiService.GetBluePlayer().DestroyView(presenter.HeroView);
+            else if (_uiService.GetRedPlayer().HasView(presenter.HeroView))
+                _uiService.GetRedPlayer().DestroyView(presenter.HeroView);
+            
             _heroes.Remove(presenter);
         }
     }

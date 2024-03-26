@@ -10,17 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecd300e009f147eaaed4e277fea30455, type: 3}
-  m_Name: ElectroAbility
+  m_Name: Empty
   m_EditorClassIdentifier: 
-  Effects:
-  - rid: 3036139212016189440
-  - rid: 3036139212016189441
+  Effects: []
   references:
     version: 2
-    RefIds:
-    - rid: 3036139212016189440
-      type: {class: DealDamageEffectEvent, ns: Lessons.TurnSystem.Events.Effect, asm: Assembly-CSharp}
-      data:
-        extraDamage: 0
-    - rid: 3036139212016189441
-      type: {class: PushEffectEvent, ns: Lessons.TurnSystem.Events.Effect, asm: Assembly-CSharp}
+    RefIds: []

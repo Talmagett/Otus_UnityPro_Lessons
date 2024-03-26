@@ -16,4 +16,4 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: f6d397e5cec894f3cbbb28a24524a3db, type: 3}
   <Health>k__BackingField: 35
   <AttackDamage>k__BackingField: 7
-  <Ability>k__BackingField: {fileID: 11400000, guid: 3b5faa886ce7a184ab7352fd88bef7b7, type: 2}
+  <Ability>k__BackingField: {fileID: 11400000, guid: bed5b7c52634d8a42af6a41e8c6cfc29, type: 2}

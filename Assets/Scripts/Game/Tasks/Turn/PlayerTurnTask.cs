@@ -24,7 +24,7 @@ namespace Game.Tasks.Turn
             _heroTurnController.TargetHeroClickPerformed += OnTargetHeroClicked;
         }
 
-        private void OnTargetHeroClicked(HeroPresenter target)
+        private async void OnTargetHeroClicked(HeroPresenter target)
         {
             var currentHero = _heroTurnController.CurrentHero;
             
@@ -34,13 +34,13 @@ namespace Game.Tasks.Turn
                         return;
             }
 
-            currentHero.HeroView.AnimateAttack(target.HeroView);
-            var damage = currentHero.HeroModel.Get<AttackDamage>();
+            await currentHero.HeroView.AnimateAttack(target.HeroView);
 
             _heroTurnController.TargetHeroClickPerformed -= OnTargetHeroClicked;
-            _eventBus.RaiseEvent(new DealDamageEvent(target.HeroModel, damage.Value));
+            currentHero.HeroModel.Attack(_eventBus,target);
+            target.HeroModel.CounterAttack(_eventBus,currentHero);
             Finish();
-            _heroTurnController.NextHero();
+            _heroTurnController.NextHeroTurn();
         }
     }
 }

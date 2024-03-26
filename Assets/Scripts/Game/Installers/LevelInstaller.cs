@@ -29,6 +29,9 @@ public class LevelInstaller : MonoInstaller
         container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle().NonLazy();
         container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle().NonLazy();
         container.BindInterfacesAndSelfTo<DestroyHandler>().AsSingle().NonLazy();
+        
+        container.BindInterfacesAndSelfTo<PushEffectHandler>().AsSingle().NonLazy();
+        container.BindInterfacesAndSelfTo<DealDamageEffectHandler>().AsSingle().NonLazy();
     }
 
     private void ConfigureTurn(DiContainer container)

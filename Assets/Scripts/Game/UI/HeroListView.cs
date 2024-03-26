@@ -35,6 +35,10 @@ namespace Game.UI
             return _views;
         }
 
+        public bool HasView(HeroView view)
+        {
+            return _views.Contains(view);
+        }
         public HeroView GetView(int index)
         {
             return _views[index];
@@ -44,6 +48,12 @@ namespace Game.UI
         {
             _views.Add(heroView);
             heroView.OnClicked += () => OnHeroClicked?.Invoke(heroView);
+        }
+        
+        public void DestroyView(HeroView heroView)
+        {
+            _views.Remove(heroView);
+            Destroy(heroView.gameObject);
         }
         
         public void SetActive(bool isActive)
