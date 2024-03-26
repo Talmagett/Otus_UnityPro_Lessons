@@ -1,3 +1,4 @@
+using Entity;
 using UnityEngine;
 
 namespace Visual.Zombie
@@ -6,7 +7,7 @@ namespace Visual.Zombie
     {
         [SerializeField] private Model.Zombie zombie;
 
-        [SerializeField] private ParticleSystem attackVfx;
+        [SerializeField] private VFXAutoDestroy deathVfx;
 
         private void OnEnable()
         {
@@ -20,7 +21,7 @@ namespace Visual.Zombie
 
         private void OnAttack()
         {
-            attackVfx.Play();
+            deathVfx.Play();
         }
     }
 }

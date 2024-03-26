@@ -29,8 +29,8 @@ namespace Model
         private CharacterEntity _characterEntity;
         private DeathMechanics _deathMechanics;
         private DestroyMechanics _destroyMechanics;
-        private DisableColliderMechanics _disableColliderMechanics;
-        private HideGameObjectMechanics _hideGameObjectMechanics;
+        //private DisableColliderMechanics _disableColliderMechanics;
+        //private HideGameObjectMechanics _hideGameObjectMechanics;
         private MeleeAttackMechanics _meleeAttackMechanics;
         private MoveToTargetMechanics _moveToTargetMechanics;
         private RotateToMechanics _rotateMechanics;
@@ -40,9 +40,9 @@ namespace Model
         {
             _takeDamageMechanics = new TakeDamageMechanics(Life);
             _deathMechanics = new DeathMechanics(Life);
-            _hideGameObjectMechanics = new HideGameObjectMechanics(Life.DeathEvent, GameObjectToHide.Value);
-            _disableColliderMechanics = new DisableColliderMechanics(Life.DeathEvent, ColliderToDisable.Value);
-            //_destroyMechanics = new DestroyMechanics(Death, gameObject);
+            //_hideGameObjectMechanics = new HideGameObjectMechanics(Life.DeathEvent, GameObjectToHide.Value);
+            //_disableColliderMechanics = new DisableColliderMechanics(Life.DeathEvent, ColliderToDisable.Value);
+            _destroyMechanics = new DestroyMechanics(Life.DeathEvent, gameObject);
             _moveToTargetMechanics = new MoveToTargetMechanics(Movement, transform, _characterEntity.transform);
             _rotateMechanics =
                 new RotateToMechanics(transform, _characterEntity.transform, Movement.CanMove, rotationSpeed);
@@ -63,18 +63,20 @@ namespace Model
         {
             _takeDamageMechanics.OnEnable();
             _deathMechanics.OnEnable();
-            _hideGameObjectMechanics.OnEnable();
+            _destroyMechanics.OnEnable();
+            //_hideGameObjectMechanics.OnEnable();
             _attackTimerMechanics.OnEnable();
-            _disableColliderMechanics.OnEnable();
+            //_disableColliderMechanics.OnEnable();
         }
 
         private void OnDisable()
         {
             _takeDamageMechanics.OnDisable();
             _deathMechanics.OnDisable();
-            _hideGameObjectMechanics.OnDisable();
+            _destroyMechanics.OnDisable();
+            //_hideGameObjectMechanics.OnDisable();
             _attackTimerMechanics.OnDisable();
-            _disableColliderMechanics.OnDisable();
+            //_disableColliderMechanics.OnDisable();
         }
 
         private void OnCollisionEnter(Collision other)
